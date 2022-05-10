@@ -1,8 +1,8 @@
-"""added listings, product tags, and reviews tables
+"""adding foreign_keys argument
 
-Revision ID: f21a4add2940
+Revision ID: 04b8f8fe0ea2
 Revises: ffdc0a98111c
-Create Date: 2022-05-10 14:18:27.493965
+Create Date: 2022-05-10 15:44:14.587260
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f21a4add2940'
+revision = '04b8f8fe0ea2'
 down_revision = 'ffdc0a98111c'
 branch_labels = None
 depends_on = None

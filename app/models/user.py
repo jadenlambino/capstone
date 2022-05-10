@@ -33,5 +33,5 @@ class User(db.Model, UserMixin):
         }
 
     listings = db.relationship('Listing', back_populates='user', cascade="all, delete")
-    reviewer = db.relationship('Review', back_populates='reviewer', cascade='all, delete')
-    reviewed = db.relationship('Review', back_populates='reviewed', cascade='all, delete')
+    # reviewed = db.relationship('Review', back_populates='reviewed', cascade='all, delete')
+    # reviewer = db.relationship('Review', back_populates='reviewer', cascade='all, delete')
