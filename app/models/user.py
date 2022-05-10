@@ -1,6 +1,7 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from .reviews import Review
 
 
 class User(db.Model, UserMixin):
@@ -33,5 +34,5 @@ class User(db.Model, UserMixin):
         }
 
     listings = db.relationship('Listing', back_populates='user', cascade="all, delete")
-    # reviewed = db.relationship('Review', back_populates='reviewed', cascade='all, delete')
-    # reviewer = db.relationship('Review', back_populates='reviewer', cascade='all, delete')
+    reviewed = db.relationship('Review', back_populates='reviewed', cascade='all, delete', foreign_keys='Review.reviewed_id')
+    reviewer = db.relationship('Review', back_populates='reviewer', cascade='all, delete', foreign_keys='Review.reviewer_id')
