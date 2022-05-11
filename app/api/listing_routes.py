@@ -7,3 +7,6 @@ listing_routes = Blueprint('listings', __name__)
 def get_listings():
     listings = Listing.query.all()
     return {'listings': [listing.to_dict() for listing in listings]}
+
+def post_listing():
+    pass
