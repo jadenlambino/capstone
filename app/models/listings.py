@@ -22,5 +22,13 @@ class Listing(db.Model):
             'photos' : self.photos
         }
 
+    def edit_listing(self, product_tag, name, price, description, photos):
+        self.product_tag = product_tag
+        self.name = name
+        self.price = price
+        self.description = description
+        self.photos = photos
+        return [product_tag, name, price, description, photos]
+
     user = db.relationship('User', back_populates='listings')
     tag = db.relationship('Product_Tag', back_populates='listings')
