@@ -39,9 +39,11 @@ def edit_listing(id):
     listing = Listing.query.get(id)
     form = ListingForm()
     data = form.data
+    print(str(data) + '!!!!!!!!!!!!!!!!!!!!!!!!!')
     # form['csrf_token'].data = request.cookies['csrf_token']
 
     print(data['name'])
+    print(data['price'])
     product_tag = data['product_tag']
     name = data['name']
     price = data['price']
@@ -49,7 +51,11 @@ def edit_listing(id):
     photos = data['photos']
 
     if form.validate_on_submit():
-        listing.edit_listing(product_tag, name, price, description, photos)
+        listing.edit_product_tag(product_tag)
+        listing.edit_name(name)
+        listing.edit_price(price)
+        listing.edit_description(description)
+        listing.edit_photos(photos)
 
     if form.errors():
         return form.errors, 403

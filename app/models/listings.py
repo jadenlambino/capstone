@@ -22,13 +22,33 @@ class Listing(db.Model):
             'photos' : self.photos
         }
 
-    def edit_listing(self, product_tag, name, price, description, photos):
+    # def edit_listing(self, product_tag, name, price, description, photos):
+    #     self.product_tag = product_tag
+    #     self.name = name
+    #     self.price = price
+    #     self.description = description
+    #     self.photos = photos
+    #     return [product_tag, name, price, description, photos]
+
+    def edit_product_tag(self, product_tag):
         self.product_tag = product_tag
+        return product_tag
+
+    def edit_name(self, name):
         self.name = name
+        return name
+
+    def edit_price(self, price):
         self.price = price
+        return price
+
+    def edit_description(self,description):
         self.description = description
+        return description
+
+    def edit_photos(self, photos):
         self.photos = photos
-        return [product_tag, name, price, description, photos]
+        return photos
 
     user = db.relationship('User', back_populates='listings')
     tag = db.relationship('Product_Tag', back_populates='listings')
