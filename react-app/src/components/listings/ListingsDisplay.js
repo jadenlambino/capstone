@@ -16,8 +16,8 @@ const ListingsDisplay = () => {
     return (
         <>
             <div>
-                {listings.map(listing => (
-                    <SingleListing listing={listing} />
+                {listings.map((listing, idx) => (
+                    <SingleListing listing={listing} key={idx}/>
                 ))}
             </div>
             <h1>Hello</h1>

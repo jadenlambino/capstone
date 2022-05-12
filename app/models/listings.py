@@ -1,4 +1,6 @@
 from .db import db
+from .product_tags import Product_Tag
+from app.models import product_tags
 
 class Listing(db.Model):
     __tablename__ = 'listings'
@@ -12,10 +14,12 @@ class Listing(db.Model):
     photos = db.Column(db.String, nullable=False)
 
     def to_dict(self):
+        product_type = Product_Tag.query.get(self.product_tag)
         return {
             'id' : self.id,
             'user_id' : self.user_id,
-            'product_tag' : self.product_tag,
+            'product_type' : product_type.type,
+            'product_tag': self.product_tag,
             'name' : self.name,
             'price' : self.price,
             'description' : self.description,

@@ -7,11 +7,11 @@ const SingleListing = ({ listing}) => {
 
     const user = useSelector(state => state.session.user)
 
-    const [name, setName] = useState('')
-    const [price, setPrice] = useState(0)
-    const [description, setDescription] = useState('')
-    const [photos, setPhotos] = useState('')
-    const [productTag, setProductTag] = useState()
+    const [name, setName] = useState(listing.name)
+    const [price, setPrice] = useState(listing.price)
+    const [description, setDescription] = useState(listing.description)
+    const [photos, setPhotos] = useState(listing.photos)
+    const [productTag, setProductTag] = useState(listing.productTag)
 
     const handleEdit = async (e) => {
         e.preventDefault()
@@ -35,15 +35,15 @@ const SingleListing = ({ listing}) => {
             <form onSubmit={handleEdit}>
                 <label>Product Tag</label>
                 <select onChange={(e) => setProductTag(e.target.value)}>
-                    <option value='none' selected disabled hidden>Select an option</option>
+                    <option value={listing.product_tag} selected disabled hidden>{listing.product_type}</option>
                     <option value={1}>Jacket</option>
                     <option value={2}>Shirt</option>
-                    <option value={3}>Sweatshirt</option>
-                    <option value={4}>Hoodie</option>
-                    <option value={5}>Jeans</option>
-                    <option value={6}>Pants</option>
-                    <option value={7}>Shorts</option>
-                    <option value={8}>Shoes</option>
+                    <option value={3}>T-Shirt</option>
+                    <option value={4}>Sweatshirt</option>
+                    <option value={5}>Hoodie</option>
+                    <option value={6}>Jeans</option>
+                    <option value={7}>Pants</option>
+                    <option value={8}>Shorts</option>
                     <option value={9}>Shoes</option>
                     <option value={10}>Hats</option>
                     <option value={11}>Accessories</option>
@@ -51,24 +51,28 @@ const SingleListing = ({ listing}) => {
                 <label>Name</label>
                 <input
                 type="text"
+                value={name}
                 onChange={(e) => setName(e.target.value)}
                 >
                 </input>
                 <label>Description</label>
                 <input
                 type="text"
+                value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 >
                 </input>
                 <label>Photo</label>
                 <input
                 type="text"
+                value={photos}
                 onChange={(e) => setPhotos(e.target.value)}
                 >
                 </input>
                 <label>Price</label>
                 <input
                 type="text"
+                value={price}
                 onChange={e => setPrice(e.target.value)}>
                 </input>
                 <button type='submit'>Submit</button>
