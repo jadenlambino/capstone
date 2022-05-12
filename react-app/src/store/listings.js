@@ -1,5 +1,7 @@
 const GET_LISTINGS = 'listings/GET_LISTINGS'
 const NEW_LISTINGS = 'listings/NEW_LISTINGS'
+const EDIT_LISTINGS = 'listings/EDIT_LISTINGS'
+const DELETE_LISTINGS = 'listings/DELETE_LIST'
 
 const getListings = (listings) => ({
     type: GET_LISTINGS,
@@ -9,6 +11,16 @@ const getListings = (listings) => ({
 const postListings = (listing) => ({
     type: NEW_LISTINGS,
     listing
+})
+
+const editListings = (listing) => ({
+    type: EDIT_LISTINGS,
+    listing
+})
+
+const deleteListings = (id) => ({
+    type: DELETE_LISTINGS,
+    id
 })
 
 export const grabListings = () => async (dispatch) => {
