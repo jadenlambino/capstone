@@ -2,29 +2,44 @@ import React from "react";
 import { uploadListings } from "../../store/listings";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom'
+
 
 const LisitngForm = () => {
     const dispatch = useDispatch();
+    const history = useHistory()
 
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState('')
     const [photos, setPhotos] = useState('')
     const [productTag, setProductTag] = useState()
+    const [photoLoading, setPhotoLoading] = useState(false)
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(productTag)
+        // console.log(productTag)
+        // const formData = new FormData()
+        // formData.append("photos", photos)
+        // setPhotoLoading(true)
 
         const new_listing = {
             productTag,
             name,
             price,
             description,
-            photos
         }
-        dispatch(uploadListings(new_listing))
+        const response = await dispatch(uploadListings(new_listing))
+        if (response.errors) {
+            console.log(response.errors)
+        }
+    }
+
+    const updateImage = (e) => {
+        const file = e.target.files[0]
+        setPhotos(file)
     }
 
     return (
@@ -56,12 +71,14 @@ const LisitngForm = () => {
             onChange={(e) => setDescription(e.target.value)}
             >
             </input>
-            <label>Photo</label>
+            {/* <label>Photo</label>
             <input
-            type="text"
-            onChange={(e) => setPhotos(e.target.value)}
+            type="file"
+            accept="image/*"
+            onChange={updateImage}
             >
             </input>
+            {(photoLoading) && <p>Loading...</p>} */}
             <label>Price</label>
             <input
             type="text"

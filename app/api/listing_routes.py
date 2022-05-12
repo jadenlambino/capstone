@@ -1,4 +1,5 @@
 from crypt import methods
+from email.mime import image
 from flask import Blueprint, jsonify, request
 from flask_login import current_user
 from app.models import Listing, db
@@ -20,9 +21,9 @@ def post_listing():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
-        # print("++++++++++++++" + str(data))
+        print(data)
 
-        if "image" not in request.files:
+        if "photos" not in request.files:
             return {"errors": "image required"}, 400
 
         image = request.files["image"]
@@ -35,9 +36,12 @@ def post_listing():
         upload = upload_file_to_s3(image)
 
         if "url" not in upload:
+            # if the dictionary doesn't have a url key
+            # it means that there was an error when we tried to upload
+            # so we send back that error message
             return upload, 400
 
-        url = upload['url']
+        url = upload["url"]
 
         new_listing = Listing (
             user_id = current_user.id,
@@ -50,14 +54,15 @@ def post_listing():
         print('++++++++++++++' +  str(data))
         db.session.add(new_listing)
         db.session.commit()
-        return new_listing.to_dict()
+    # return new_listing.to_dict()
 
     if form.errors:
+        print('not hitting')
         return form.errors, 403
 
 @listing_routes.route('/<int:id>/', methods=["PATCH"])
 def edit_listing(id):
-    listing = Listing.query.get(id)
+    listing = Listing.query.filter_by(id=id).one()
     form = ListingForm()
     data = form.data
     print(str(data) + '!!!!!!!!!!!!!!!!!!!!!!!!!')
@@ -77,13 +82,13 @@ def edit_listing(id):
         listing.edit_price(price)
         listing.edit_description(description)
         listing.edit_photos(photos)
+        db.session.commit()
+        return listing.to_dict()
 
-    if form.errors():
+    if form.errors:
         return form.errors, 403
-
-    db.session.commit()
-
-    return listing.to_dict()
+    # db.session.update(edit_listing)
+    # return edit_listing.to_dict()
 
 @listing_routes.route('/<int:id>/', methods=["DELETE"])
 def delete_listing(id):

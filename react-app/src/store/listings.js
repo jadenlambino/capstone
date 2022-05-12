@@ -32,19 +32,16 @@ export const grabListings = () => async (dispatch) => {
 }
 
 export const uploadListings = (listingData) => async (dispatch) => {
-    const {productTag, name, price, description, photos} = listingData;
+    const {productTag, name, price, description} = listingData;
     console.log(listingData)
     const response = await fetch('api/listings/', {
         method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
         body: JSON.stringify({
             product_tag: productTag,
             name,
             price,
             description,
-            photos
+            // photos
         })
     })
 
@@ -54,6 +51,7 @@ export const uploadListings = (listingData) => async (dispatch) => {
         return listing
     } else {
         const errors = await response.json();
+        return errors
         console.log(errors)
     }
 }
