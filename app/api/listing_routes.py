@@ -65,8 +65,7 @@ def edit_listing(id):
     listing = Listing.query.filter_by(id=id).one()
     form = ListingForm()
     data = form.data
-    print(str(data) + '!!!!!!!!!!!!!!!!!!!!!!!!!')
-    # form['csrf_token'].data = request.cookies['csrf_token']
+    form['csrf_token'].data = request.cookies['csrf_token']
 
     print(data['name'])
     print(data['price'])

@@ -84,7 +84,7 @@ export const patchListings = (id, listingData) => async (dispatch) => {
 }
 
 export const removeListings = (id) => async dispatch => {
-    const response = await fetch(`api/listings/${id}`, {
+    const response = await fetch(`api/listings/${id}/`, {
         method: "DELETE"
     });
 
