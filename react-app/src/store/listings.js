@@ -36,6 +36,9 @@ export const uploadListings = (listingData) => async (dispatch) => {
     console.log(listingData)
     const response = await fetch('api/listings/', {
         method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({
             product_tag: productTag,
             name,

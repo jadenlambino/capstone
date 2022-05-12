@@ -11,7 +11,7 @@ class Listing(db.Model):
     name = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Float, nullable=False)
     description = db.Column(db.String(255), nullable=False)
-    photos = db.Column(db.String, nullable=False)
+    photos = db.Column(db.String)
 
     def to_dict(self):
         product_type = Product_Tag.query.get(self.product_tag)

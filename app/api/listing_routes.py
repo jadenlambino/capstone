@@ -21,22 +21,21 @@ def post_listing():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
-        print(data)
-
+        print("++++++++++++++" + str(data))
         new_listing = Listing (
             user_id = current_user.id,
             product_tag = data['product_tag'],
             name = data['name'],
-            price = data['price'],
+            price = float(data['price']),
             description = data['description'],
+            photos = ""
         )
         print('++++++++++++++' +  str(data))
         db.session.add(new_listing)
         db.session.commit()
-    # return new_listing.to_dict()
+        return new_listing.to_dict()
 
     if form.errors:
-        print('not hitting')
         return form.errors, 403
 
 @listing_routes.route('/<int:id>/', methods=["PATCH"])
