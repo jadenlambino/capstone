@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from app.models import db, Image
 from flask_login import current_user
+from app.models.listing_photos import ListingPhotos
 from app.s3_helpers import (
     upload_file_to_s3, allowed_file, get_unique_filename)
 
@@ -28,7 +29,7 @@ def upload_image():
 
     url = upload["url"]
     # flask_login allows us to get the current user from the request
-    new_image = Image(user=current_user, url=url)
+    new_image = ListingPhotos(user=current_user, url=url)
     db.session.add(new_image)
     db.session.commit()
     return {"url": url}
