@@ -1,9 +1,11 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useReducer, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {patchListings, removeListings} from '../../store/listings'
 
 const SingleListing = ({ listing}) => {
     const dispatch = useDispatch();
+
+    const user = useSelector(state => state.session.user)
 
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
@@ -11,26 +13,26 @@ const SingleListing = ({ listing}) => {
     const [photos, setPhotos] = useState('')
     const [productTag, setProductTag] = useState()
 
-    handleEdit = async (e) => {
+    const handleEdit = async (e) => {
         e.preventDefault()
-        await dispatch(patchListings(
-            productTag,
-            name,
-            price,
-            description,
-            photos
-        ))
+        const data = {
+        productTag,
+        name,
+        price,
+        description,
+        photos}
+        await dispatch(patchListings(listing.id, data))
     }
 
-    const handleDelete = (e) => {
+    const handleDelete = async (e) => {
         e.preventDefault()
-        await dispatch(removeListings())
+        await dispatch(removeListings(listing.id))
     }
 
 
     let functionButtons = (
         <>
-            <form>
+            <form onSubmit={handleEdit}>
                 <label>Product Tag</label>
                 <select onChange={(e) => setProductTag(e.target.value)}>
                     <option value='none' selected disabled hidden>Select an option</option>
@@ -71,12 +73,16 @@ const SingleListing = ({ listing}) => {
                 </input>
                 <button type='submit'>Submit</button>
             </form>
+            <button onClick={handleDelete}>delete</button>
         </>
     )
 
     return (
         <div>
             <h1>{listing.name}</h1>
+            {user.id === listing.user_id && functionButtons}
         </div>
     )
 }
+
+export default SingleListing

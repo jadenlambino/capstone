@@ -2,6 +2,7 @@ import {React, useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { grabListings } from '../../store/listings';
 import LisitngForm from './ListingsForm';
+import SingleListing from './SingleListing';
 
 const ListingsDisplay = () => {
     const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const ListingsDisplay = () => {
         <>
             <div>
                 {listings.map(listing => (
-                    <p key={listing.id}>{listing.name}</p>
+                    <SingleListing listing={listing} />
                 ))}
             </div>
             <h1>Hello</h1>
