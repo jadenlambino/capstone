@@ -37,10 +37,6 @@ const LisitngForm = () => {
         }
     }
 
-    const updateImage = (e) => {
-        const file = e.target.files[0]
-        setPhotos(file)
-    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -71,14 +67,6 @@ const LisitngForm = () => {
             onChange={(e) => setDescription(e.target.value)}
             >
             </input>
-            {/* <label>Photo</label>
-            <input
-            type="file"
-            accept="image/*"
-            onChange={updateImage}
-            >
-            </input>
-            {(photoLoading) && <p>Loading...</p>} */}
             <label>Price</label>
             <input
             type="text"
