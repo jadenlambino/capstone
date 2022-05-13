@@ -50,3 +50,4 @@ class Listing(db.Model):
 
     user = db.relationship('User', back_populates='listings')
     tag = db.relationship('Product_Tag', back_populates='listings')
+    listing_photos = db.relationship('ListingPhotos', back_populates='listing')
