@@ -1,5 +1,3 @@
-from crypt import methods
-from email.mime import image
 from flask import Blueprint, jsonify, request
 from flask_login import current_user
 from app.models import Listing, db
