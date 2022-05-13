@@ -9,7 +9,8 @@ image_routes = Blueprint("images", __name__)
 
 @image_routes.route("", methods=["POST"])
 def upload_image():
-
+    print(request)
+    print(request.data)
     if "image" not in request.files:
         return {"errors": "image required"}, 400
 
@@ -33,7 +34,7 @@ def upload_image():
     print("hello from 29")
     url = upload["url"]
     # flask_login allows us to get the current user from the request
-    new_image = ListingPhotos(user_id=current_user.id, url=url)
+    new_image = ListingPhotos(listing_id=current_user.id, url=url)
     db.session.add(new_image)
     db.session.commit()
     return {"url": url}

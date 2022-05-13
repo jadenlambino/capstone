@@ -28,7 +28,6 @@ const UploadPicture = () => {
         if (res.ok) {
             await res.json();
             setImageLoading(false);
-            history.push("/images");
         }
         else {
             // const errors = res.errors

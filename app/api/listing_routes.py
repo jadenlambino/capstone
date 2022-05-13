@@ -17,18 +17,21 @@ def get_listings():
 
 @listing_routes.route('/', methods=["POST"])
 def post_listing():
+    print('================================================')
+    print(str(request) + '~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    print(request.data)
     form = ListingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
-        print("++++++++++++++" + str(data))
+        # print("++++++++++++++" + str(data))
         new_listing = Listing (
             user_id = current_user.id,
             product_tag = data['product_tag'],
             name = data['name'],
             price = float(data['price']),
             description = data['description'],
-            photos = ""
+            # photos = ""
         )
         print('++++++++++++++' +  str(data))
         db.session.add(new_listing)

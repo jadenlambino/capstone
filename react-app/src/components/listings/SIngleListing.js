@@ -62,13 +62,6 @@ const SingleListing = ({ listing}) => {
                 onChange={(e) => setDescription(e.target.value)}
                 >
                 </input>
-                <label>Photo</label>
-                <input
-                type="text"
-                value={photos}
-                onChange={(e) => setPhotos(e.target.value)}
-                >
-                </input>
                 <label>Price</label>
                 <input
                 type="text"
