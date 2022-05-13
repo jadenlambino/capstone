@@ -1,10 +1,16 @@
 const GET_LISTINGS = 'listings/GET_LISTINGS'
+const GET_SINGLE = 'listings/GET_SINGLE'
 const NEW_LISTINGS = 'listings/NEW_LISTINGS'
 const EDIT_LISTINGS = 'listings/EDIT_LISTINGS'
 const DELETE_LISTINGS = 'listings/DELETE_LIST'
 
 const getListings = (listings) => ({
     type: GET_LISTINGS,
+    listings
+})
+
+export const getSingle = (listings) => ({
+    type: GET_SINGLE,
     listings
 })
 
@@ -28,6 +34,14 @@ export const grabListings = () => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(getListings(data))
+    }
+}
+
+export const grabSingle = (id) => async (dispatch) => {
+    const response = await fetch(`/api/listings/${id}/`)
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(getSingle(data))
     }
 }
 
@@ -99,6 +113,10 @@ export default function reducer(state = initialState, action) {
     switch (action.type) {
         case GET_LISTINGS:
             newState = {}
+            action.listings.listings.forEach(listing => {newState[listing.id] = listing})
+            return newState
+        case GET_SINGLE:
+            newState = {...state}
             action.listings.listings.forEach(listing => {newState[listing.id] = listing})
             return newState
         case NEW_LISTINGS:
