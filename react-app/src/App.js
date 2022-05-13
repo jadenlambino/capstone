@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import ListingsDisplay from './components/listings/ListingsDisplay';
 import { authenticate } from './store/session';
+import SingleListing from './components/listings/SIngleListing';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -47,6 +48,9 @@ function App() {
         <Route path='/listings' exact={true}>
           <ListingsDisplay />
         </Route>
+        {/* <Route path='/listings/:id' exact={true}>
+          <SingleListing />
+        </Route> */}
       </Switch>
     </BrowserRouter>
   );

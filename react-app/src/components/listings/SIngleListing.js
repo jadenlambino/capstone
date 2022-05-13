@@ -2,7 +2,7 @@ import React, { useReducer, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {patchListings, removeListings} from '../../store/listings'
 
-const SingleListing = ({ listing}) => {
+const SingleListing = ({ listing }) => {
     const dispatch = useDispatch();
 
     const user = useSelector(state => state.session.user)
@@ -84,7 +84,7 @@ const SingleListing = ({ listing}) => {
     return (
         <div>
             <h1>{listing.name}</h1>
-            <img src={listing.photos} alt='this is a picture'></img>
+            {/* <img src={listing.photos} alt='this is a picture'></img> */}
             {user.id === listing.user_id && functionButtons}
         </div>
     )

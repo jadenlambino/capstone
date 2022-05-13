@@ -24,7 +24,7 @@ const deleteListings = (id) => ({
 })
 
 export const grabListings = () => async (dispatch) => {
-    const response = await fetch('api/listings/');
+    const response = await fetch('/api/listings/');
     if (response.ok) {
         const data = await response.json();
         dispatch(getListings(data))

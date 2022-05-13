@@ -31,7 +31,7 @@ def seed_listings():
         name = 'Jeans',
         price = 90.00,
         description = 'These are some jeans',
-        photos = 'https://jaden-capstone.s3.us-west-1.amazonaws.com/fd1abf11f09a4b188464bb31468d23ac.jpg'
+        photos = 'https://jaden-capstone.s3.us-west-1.amazonaws.com/9b03f031bcdb4513965fab3ab398433f.jpeg'
     )
     demo5 = Listing (
         user_id = 3,
@@ -39,7 +39,7 @@ def seed_listings():
         name = 'Shorts',
         price = 27.00,
         description = 'These are some shorts',
-        photos = 'https://jaden-capstone.s3.us-west-1.amazonaws.com/fd1abf11f09a4b188464bb31468d23ac.jpg'
+        photos = 'https://jaden-capstone.s3.us-west-1.amazonaws.com/0a1a75b18b084219bfd30cb9f92e2096.jpeg'
     )
     demo6 = Listing (
         user_id = 3,
@@ -47,7 +47,7 @@ def seed_listings():
         name = 'Hat',
         price = 30.00,
         description = 'This is a hat',
-        photos = 'https://jaden-capstone.s3.us-west-1.amazonaws.com/fd1abf11f09a4b188464bb31468d23ac.jpg'
+        photos = 'https://jaden-capstone.s3.us-west-1.amazonaws.com/064866afbee5437b840081680b20fd64.jpeg'
     )
 
     db.session.add(demo)
