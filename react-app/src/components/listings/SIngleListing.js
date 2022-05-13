@@ -113,7 +113,6 @@ const SingleListing = () => {
                 <h1>{listing.name}</h1>
                 <p>{listing.description}</p>
                 <p>{listing.price}</p>
-                <h1>Hello</h1>
             </div>
         </div>
     )
