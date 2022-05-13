@@ -18,5 +18,5 @@ class Review(db.Model):
             'body': self.body
         }
 
-    reviewer = db.relationship('User', back_populates='reviewer')
-    reviewed = db.relationship('User', back_populates='reviewed')
+    reviewed = db.relationship('User', back_populates='reviewed', foreign_keys=[reviewed_id])
+    reviewer = db.relationship('User', back_populates='reviewer', foreign_keys=[reviewer_id])
