@@ -65,8 +65,7 @@ const SingleListing = ({ listing}) => {
                 </input>
                 <label>Photo</label>
                 <input
-                type="text"
-                value={photos}
+                type="file"
                 onChange={(e) => setPhotos(e.target.value)}
                 >
                 </input>
@@ -85,6 +84,7 @@ const SingleListing = ({ listing}) => {
     return (
         <div>
             <h1>{listing.name}</h1>
+            <img src={listing.photos} alt='this is a picture'></img>
             {user.id === listing.user_id && functionButtons}
         </div>
     )
