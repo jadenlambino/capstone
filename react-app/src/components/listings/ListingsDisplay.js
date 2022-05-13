@@ -1,7 +1,6 @@
 import {React, useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { grabListings } from '../../store/listings';
-import UploadPicture from './ListingPhotoForm';
 import LisitngForm from './ListingsForm';
 import SingleListing from './SIngleListing';
 
@@ -23,7 +22,6 @@ const ListingsDisplay = () => {
             </div>
             <h1>Hello</h1>
             <LisitngForm />
-            {/* <UploadPicture /> */}
         </>
     )
 }
