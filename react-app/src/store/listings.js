@@ -32,20 +32,14 @@ export const grabListings = () => async (dispatch) => {
 }
 
 export const uploadListings = (listingData) => async (dispatch) => {
-    const {productTag, name, price, description} = listingData;
+    // const {productTag, name, price, description, formData} = listingData;
     console.log(listingData)
     const response = await fetch('api/listings/', {
         method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            product_tag: productTag,
-            name,
-            price,
-            description,
-            // photos
-        })
+        // headers: {
+        //     "Content-Type": "application/json"
+        // },
+        body: listingData
     })
 
     if (response.ok) {

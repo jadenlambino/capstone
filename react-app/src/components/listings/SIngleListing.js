@@ -22,6 +22,7 @@ const SingleListing = ({ listing}) => {
         description,
         photos}
         await dispatch(patchListings(listing.id, data))
+        //hello
     }
 
     const handleDelete = async (e) => {

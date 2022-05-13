@@ -10,4 +10,4 @@ class ListingForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired('Please give your listing a name')])
     price = FloatField('Price', validators=[DataRequired('Please set a price for your listing.')])
     description = StringField('Description', validators=[DataRequired('Tell users why they should buy your product!')])
-    photos = StringField('Photos')
+    # photos = StringField('Photos')
