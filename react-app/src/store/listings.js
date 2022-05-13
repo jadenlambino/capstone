@@ -34,7 +34,7 @@ export const grabListings = () => async (dispatch) => {
 export const uploadListings = (listingData) => async (dispatch) => {
     // const {productTag, name, price, description, formData} = listingData;
     console.log(listingData)
-    const response = await fetch('api/listings/', {
+    const response = await fetch('/api/listings/', {
         method: 'POST',
         // headers: {
         //     "Content-Type": "application/json"
@@ -55,7 +55,7 @@ export const uploadListings = (listingData) => async (dispatch) => {
 
 export const patchListings = (id, listingData) => async (dispatch) => {
     const {productTag, name, price, description, photos} = listingData;
-    const response = await fetch(`api/listings/${id}/`, {
+    const response = await fetch(`/api/listings/${id}/`, {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json"
@@ -81,7 +81,7 @@ export const patchListings = (id, listingData) => async (dispatch) => {
 }
 
 export const removeListings = (id) => async dispatch => {
-    const response = await fetch(`api/listings/${id}/`, {
+    const response = await fetch(`/api/listings/${id}/`, {
         method: "DELETE"
     });
 

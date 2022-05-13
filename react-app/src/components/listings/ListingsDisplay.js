@@ -15,20 +15,21 @@ const ListingsDisplay = () => {
 
     useEffect(() => {
         dispatch(grabListings())
-    }, [dispatch])
+      }, [dispatch])
 
     return (
         <>
             <div className='listing-display'>
                 {listings.map((listing, idx) => (
                     <div key={idx} className='listing-container'>
-                        <img src={listing.photos} className='display-img'></img>
+                        <NavLink to={`/listings/${listing.id}`}>
+                            <img src={listing.photos} className='display-img'></img>
+                        </NavLink>
                         <span className='listing-info'>
                             <span>{listing.name}</span>
                             <span>{listing.description}</span>
                             <span>{listing.price}</span>
                         </span>
-                        {/* {<SingleListing listing={listing} />} */}
                     </div>
                 ))}
             </div>

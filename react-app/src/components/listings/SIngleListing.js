@@ -1,11 +1,20 @@
 import React, { useReducer, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import {patchListings, removeListings} from '../../store/listings'
+import './SingleListing.css'
 
-const SingleListing = ({ listing }) => {
+const SingleListing = () => {
     const dispatch = useDispatch();
+    const history = useHistory()
+    const id = Number(Object.values(useParams()))
 
     const user = useSelector(state => state.session.user)
+    const listings = useSelector(state => state.listings)
+    const listing = listings[id]
+    console.log(id)
+    console.log(listings)
+    console.log(listing)
 
     const [name, setName] = useState(listing.name)
     const [price, setPrice] = useState(listing.price)
@@ -27,16 +36,18 @@ const SingleListing = ({ listing }) => {
 
     const handleDelete = async (e) => {
         e.preventDefault()
+        history.push('/listings')
         await dispatch(removeListings(listing.id))
     }
-
 
     let functionButtons = (
         <>
             <form onSubmit={handleEdit}>
                 <label>Product Tag</label>
-                <select onChange={(e) => setProductTag(e.target.value)}>
-                    <option value={listing.product_tag} selected disabled hidden>{listing.product_type}</option>
+                <select
+                onChange={(e) => setProductTag(e.target.value)}
+                defaultValue={listing.product_tag}>
+                    <option value={listing.product_tag} selected hidden>{listing.product_type}</option>
                     <option value={1}>Jacket</option>
                     <option value={2}>Shirt</option>
                     <option value={3}>T-Shirt</option>
@@ -82,10 +93,15 @@ const SingleListing = ({ listing }) => {
     )
 
     return (
-        <div>
-            <h1>{listing.name}</h1>
-            {/* <img src={listing.photos} alt='this is a picture'></img> */}
-            {user.id === listing.user_id && functionButtons}
+        <div className='s-l-c'>
+            <img src={listing.photos} alt='this is a picture' className='s-p'></img>
+            <div className='s-i'>
+                {user.id === listing.user_id && functionButtons}
+                <h1>{listing.name}</h1>
+                <p>{listing.description}</p>
+                <p>{listing.price}</p>
+                <h1>Hello</h1>
+            </div>
         </div>
     )
 }

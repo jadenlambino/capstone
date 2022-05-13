@@ -10,6 +10,8 @@ import User from './components/User';
 import ListingsDisplay from './components/listings/ListingsDisplay';
 import { authenticate } from './store/session';
 import SingleListing from './components/listings/SIngleListing';
+import { grabListings } from './store/listings';
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -21,6 +23,8 @@ function App() {
       setLoaded(true);
     })();
   }, [dispatch]);
+
+
 
   if (!loaded) {
     return null;
@@ -48,9 +52,9 @@ function App() {
         <Route path='/listings' exact={true}>
           <ListingsDisplay />
         </Route>
-        {/* <Route path='/listings/:id' exact={true}>
+        <Route path='/listings/:id' exact={true}>
           <SingleListing />
-        </Route> */}
+        </Route>
       </Switch>
     </BrowserRouter>
   );
