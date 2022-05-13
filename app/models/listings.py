@@ -11,6 +11,7 @@ class Listing(db.Model):
     name = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Float, nullable=False)
     description = db.Column(db.String(255), nullable=False)
+    photos = db.Column(db.String, nullable=False)
 
     def to_dict(self):
         product_type = Product_Tag.query.get(self.product_tag)
@@ -50,4 +51,4 @@ class Listing(db.Model):
 
     user = db.relationship('User', back_populates='listings')
     tag = db.relationship('Product_Tag', back_populates='listings')
-    listing_photos = db.relationship('ListingPhotos', back_populates='listing')
+    # listing_photos = db.relationship('ListingPhotos', back_populates='listing')

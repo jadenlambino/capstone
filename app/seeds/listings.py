@@ -55,5 +55,5 @@ def seed_listings():
 
 def undo_listings():
     db.session.execute('TRUNCATE listings RESTART IDENTITY CASCADE;')
-    db.session.execute('TRUNCATE listing_photos RESTART IDENTITY CASCADE;')
+    # db.session.execute('TRUNCATE listing_photos RESTART IDENTITY CASCADE;')
     db.session.commit()

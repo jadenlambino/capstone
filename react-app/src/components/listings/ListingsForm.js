@@ -12,7 +12,7 @@ const LisitngForm = () => {
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState('')
-    const [photos, setPhotos] = useState('')
+    const [image, setImage] = useState(null);
     const [productTag, setProductTag] = useState()
     const [photoLoading, setPhotoLoading] = useState(false)
 
@@ -20,23 +20,27 @@ const LisitngForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // console.log(productTag)
-        // const formData = new FormData()
-        // formData.append("photos", photos)
-        // setPhotoLoading(true)
+        const formData = new FormData();
+        formData.append("image", image);
+        formData.append("product_tag", productTag);
+        formData.append("description", description);
+        formData.append("price", price);
+        formData.append('name', name);
 
-        const new_listing = {
-            productTag,
-            name,
-            price,
-            description,
-        }
-        const response = await dispatch(uploadListings(new_listing))
+        // const new_listing = {
+        //     formData
+        // }
+
+        const response = await dispatch(uploadListings(formData))
         if (response.errors) {
             console.log(response.errors)
         }
     }
 
+    const updateImage = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -72,6 +76,11 @@ const LisitngForm = () => {
             type="text"
             onChange={e => setPrice(e.target.value)}>
             </input>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={updateImage}
+            />
             <button type='submit'>Submit</button>
         </form>
     )

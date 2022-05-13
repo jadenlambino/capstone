@@ -1,8 +1,8 @@
-"""adding a new table
+"""does this work
 
-Revision ID: 5485ca474400
+Revision ID: 9cd1d8e86b15
 Revises: ffdc0a98111c
-Create Date: 2022-05-12 16:38:47.266505
+Create Date: 2022-05-13 09:13:25.971213
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5485ca474400'
+revision = '9cd1d8e86b15'
 down_revision = 'ffdc0a98111c'
 branch_labels = None
 depends_on = None
@@ -31,6 +31,7 @@ def upgrade():
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('price', sa.Float(), nullable=False),
     sa.Column('description', sa.String(length=255), nullable=False),
+    sa.Column('photos', sa.String()),
     sa.ForeignKeyConstraint(['product_tag'], ['product_tags.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')

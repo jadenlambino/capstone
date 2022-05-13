@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { grabListings } from '../../store/listings';
 import UploadPicture from './ListingPhotoForm';
 import LisitngForm from './ListingsForm';
-import SingleListing from './SingleListing';
+import SingleListing from './SIngleListing';
 
 const ListingsDisplay = () => {
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const ListingsDisplay = () => {
             </div>
             <h1>Hello</h1>
             <LisitngForm />
-            <UploadPicture />
+            {/* <UploadPicture /> */}
         </>
     )
 }
