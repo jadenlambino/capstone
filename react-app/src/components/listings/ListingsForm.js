@@ -27,10 +27,6 @@ const LisitngForm = () => {
         formData.append("price", price);
         formData.append('name', name);
 
-        // const new_listing = {
-        //     formData
-        // }
-
         const response = await dispatch(uploadListings(formData))
         if (response.errors) {
             console.log(response.errors)
