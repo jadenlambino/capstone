@@ -7,7 +7,6 @@ def seed_listings():
         name = 'Jacket',
         price = 100.00,
         description = 'This is a jacket',
-        photos = ''
     )
     demo2 = Listing (
         user_id = 1,
@@ -15,7 +14,6 @@ def seed_listings():
         name = 'T-shirt',
         price = 20.00,
         description = 'This is a T-shirt',
-        photos = ''
     )
     demo3 = Listing (
         user_id = 2,
@@ -23,7 +21,6 @@ def seed_listings():
         name = 'Sweatshirt',
         price = 40.00,
         description = 'This is a sweatshirt',
-        photos = ''
     )
     demo4 = Listing (
         user_id = 2,
@@ -31,7 +28,6 @@ def seed_listings():
         name = 'Jeans',
         price = 90.00,
         description = 'These are some jeans',
-        photos = ''
     )
     demo5 = Listing (
         user_id = 3,
@@ -39,7 +35,6 @@ def seed_listings():
         name = 'Shorts',
         price = 27.00,
         description = 'These are some shorts',
-        photos = ''
     )
     demo6 = Listing (
         user_id = 3,
@@ -47,7 +42,6 @@ def seed_listings():
         name = 'Hat',
         price = 30.00,
         description = 'This is a hat',
-        photos = ''
     )
 
     db.session.add(demo)

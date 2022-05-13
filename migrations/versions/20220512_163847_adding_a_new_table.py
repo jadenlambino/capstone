@@ -1,8 +1,8 @@
-"""adding foreign_keys argument
+"""adding a new table
 
-Revision ID: 04b8f8fe0ea2
+Revision ID: 5485ca474400
 Revises: ffdc0a98111c
-Create Date: 2022-05-10 15:44:14.587260
+Create Date: 2022-05-12 16:38:47.266505
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '04b8f8fe0ea2'
+revision = '5485ca474400'
 down_revision = 'ffdc0a98111c'
 branch_labels = None
 depends_on = None
@@ -31,7 +31,6 @@ def upgrade():
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('price', sa.Float(), nullable=False),
     sa.Column('description', sa.String(length=255), nullable=False),
-    sa.Column('photos', sa.String(), nullable=False),
     sa.ForeignKeyConstraint(['product_tag'], ['product_tags.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')

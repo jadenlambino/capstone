@@ -11,7 +11,6 @@ class Listing(db.Model):
     name = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Float, nullable=False)
     description = db.Column(db.String(255), nullable=False)
-    photos = db.Column(db.String)
 
     def to_dict(self):
         product_type = Product_Tag.query.get(self.product_tag)
@@ -23,7 +22,6 @@ class Listing(db.Model):
             'name' : self.name,
             'price' : self.price,
             'description' : self.description,
-            'photos' : self.photos
         }
 
     # def edit_listing(self, product_tag, name, price, description, photos):
@@ -49,10 +47,6 @@ class Listing(db.Model):
     def edit_description(self,description):
         self.description = description
         return description
-
-    def edit_photos(self, photos):
-        self.photos = photos
-        return photos
 
     user = db.relationship('User', back_populates='listings')
     tag = db.relationship('Product_Tag', back_populates='listings')

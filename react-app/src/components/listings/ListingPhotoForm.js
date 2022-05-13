@@ -16,6 +16,10 @@ const UploadPicture = () => {
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         setImageLoading(true);
+        console.log(image)
+        for (var pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]);
+        }
 
         const res = await fetch('/api/images', {
             method: "POST",
@@ -27,10 +31,11 @@ const UploadPicture = () => {
             history.push("/images");
         }
         else {
+            // const errors = res.errors
             setImageLoading(false);
             // a real app would probably use more advanced
             // error handling
-            console.log("error");
+            console.log(res);
         }
     }
 
