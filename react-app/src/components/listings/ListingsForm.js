@@ -15,6 +15,7 @@ const LisitngForm = () => {
     const [image, setImage] = useState(null);
     const [productTag, setProductTag] = useState()
     const [photoLoading, setPhotoLoading] = useState(false)
+    const [defaultValue, setDeaultValue] = useState(false)
 
 
     const handleSubmit = async (e) => {
@@ -41,8 +42,11 @@ const LisitngForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <label>Product Tag</label>
-            <select onChange={(e) => setProductTag(e.target.value)}>
-                <option value='none' selected disabled hidden>Select an option</option>
+            <select
+            onChange={(e) => setProductTag(e.target.value)}
+            defaultValue={defaultValue}
+            >
+                <option value={defaultValue} disabled hidden>Select an option</option>
                 <option value={1}>Jacket</option>
                 <option value={2}>Shirt</option>
                 <option value={3}>T-Shirt</option>

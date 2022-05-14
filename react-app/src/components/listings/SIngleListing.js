@@ -1,42 +1,57 @@
-import React, { useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {patchListings, removeListings} from '../../store/listings'
+import { useHistory, useParams } from 'react-router-dom';
+import { grabSingle, patchListings, removeListings } from '../../store/listings'
+import './SingleListing.css'
 
-const SingleListing = ({ listing}) => {
+const SingleListing = () => {
     const dispatch = useDispatch();
-
+    const history = useHistory()
+    const { id } = useParams();
     const user = useSelector(state => state.session.user)
+    const listing = useSelector(state => state.listings[id])
+    const [name, setName] = useState('')
+    const [productTag, setProductTag] = useState('')
+    const [description, setDescription] = useState('')
+    const [price, setPrice] = useState(0)
+    const [reveal, setReveal] = useState(false)
 
-    const [name, setName] = useState(listing.name)
-    const [price, setPrice] = useState(listing.price)
-    const [description, setDescription] = useState(listing.description)
-    const [photos, setPhotos] = useState(listing.photos)
-    const [productTag, setProductTag] = useState(listing.productTag)
+    useEffect(() => {
+        if (!id) {
+            return;
+        }
+        dispatch(grabSingle(id));
+    }, [id]);
+
+    console.log(listing)
+    if (!listing) return null
 
     const handleEdit = async (e) => {
         e.preventDefault()
         const data = {
-        productTag,
-        name,
-        price,
-        description,
-        photos}
+            productTag,
+            name,
+            price,
+            description
+        }
         await dispatch(patchListings(listing.id, data))
         //hello
     }
 
     const handleDelete = async (e) => {
         e.preventDefault()
+        history.push('/listings')
         await dispatch(removeListings(listing.id))
     }
-
 
     let functionButtons = (
         <>
             <form onSubmit={handleEdit}>
                 <label>Product Tag</label>
-                <select onChange={(e) => setProductTag(e.target.value)}>
-                    <option value={listing.product_tag} selected disabled hidden>{listing.product_type}</option>
+                <select
+                onChange={(e) => setProductTag(e.target.value)}
+                defaultValue={listing.product_tag}>
+                    <option value={listing.product_tag} selected hidden>{listing.product_type}</option>
                     <option value={1}>Jacket</option>
                     <option value={2}>Shirt</option>
                     <option value={3}>T-Shirt</option>
@@ -63,13 +78,6 @@ const SingleListing = ({ listing}) => {
                 onChange={(e) => setDescription(e.target.value)}
                 >
                 </input>
-                <label>Photo</label>
-                <input
-                type="text"
-                value={photos}
-                onChange={(e) => setPhotos(e.target.value)}
-                >
-                </input>
                 <label>Price</label>
                 <input
                 type="text"
@@ -82,10 +90,30 @@ const SingleListing = ({ listing}) => {
         </>
     )
 
+    const rev = (e) => {
+        e.preventDefault()
+        setName(listing.name)
+        setProductTag(listing.product_tag)
+        setDescription(listing.description)
+        setPrice(listing.price)
+        setReveal(!reveal)
+    }
+
+    let revealButton = (
+        <button onClick={rev}>open</button>
+    )
+
+
     return (
-        <div>
-            <h1>{listing.name}</h1>
-            {user.id === listing.user_id && functionButtons}
+        <div className='s-l-c'>
+            <img src={listing.photos} alt='this is a picture' className='s-p'></img>
+            <div className='s-i'>
+                {user.id === listing.user_id && revealButton}
+                {reveal && functionButtons}
+                <h1>{listing.name}</h1>
+                <p>{listing.description}</p>
+                <p>{listing.price}</p>
+            </div>
         </div>
     )
 }

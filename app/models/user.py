@@ -1,4 +1,5 @@
 from .db import db
+from .listings import Listing
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from .reviews import Review
@@ -27,10 +28,12 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
+        listings = Listing.query.filter(Listing.user_id == self.id).all()
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'listings': [listing.to_dict() for listing in listings]
         }
 
     listings = db.relationship('Listing', back_populates='user', cascade="all, delete")
