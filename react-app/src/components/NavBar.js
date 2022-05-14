@@ -4,15 +4,13 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import Popup from 'reactjs-popup'
 import './NavBar.css'
+import { useSelector } from 'react-redux';
 
 const NavBar = () => {
-  return (
-    <nav>
-      <div>
-        <NavLink to='/' exact={true} activeClassName='active' className='nav-item'>
-          Home
-        </NavLink>
-      </div>
+  const user = useSelector(state => state.session.user)
+
+  let logSign = (
+    <>
       <div>
         <NavLink to='/login' exact={true} activeClassName='active' className='nav-item'>
           Login
@@ -23,12 +21,11 @@ const NavBar = () => {
           Sign Up
         </NavLink>
       </div>
-      <div>
-        <NavLink to='/users' exact={true} activeClassName='active' className='nav-item'>
-          Users
-        </NavLink>
-      </div>
-      <Popup
+    </>
+  )
+
+  let logout = (
+    <Popup
       trigger={<div>Profile</div>}
       position='bottom center'
       on='hover'
@@ -39,6 +36,22 @@ const NavBar = () => {
       >
         <LogoutButton />
       </Popup>
+  )
+
+  return (
+    <nav>
+      <div>
+        <NavLink to='/listings' exact={true} activeClassName='active' className='nav-item'>
+          Buy
+        </NavLink>
+      </div>
+      {!user && logSign}
+      <div>
+        <NavLink to='/users' exact={true} activeClassName='active' className='nav-item'>
+          Users
+        </NavLink>
+      </div>
+      {user && logout}
     </nav>
   );
 }
