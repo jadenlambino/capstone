@@ -34,8 +34,8 @@ function User() {
         </li>
       </ul>
       <div>
-        {user.listings?.map(listing =>(
-            <p>{listing.name}</p>
+        {user.listings?.map((listing, idx) =>(
+            <p key={idx}>{listing.name}</p>
         ))}
       </div>
     </>
