@@ -23,6 +23,7 @@ class Listing(db.Model):
             'name' : self.name,
             'price' : self.price,
             'description' : self.description,
+            'photos': self.photos
         }
 
     # def edit_listing(self, product_tag, name, price, description, photos):

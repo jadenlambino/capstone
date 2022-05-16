@@ -13,6 +13,11 @@ def get_listings():
     listings = Listing.query.all()
     return {'listings': [listing.to_dict() for listing in listings]}
 
+@listing_routes.route('/<int:id>/')
+def get_single_listing(id):
+    listing = Listing.query.filter(Listing.id == id).first()
+    return {'listings': [listing.to_dict()]}
+
 @listing_routes.route('/', methods=["POST"])
 def post_listing():
     form = ListingForm()

@@ -1,0 +1,28 @@
+.listing-display{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.listing-container {
+    margin: 5px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.display-img {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}
+
+.listing-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.hide {
+    display: none;
+}

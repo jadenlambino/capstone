@@ -1,0 +1,15 @@
+.s-l-c {
+    height: 100%;
+    display: flex;
+}
+
+.s-p {
+    height: 500px;
+    width: 500px;
+}
+
+.s-i {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
