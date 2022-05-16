@@ -73,9 +73,16 @@ export const uploadListings = (listingData) => async (dispatch) => {
     }
 }
 
-export const purchaseListings = (id) => async (dispatch) => {
+export const purchaseListings = (id, data) => async (dispatch) => {
+    const {buyer_id} = data;
     const response = await fetch(`/api/listings/${id}/buy`, {
         method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            buyer_id
+        })
     })
 
     if (response.ok) {

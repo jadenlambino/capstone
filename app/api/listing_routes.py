@@ -6,6 +6,7 @@ from app.forms.listing_form import ListingForm
 from app.s3_helpers import (
     upload_file_to_s3, allowed_file, get_unique_filename
 )
+import ast
 
 listing_routes = Blueprint('listings', __name__)
 
@@ -99,8 +100,12 @@ def edit_listing(id):
 @listing_routes.route('/<int:id>/buy', methods=['PATCH'])
 def buy_listing(id):
     listing = Listing.query.filter_by(id=id).one()
+    print(str(request.data) + '--------------------------------')
+    data = request.data.decode('utf-8')
+    data_dict = ast.literal_eval(data)
+    print(data_dict)
 
-    listing.set_purchase(id)
+    listing.set_purchase(data_dict['buyer_id'])
 
     db.session.commit()
     return listing.to_dict()

@@ -16,6 +16,7 @@ const SingleListing = () => {
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState(0)
     const [reveal, setReveal] = useState(false)
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         if (!id) {
@@ -106,7 +107,12 @@ const SingleListing = () => {
 
     const handlePurchase = async (e) => {
         e.preventDefault()
-        await dispatch(purchaseListings(user.id))
+
+        const data = {
+            buyer_id: user.id
+        }
+        await dispatch(purchaseListings(id, data))
+        setOpen(true)
     }
 
     let buyButton = (
@@ -125,6 +131,11 @@ const SingleListing = () => {
                 <p>{listing.description}</p>
                 <p>{listing.price}</p>
             </div>
+            <Popup
+            open={open}
+            modal>
+                <h1>HELLO!!!</h1>
+            </Popup>
         </div>
     )
 }
