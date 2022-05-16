@@ -1,10 +1,13 @@
 import React, {useState} from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { uploadReview } from "../../store/reviews";
 import { Rating } from "react-simple-star-rating";
+import { useHistory } from "react-router-dom";
 
 const ReviewForm = ({ listing}) => {
     const dispatch = useDispatch()
+    const history = useHistory()
+    const user = useSelector(state => state.session.user)
 
     const [rating, setRating] = useState(0)
     const [body, setBody] = useState('')
@@ -21,9 +24,11 @@ const ReviewForm = ({ listing}) => {
         }
 
         const response = await dispatch(uploadReview(review))
-        // if (response.errors) {
-        //     console.log(response.errors)
-        // }
+        if (response.errors) {
+            console.log(response.errors)
+        }
+
+        history.push(`/users/${user.id}`)
     }
 
     const handleRating = (rate) => {
