@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { grabSingle, patchListings, removeListings, purchaseListings } from '../../store/listings'
 import Popup from 'reactjs-popup'
+import 'reactjs-popup/dist/index.css';
 import './SingleListing.css'
+import ReviewForm from '../reviews/ReviewForm';
 
 const SingleListing = () => {
     const dispatch = useDispatch();
@@ -134,7 +136,7 @@ const SingleListing = () => {
             <Popup
             open={open}
             modal>
-                <h1>HELLO!!!</h1>
+                <ReviewForm listing={listing}/>
             </Popup>
         </div>
     )

@@ -31,13 +31,15 @@ class User(db.Model, UserMixin):
 
     def to_dict(self):
         listings = Listing.query.filter(Listing.user_id == self.id).all()
+        purchases = Listing.query.filter(Listing.buyer_id == self.id).all()
         reviews = Review.query.filter(Review.reviewed_id == self.id).all()
         return {
             'id': self.id,
             'username': self.username,
             'email': self.email,
             'listings': [listing.to_dict() for listing in listings],
-            'reviews': [review.to_dict() for review in reviews]
+            'reviews': [review.to_dict() for review in reviews],
+            'purchases': [purchase.to_dict() for purchase in purchases]
         }
 
     listings = db.relationship('Listing', back_populates='user', cascade="all, delete", foreign_keys='Listing.user_id')

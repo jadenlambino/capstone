@@ -23,11 +23,25 @@ const deleteReviews = (id) => ({
     id
 })
 
-const uploadReview = (review) => async (dispatch) => {
+export const uploadReview = (review) => async (dispatch) => {
+    const {reviewed_id, rating, body} = review
     const response = await fetch('/api/reviews/', {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
-
+            reviewed_id,
+            rating,
+            body
         })
     })
+
+    if (response.ok){
+        return {'message': 'this is too lit with it'}
+    } else {
+        const errors = await response.json()
+        console.log(errors)
+        return errors
+    }
 }
