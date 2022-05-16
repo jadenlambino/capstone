@@ -8,7 +8,7 @@ const getReviews = (reviews) => ({
     reviews
 })
 
-const postReviews = (review) => ({
+const postReview = (review) => ({
     type: NEW_REVIEWS,
     review
 })
@@ -22,3 +22,12 @@ const deleteReviews = (id) => ({
     type: DELETE_REVIEWS,
     id
 })
+
+const newReview = (review) => async (dispatch) => {
+    const response = await fetch('/api/reviews/', {
+        method: 'POST',
+        body: JSON.stringify({
+
+        })
+    })
+}
