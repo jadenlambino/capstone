@@ -35,7 +35,10 @@ function User() {
       </ul>
       <div>
         {user.listings?.map((listing, idx) =>(
-            <p key={idx}>{listing.name}</p>
+          <div key={idx}>
+            <img src={listing.photos} alt='this is a picture' className='display-img'></img>
+            <p>{listing.name}</p>
+          </div>
         ))}
       </div>
     </>
