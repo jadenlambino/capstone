@@ -1,3 +1,5 @@
+from email.policy import default
+from sqlalchemy import ForeignKey
 from .db import db
 from .product_tags import Product_Tag
 from app.models import product_tags
@@ -12,6 +14,8 @@ class Listing(db.Model):
     price = db.Column(db.Float, nullable=False)
     description = db.Column(db.String(255), nullable=False)
     photos = db.Column(db.String, nullable=False)
+    is_purchased = db.Column(db.Boolean, nullable=False, default=False)
+    buyer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def to_dict(self):
         product_type = Product_Tag.query.get(self.product_tag)
@@ -50,6 +54,7 @@ class Listing(db.Model):
         self.description = description
         return description
 
-    user = db.relationship('User', back_populates='listings')
+    user = db.relationship('User', back_populates='listings', foreign_keys=[user_id])
+    buyer = db.relationship('User', back_populates='buyer', foreign_keys=[buyer_id])
     tag = db.relationship('Product_Tag', back_populates='listings')
     # listing_photos = db.relationship('ListingPhotos', back_populates='listing')

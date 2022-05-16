@@ -23,7 +23,7 @@ const deleteReviews = (id) => ({
     id
 })
 
-const newReview = (review) => async (dispatch) => {
+const uploadReview = (review) => async (dispatch) => {
     const response = await fetch('/api/reviews/', {
         method: 'POST',
         body: JSON.stringify({
