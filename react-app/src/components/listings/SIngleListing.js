@@ -1,7 +1,8 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { grabSingle, patchListings, removeListings } from '../../store/listings'
+import { grabSingle, patchListings, removeListings, purchaseListings } from '../../store/listings'
+import Popup from 'reactjs-popup'
 import './SingleListing.css'
 
 const SingleListing = () => {
@@ -103,6 +104,15 @@ const SingleListing = () => {
         <button onClick={rev}>open</button>
     )
 
+    const handlePurchase = async (e) => {
+        e.preventDefault()
+        await dispatch(purchaseListings(user.id))
+    }
+
+    let buyButton = (
+        <button onClick={handlePurchase}>Buy</button>
+    )
+
 
     return (
         <div className='s-l-c'>
@@ -110,6 +120,7 @@ const SingleListing = () => {
             <div className='s-i'>
                 {user.id === listing.user_id && revealButton}
                 {reveal && functionButtons}
+                {user.id !== listing.user_id && buyButton}
                 <h1>{listing.name}</h1>
                 <p>{listing.description}</p>
                 <p>{listing.price}</p>

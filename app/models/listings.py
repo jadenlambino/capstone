@@ -27,7 +27,9 @@ class Listing(db.Model):
             'name' : self.name,
             'price' : self.price,
             'description' : self.description,
-            'photos': self.photos
+            'photos': self.photos,
+            'is_purchased' : self.is_purchased,
+            'buyer_id': self.buyer_id
         }
 
     # def edit_listing(self, product_tag, name, price, description, photos):
@@ -53,6 +55,11 @@ class Listing(db.Model):
     def edit_description(self,description):
         self.description = description
         return description
+
+    def set_purchase(self, buyer_id):
+        self.is_purchased = True
+        self.buyer_id = buyer_id
+        return {'message': 'purchase complete!'}
 
     user = db.relationship('User', back_populates='listings', foreign_keys=[user_id])
     buyer = db.relationship('User', back_populates='buyer', foreign_keys=[buyer_id])

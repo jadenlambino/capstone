@@ -1,5 +1,6 @@
 const GET_LISTINGS = 'listings/GET_LISTINGS'
 const GET_SINGLE = 'listings/GET_SINGLE'
+const BUY_LISTING = 'listings/BUY_LISTING'
 const NEW_LISTINGS = 'listings/NEW_LISTINGS'
 const EDIT_LISTINGS = 'listings/EDIT_LISTINGS'
 const DELETE_LISTINGS = 'listings/DELETE_LIST'
@@ -12,6 +13,11 @@ const getListings = (listings) => ({
 export const getSingle = (listings) => ({
     type: GET_SINGLE,
     listings
+})
+
+const buyListing = (listing) => ({
+    type: BUY_LISTING,
+    listing
 })
 
 const postListings = (listing) => ({
@@ -67,6 +73,18 @@ export const uploadListings = (listingData) => async (dispatch) => {
     }
 }
 
+export const purchaseListings = (id) => async (dispatch) => {
+    const response = await fetch(`/api/listings/${id}/buy`, {
+        method: 'PATCH',
+    })
+
+    if (response.ok) {
+        const listing = await response.json();
+        dispatch(buyListing(listing))
+        return listing
+    }
+}
+
 export const patchListings = (id, listingData) => async (dispatch) => {
     const {productTag, name, price, description, photos} = listingData;
     const response = await fetch(`/api/listings/${id}/`, {
@@ -118,6 +136,10 @@ export default function reducer(state = initialState, action) {
         case GET_SINGLE:
             newState = {...state}
             action.listings.listings.forEach(listing => {newState[listing.id] = listing})
+            return newState
+        case BUY_LISTING:
+            newState = {...state}
+            newState[action.listing.id] = action.listing
             return newState
         case NEW_LISTINGS:
             newState = {...state};

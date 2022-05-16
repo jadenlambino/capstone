@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user
+from sqlalchemy import true
 from app.models import Listing, db
 from app.forms.listing_form import ListingForm
 from app.s3_helpers import (
@@ -94,6 +95,15 @@ def edit_listing(id):
         return form.errors, 403
     # db.session.update(edit_listing)
     # return edit_listing.to_dict()
+
+@listing_routes.route('/<int:id>/buy', methods=['PATCH'])
+def buy_listing(id):
+    listing = Listing.query.filter_by(id=id).one()
+
+    listing.set_purchase(id)
+
+    db.session.commit()
+    return listing.to_dict()
 
 @listing_routes.route('/<int:id>/', methods=["DELETE"])
 def delete_listing(id):
