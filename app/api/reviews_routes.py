@@ -1,14 +1,15 @@
 from flask import Blueprint, request
 from flask_login import current_user
-from app.models import Review, db
+from app.models import Review, db, Listing
 from app.forms import ReviewForm
+
 
 review_routes = Blueprint('reviews', __name__)
 
-# @review_routes.route('/')
-# def get_reviews(id):
-#     reviews = Review.query.filter(id == Review.reviewed_id)
-#     return {'reviews': [review.to_dict() for review in reviews]}
+@review_routes.route('/<int:id>/')
+def get_reviews(id):
+    review = Review.query.filter_by(id = Review.listing_id).one()
+    return review.to_dict()
 
 @review_routes.route('/', methods=['POST'])
 def create_review():
@@ -27,25 +28,29 @@ def create_review():
         )
 
         db.session.add(new_review)
+
+        listing = Listing.query.filter_by(id = data['listing_id']).one()
+        listing.set_review()
+
         db.session.commit()
         return new_review.to_dict()
 
     if form.errors:
         return form.errors, 403
 
-@review_routes.route('/<int:id>/', methods=['PATCH'])
-def edit_review(id):
-    review = Review.query.filter_by(id = id).one()
-    form = ReviewForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
+# @review_routes.route('/<int:id>/', methods=['PATCH'])
+# def edit_review(id):
+#     review = Review.query.filter_by(id = Review.listing_id).one()
+#     print(str(review) + '++++++++++++++++')
+#     form = ReviewForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
 
-    data = form.data
+#     if form.validate_on_submit():
+#         data = form.data
+#         review.edit_rating(data['rating'])
+#         review.edit_body(data['body'])
+#         db.session.commit()
+#         return review.to_dict()
 
-    if form.validate_on_submit():
-        review.edit_rating(data['rating'])
-        review.edit_body(data['body'])
-        db.session.commit()
-        return review.to_dict()
-
-    if form.errors:
-        return form.errors, 403
+#     if form.errors:
+#         return form.errors, 403

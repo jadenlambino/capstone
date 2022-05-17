@@ -38,6 +38,7 @@ const ReviewForm = ({ purchase }) => {
 
     return (
         <>
+            <img src={purchase.photos}></img>
             <form onSubmit={handleSubmit}>
                 <input
                 type="text"

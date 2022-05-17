@@ -18,7 +18,6 @@ const SingleListing = () => {
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState(0)
     const [reveal, setReveal] = useState(false)
-    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         if (!id) {
@@ -114,7 +113,7 @@ const SingleListing = () => {
             buyer_id: user.id
         }
         await dispatch(purchaseListings(id, data))
-        setOpen(true)
+        history.push(`/users/${user.id}`)
     }
 
     let buyButton = (
@@ -133,11 +132,6 @@ const SingleListing = () => {
                 <p>{listing.description}</p>
                 <p>{listing.price}</p>
             </div>
-            {/* <Popup
-            open={open}
-            modal>
-                <ReviewForm listing={listing}/>
-            </Popup> */}
         </div>
     )
 }

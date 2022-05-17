@@ -48,20 +48,21 @@ export const uploadReview = (review) => async (dispatch) => {
 }
 
 export const patchReview = (id, review) => async (dispatch) => {
-    const {rating, body} = review
+    const {listing_id, rating, body} = review
     const response = await fetch(`/api/reviews/${id}/`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            listing_id,
             rating,
             body
         })
     })
 
     if (response.ok) {
-        return {'message': 'too lit too lit'}
+        return response.json();
     } else {
         const errors = await response.json()
         console.log(errors)

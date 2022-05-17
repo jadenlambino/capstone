@@ -16,6 +16,7 @@ class Listing(db.Model):
     description = db.Column(db.String(255), nullable=False)
     photos = db.Column(db.String, nullable=False)
     is_purchased = db.Column(db.Boolean, nullable=False, default=False)
+    is_reviewed = db.Column(db.Boolean, nullable=False, default=False)
     buyer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def to_dict(self):
@@ -30,7 +31,8 @@ class Listing(db.Model):
             'description' : self.description,
             'photos': self.photos,
             'is_purchased' : self.is_purchased,
-            'buyer_id': self.buyer_id
+            'buyer_id': self.buyer_id,
+            'is_reviewed' : self.is_reviewed
         }
 
     # def edit_listing(self, product_tag, name, price, description, photos):
@@ -61,6 +63,10 @@ class Listing(db.Model):
         self.is_purchased = True
         self.buyer_id = buyer_id
         return {'message': 'purchase complete!'}
+
+    def set_review(self):
+        self.is_reviewed = True
+        return
 
     user = db.relationship('User', back_populates='listings', foreign_keys=[user_id])
     buyer = db.relationship('User', back_populates='buyer', foreign_keys=[buyer_id])

@@ -33,15 +33,12 @@ function User() {
 
   let count = 0
   if(user.reviews) {
-    console.log('reviews')
     user.reviews.forEach(review => {
-      console.log(review)
       count += review.rating
       return count
     })
     count /= user.reviews.length
   }
-  console.log(count)
 
   const showFeedback = (e) => {
     e.preventDefault()
@@ -89,10 +86,21 @@ function User() {
           <div key={idx}>
             <img src={purchase.photos} className='display-img'></img>
             <p>{purchase.name}</p>
-            <button onClick={showFeedback}>Leave Feedback</button>
-            <Popup open={feedback}>
-              <ReviewForm purchase={purchase}/>
-            </Popup>
+            { !purchase.is_reviewed &&
+            <>
+              <button onClick={showFeedback}>Leave Feedback</button>
+              <Popup open={feedback}>
+                <ReviewForm purchase={purchase}/>
+              </Popup>
+            </>
+            }
+            {purchase.is_reviewed &&
+            <>
+              <button onClick={showFeedback}>Edit Feedback</button>
+              <Popup open={feedback}>
+                <EditReview purchase={purchase}/>
+              </Popup>
+            </>}
           </div>
         ))}
       </div>

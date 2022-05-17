@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { patchReview, removeReview } from "../../store/session";
 import { Rating } from "react-simple-star-rating";
 import { useHistory, useParams } from "react-router-dom";
 
 
-const EditReview = ({ review }) => {
+const EditReview = ({ purchase }) => {
     const dispatch = useDispatch()
     const history = useHistory()
+    const [review, setReview] = useState({})
+
+    const grabSingle = (id) => async (dispatch) => {
+        const response = await fetch(`/api/reviews/${id}/`)
+        const review = await response.json()
+        setReview(review)
+    }
+
+    useEffect(() => {
+        dispatch(grabSingle(purchase.id))
+    }, [dispatch])
+
+
     const [rating, setRating] = useState(review.rating)
     const [body, setBody] = useState(review.body)
 
@@ -15,14 +28,13 @@ const EditReview = ({ review }) => {
         e.preventDefault()
 
         const edit = {
+            listing_id: purchase.id,
             rating,
             body
         }
 
         const response = await dispatch(patchReview(review.id, edit))
-        if (response.errors) {
-            console.log(response.errors)
-        }
+
     }
 
     const handleDelete = async (e) => {
