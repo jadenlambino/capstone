@@ -133,11 +133,11 @@ const SingleListing = () => {
                 <p>{listing.description}</p>
                 <p>{listing.price}</p>
             </div>
-            <Popup
+            {/* <Popup
             open={open}
             modal>
                 <ReviewForm listing={listing}/>
-            </Popup>
+            </Popup> */}
         </div>
     )
 }

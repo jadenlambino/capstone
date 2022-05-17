@@ -19,6 +19,7 @@ def create_review():
     if form.validate_on_submit():
         data = form.data
         new_review = Review (
+            listing_id=data['listing_id'],
             reviewed_id = data['reviewed_id'],
             reviewer_id = current_user.id,
             rating = data['rating'],

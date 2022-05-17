@@ -4,7 +4,7 @@ import { uploadReview } from "../../store/reviews";
 import { Rating } from "react-simple-star-rating";
 import { useHistory } from "react-router-dom";
 
-const ReviewForm = ({ listing}) => {
+const ReviewForm = ({ purchase }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector(state => state.session.user)
@@ -18,7 +18,8 @@ const ReviewForm = ({ listing}) => {
         console.log(rating)
 
         const review = {
-            reviewed_id: listing.user_id,
+            listing_id: purchase.id,
+            reviewed_id: purchase.user_id,
             rating,
             body
         }

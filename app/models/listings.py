@@ -3,6 +3,7 @@ from sqlalchemy import ForeignKey
 from .db import db
 from .product_tags import Product_Tag
 from app.models import product_tags
+from .reviews import Review
 
 class Listing(db.Model):
     __tablename__ = 'listings'
@@ -64,4 +65,5 @@ class Listing(db.Model):
     user = db.relationship('User', back_populates='listings', foreign_keys=[user_id])
     buyer = db.relationship('User', back_populates='buyer', foreign_keys=[buyer_id])
     tag = db.relationship('Product_Tag', back_populates='listings')
+    review = db.relationship('Review', back_populates='listing')
     # listing_photos = db.relationship('ListingPhotos', back_populates='listing')

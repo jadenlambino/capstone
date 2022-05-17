@@ -2,6 +2,7 @@ from app.models import db, Review
 
 def seed_reviews():
     demo = Review (
+        listing_id = 1,
         reviewed_id = 1,
         reviewer_id = 2,
         rating = 5,

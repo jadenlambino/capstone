@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Rating } from 'react-simple-star-rating'
 import { useParams } from 'react-router-dom';
 import EditReview from './reviews/EditReviewForm';
+import Popup from 'reactjs-popup'
+import ReviewForm from './reviews/ReviewForm';
+
 
 function User() {
   const viewer = useSelector(state => state.session.user)
   const [user, setUser] = useState({});
   const { userId } = useParams();
   const [ratingValue, setRatingValue] = useState(0)
+  const [feedback, setFeedback] = useState(false)
 
   const fetchUser = async () => {
     const response = await fetch(`/api/users/${userId}`);
@@ -39,6 +43,11 @@ function User() {
   }
   console.log(count)
 
+  const showFeedback = (e) => {
+    e.preventDefault()
+    setFeedback(!feedback)
+  }
+
   return (
     <>
       <ul>
@@ -67,7 +76,6 @@ function User() {
       <div>
         {user.reviews?.map((review, idx) => (
           <div key={idx}>
-            {review.reviewer_id === viewer.id && <EditReview review={review}/>}
             <p>{review.body}</p>
             <Rating
               initialValue={review.rating}
@@ -77,10 +85,14 @@ function User() {
         ))}
       </div>
       <div>
-        {user.purchases?.map((purchase, idx) => (
+        {viewer.id === user.id && user.purchases?.map((purchase, idx) => (
           <div key={idx}>
             <img src={purchase.photos} className='display-img'></img>
             <p>{purchase.name}</p>
+            <button onClick={showFeedback}>Leave Feedback</button>
+            <Popup open={feedback}>
+              <ReviewForm purchase={purchase}/>
+            </Popup>
           </div>
         ))}
       </div>

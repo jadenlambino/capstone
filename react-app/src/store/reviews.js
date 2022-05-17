@@ -24,13 +24,14 @@ const deleteReviews = (id) => ({
 })
 
 export const uploadReview = (review) => async (dispatch) => {
-    const {reviewed_id, rating, body} = review
+    const {listing_id, reviewed_id, rating, body} = review
     const response = await fetch('/api/reviews/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            listing_id,
             reviewed_id,
             rating,
             body

@@ -4,6 +4,7 @@ class Review(db.Model):
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer, primary_key=True)
+    listing_id = db.Column(db.Integer, db.ForeignKey('listings.id'), nullable=False)
     reviewed_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     reviewer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     rating = db.Column(db.Float, nullable=False)
@@ -26,5 +27,6 @@ class Review(db.Model):
         self.body = body
         return body
 
+    listing = db.relationship('Listing', back_populates='review')
     reviewed = db.relationship('User', back_populates='reviewed', foreign_keys=[reviewed_id])
     reviewer = db.relationship('User', back_populates='reviewer', foreign_keys=[reviewer_id])
