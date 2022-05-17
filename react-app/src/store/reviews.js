@@ -45,3 +45,35 @@ export const uploadReview = (review) => async (dispatch) => {
         return errors
     }
 }
+
+export const patchReview = (id, review) => async (dispatch) => {
+    const {rating, body} = review
+    const response = await fetch(`/api/reviews/${id}/`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            rating,
+            body
+        })
+    })
+
+    if (response.ok) {
+        return {'message': 'too lit too lit'}
+    } else {
+        const errors = await response.json()
+        console.log(errors)
+        return errors
+    }
+}
+
+export const removeReview = (id) => async (dispatch) => {
+    const response = await fetch(`api/reviews/${id}/`, {
+        method: 'DELETE'
+    });
+
+    if (response.ok){
+        dispatch(deleteReviews(id))
+    }
+}

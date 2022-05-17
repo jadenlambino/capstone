@@ -18,5 +18,13 @@ class Review(db.Model):
             'body': self.body
         }
 
+    def edit_rating(self, rating):
+        self.rating = rating
+        return rating
+
+    def edit_body(self, body):
+        self.body = body
+        return body
+
     reviewed = db.relationship('User', back_populates='reviewed', foreign_keys=[reviewed_id])
     reviewer = db.relationship('User', back_populates='reviewer', foreign_keys=[reviewer_id])

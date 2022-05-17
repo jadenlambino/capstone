@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Rating } from 'react-simple-star-rating'
 import { useParams } from 'react-router-dom';
+import EditReview from './reviews/EditReviewForm';
 
 function User() {
+  const viewer = useSelector(state => state.session.user)
   const [user, setUser] = useState({});
   const { userId } = useParams();
   const [ratingValue, setRatingValue] = useState(0)
+
+  const fetchUser = async () => {
+    const response = await fetch(`/api/users/${userId}`);
+    const user = await response.json();
+    setUser(user);
+  }
 
   useEffect(() => {
     if (!userId) {
       return;
     }
-    (async () => {
-      const response = await fetch(`/api/users/${userId}`);
-      const user = await response.json();
-      setUser(user);
-    })();
+    fetchUser();
   }, [userId]);
 
   if (!user) {
@@ -62,6 +67,7 @@ function User() {
       <div>
         {user.reviews?.map((review, idx) => (
           <div key={idx}>
+            {review.reviewer_id === viewer.id && <EditReview review={review}/>}
             <p>{review.body}</p>
             <Rating
               initialValue={review.rating}
