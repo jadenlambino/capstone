@@ -55,3 +55,15 @@ def edit_review(id):
 
     if form.errors:
         return form.errors, 403
+
+@review_routes.route('/<int:id>/', methods=['DELETE'])
+def delete_review(id):
+    review = Review.query.get(id)
+
+    listing = Listing.query.filter_by(id = review.listing_id).one()
+    listing.unset_review()
+
+    db.session.delete(review)
+    db.session.commit()
+
+    return {'message': 'Deleted'}

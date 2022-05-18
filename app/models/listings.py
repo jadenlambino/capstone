@@ -68,6 +68,9 @@ class Listing(db.Model):
         self.is_reviewed = True
         return
 
+    def unset_review(self):
+        self.is_reviewed = False
+
     user = db.relationship('User', back_populates='listings', foreign_keys=[user_id])
     buyer = db.relationship('User', back_populates='buyer', foreign_keys=[buyer_id])
     tag = db.relationship('Product_Tag', back_populates='listings')

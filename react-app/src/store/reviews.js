@@ -82,8 +82,8 @@ export const patchReview = (id, review) => async (dispatch) => {
 }
 
 export const removeReview = (id) => async (dispatch) => {
-    const response = await fetch(`api/reviews/${id}/`, {
-        method: 'DELETE'
+    const response = await fetch(`/api/reviews/${id}/`, {
+        method: "DELETE"
     });
 
     if (response.ok) {

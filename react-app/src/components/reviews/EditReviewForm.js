@@ -15,6 +15,12 @@ const EditReview = ({ purchase }) => {
     const [rating, setRating] = useState(review.rating)
     const [body, setBody] = useState(review.body)
 
+    const [feedback, setFeedback] = useState(false)
+    const showFeedback = (e) => {
+        e.preventDefault()
+        setFeedback(!feedback)
+    }
+
     const handleEdit = async (e) => {
         e.preventDefault()
 
@@ -31,7 +37,6 @@ const EditReview = ({ purchase }) => {
     const handleDelete = async (e) => {
         e.preventDefault()
         const response = await dispatch(removeReview(review.id))
-        history.push('/listings')
     }
 
     const handleRating = (rate) => {
@@ -40,22 +45,25 @@ const EditReview = ({ purchase }) => {
 
     return (
         <>
-                <form onSubmit={handleEdit}>
-                    <input
-                        type="text"
-                        value={body}
-                        onChange={(e) => setBody(e.target.value)}
-                    >
-                    </input>
-                    <Rating
-                        onClick={handleRating}
-                        // ratingValue={rating}
-                        // readonly={rating > 0}
-                        initialValue={rating}
-                    />
-                    <button type='submit'>submit</button>
-                </form>
-                <button onClick={handleDelete}>Delete</button>
+            <button onClick={showFeedback}>Leave Feedback</button>
+            <Popup open={feedback}>
+            <form onSubmit={handleEdit}>
+                <input
+                    type="text"
+                    value={body}
+                    onChange={(e) => setBody(e.target.value)}
+                >
+                </input>
+                <Rating
+                    onClick={handleRating}
+                    // ratingValue={rating}
+                    // readonly={rating > 0}
+                    initialValue={rating}
+                />
+                <button type='submit'>submit</button>
+            </form>
+            <button onClick={handleDelete}>Delete</button>
+            </Popup>
         </>
     )
 }
