@@ -1,20 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Rating } from "react-simple-star-rating";
-import { patchReview, removeReview } from "../../store/reviews";
+import { grabReviews, patchReview, removeReview } from "../../store/reviews";
 import { useHistory, useParams } from "react-router-dom";
 import Popup from "reactjs-popup";
 import ReviewForm from "../reviews/ReviewForm";
 import EditReview from "../reviews/EditReviewForm";
+import { grabSingle } from "../../store/listings";
 
 const PurchaseHistory = ({ purchase }) => {
+    const dispatch = useDispatch()
+    // const listing = useSelector(state => state.listings[purchase.id])
+    const review = useSelector(state => state.reviews[purchase.id])
+
+    useEffect(() => {
+        dispatch(grabReviews())
+    }, [dispatch])
+
+    // useEffect(() => {
+    //     dispatch(grabSingle(purchase.id))
+    // }, [dispatch])
+
+    // if (!listing) return null
 
     return (
         <div>
             <img src={purchase.photos} className='display-img'></img>
             <p>{purchase.name}</p>
-            {!purchase.is_reviewed && <ReviewForm purchase={purchase} />}
-            {purchase.is_reviewed && <EditReview purchase={purchase} />}
+            {!review && <ReviewForm purchase={purchase} />}
+            {review && <EditReview purchase={purchase} />}
+            <h1>damn</h1>
         </div>
     )
 }

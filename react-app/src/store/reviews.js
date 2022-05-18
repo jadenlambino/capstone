@@ -18,9 +18,9 @@ const editReviews = (review) => ({
     review
 })
 
-const deleteReviews = (id) => ({
+const deleteReviews = (review) => ({
     type: DELETE_REVIEWS,
-    id
+    review
 })
 
 export const grabReviews = () => async (dispatch) => {
@@ -73,7 +73,7 @@ export const patchReview = (id, review) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        dispatch(editReviews)
+        dispatch(editReviews(data))
     } else {
         const errors = await response.json()
         console.log(errors)
@@ -87,7 +87,8 @@ export const removeReview = (id) => async (dispatch) => {
     });
 
     if (response.ok) {
-        dispatch(deleteReviews(id))
+        const data = await response.json()
+        dispatch(deleteReviews(data))
     }
 }
 
@@ -102,15 +103,15 @@ const reducer = (state = initialState, action) => {
             return newState
         case NEW_REVIEWS:
             newState = { ...state }
-            newState[action.review.id] = action.review
+            newState[action.review.listing_id] = action.review
             return newState
         case EDIT_REVIEWS:
             newState = {...state}
-            newState[action.review.id] = action.review
+            newState[action.review.listing_id] = action.review
             return newState
         case DELETE_REVIEWS:
             newState = {...state}
-            delete newState[action.id]
+            delete newState[action.review.listing_id]
             return newState
         default:
             return state

@@ -10,6 +10,7 @@ import Popup from "reactjs-popup";
 const EditReview = ({ purchase }) => {
     const dispatch = useDispatch()
     const history = useHistory()
+    const user = useSelector(state => state.session.user)
     const review = useSelector(state => state.reviews[purchase.id])
 
     const [rating, setRating] = useState(review.rating)
@@ -31,12 +32,15 @@ const EditReview = ({ purchase }) => {
         }
 
         const response = await dispatch(patchReview(review.id, edit))
+        setFeedback(false)
 
     }
 
     const handleDelete = async (e) => {
         e.preventDefault()
         const response = await dispatch(removeReview(review.id))
+        setFeedback(false)
+        // history.push(`/users/${user.id}`)
     }
 
     const handleRating = (rate) => {
@@ -45,7 +49,7 @@ const EditReview = ({ purchase }) => {
 
     return (
         <>
-            <button onClick={showFeedback}>Leave Feedback</button>
+            <button onClick={showFeedback}>Edit Feedback</button>
             <Popup open={feedback}>
             <form onSubmit={handleEdit}>
                 <input
