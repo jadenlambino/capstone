@@ -5,11 +5,11 @@ import { Rating } from "react-simple-star-rating";
 import { useHistory } from "react-router-dom";
 import Popup from "reactjs-popup";
 
-const ReviewForm = ({ purchase }) => {
+const ReviewForm = ({ purchase, open }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector(state => state.session.user)
-    const [feedback, setFeedback] = useState(false)
+    const [feedback, setFeedback] = useState(open)
     const showFeedback = (e) => {
         e.preventDefault()
         setFeedback(!feedback)
@@ -33,7 +33,6 @@ const ReviewForm = ({ purchase }) => {
         if (response.errors) {
             console.log(response.errors)
         }
-
         setFeedback(false)
     }
 

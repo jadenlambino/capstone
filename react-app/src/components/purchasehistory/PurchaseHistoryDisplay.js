@@ -13,23 +13,22 @@ const PurchaseHistory = ({ purchase }) => {
     // const listing = useSelector(state => state.listings[purchase.id])
     const review = useSelector(state => state.reviews[purchase.id])
 
-    useEffect(() => {
-        dispatch(grabReviews())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(grabReviews())
+    // }, [dispatch])
 
     // useEffect(() => {
     //     dispatch(grabSingle(purchase.id))
     // }, [dispatch])
 
     // if (!listing) return null
-
     return (
         <div>
             <img src={purchase.photos} className='display-img'></img>
             <p>{purchase.name}</p>
-            {!review && <ReviewForm purchase={purchase} />}
-            {review && <EditReview purchase={purchase} />}
-            <h1>damn</h1>
+            {/* {!review && <ReviewForm purchase={purchase} />}
+            {review && <EditReview purchase={purchase} />} */}
+            {review ? <EditReview purchase={purchase} open={false}/> : <ReviewForm purchase={purchase} open={false}/>}
         </div>
     )
 }

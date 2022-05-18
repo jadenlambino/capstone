@@ -1,14 +1,24 @@
 .s-l-c {
     height: 100%;
+    width: 100%;
     display: flex;
+    padding-top: 5%;
+}
+
+.ic {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .s-p {
-    height: 500px;
-    width: 500px;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .s-i {
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;

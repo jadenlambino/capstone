@@ -1,8 +1,10 @@
 import { React, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { grabListings } from '../../store/listings';
-import SingleListing from './SIngleListing';
+import Popup from 'reactjs-popup';
 import { NavLink, useHistory } from 'react-router-dom';
+import LoginForm from '../auth/LoginForm';
+import 'reactjs-popup/dist/index.css';
 import './ListingsDisplay.css'
 
 const ListingsDisplay = () => {
@@ -11,10 +13,17 @@ const ListingsDisplay = () => {
     const user = useSelector(state => state.session.user);
     const listings = useSelector(state => Object.values(state.listings));
     const [render, setRender] = useState(false)
+    const [login, setLogin] = useState(false)
 
     useEffect(() => {
         dispatch(grabListings())
     }, [dispatch])
+
+
+    const showLogin = (e) => {
+      e.preventDefault();
+      setLogin(!login)
+    }
 
     return (
         <>
@@ -28,9 +37,12 @@ const ListingsDisplay = () => {
                                         <img src={listing.photos} className='display-img'></img>
                                     </NavLink>
                                 ) : (
-                                    <NavLink to={`/login`}>
-                                        <img src={listing.photos} className='display-img'></img>
-                                    </NavLink>
+                                    <>
+                                        <img src={listing.photos} className='display-img' onClick={showLogin}></img>
+                                        <Popup open={login} onClose={showLogin}>
+                                            <LoginForm />
+                                        </Popup>
+                                    </>
                                 )}
                                 <span className='listing-info'>
                                     <span>{listing.name}</span>
@@ -42,7 +54,6 @@ const ListingsDisplay = () => {
                     </div>
                 ))}
             </div>
-            <h1>Hello</h1>
         </>
     )
 }

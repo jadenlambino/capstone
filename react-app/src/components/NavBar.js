@@ -1,20 +1,28 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import Popup from 'reactjs-popup'
 import './NavBar.css'
 import { useSelector } from 'react-redux';
+import LoginForm from './auth/LoginForm';
 
 const NavBar = () => {
   const user = useSelector(state => state.session.user)
+  const [login, setLogin] = useState(false)
+
+  const showLogin = (e) => {
+    e.preventDefault();
+    setLogin(!login)
+  }
 
   let logSign = (
     <>
       <div className='nd'>
-        <NavLink to='/login' exact={true} activeClassName='active' className='nav-item'>
-          LOGIN
-        </NavLink>
+        <button className='nb' onClick={showLogin}>LOGIN</button>
+        <Popup open={login} onClose={showLogin}>
+          <LoginForm />
+        </Popup>
       </div>
       <div className='nd'>
         <NavLink to='/sign-up' exact={true} activeClassName='active' className='nav-item'>

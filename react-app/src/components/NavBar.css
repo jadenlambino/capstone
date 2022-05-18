@@ -36,3 +36,11 @@ nav {
     color: black;
     font-family: grailed;
 }
+
+.nb {
+    font-family: grailed;
+    border: 1px solid lightslategray;
+    background-color: white;
+    padding: 5px;
+    border-radius: 3px;
+}

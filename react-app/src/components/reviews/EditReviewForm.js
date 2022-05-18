@@ -7,7 +7,7 @@ import Popup from "reactjs-popup";
 
 
 
-const EditReview = ({ purchase }) => {
+const EditReview = ({ purchase, open }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector(state => state.session.user)
@@ -16,7 +16,7 @@ const EditReview = ({ purchase }) => {
     const [rating, setRating] = useState(review.rating)
     const [body, setBody] = useState(review.body)
 
-    const [feedback, setFeedback] = useState(false)
+    const [feedback, setFeedback] = useState(open)
     const showFeedback = (e) => {
         e.preventDefault()
         setFeedback(!feedback)

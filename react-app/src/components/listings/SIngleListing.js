@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { grabSingle, patchListings, removeListings, purchaseListings } from '../../store/listings'
 import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css';
@@ -122,12 +122,16 @@ const SingleListing = () => {
 
     return (
         <div className='s-l-c'>
-            <img src={listing.photos} alt='this is a picture' className='s-p'></img>
+            <div className='ic'>
+                <img src={listing.photos} alt='this is a picture' className='s-p'></img>
+            </div>
             <div className='s-i'>
-                <h1>{listing.username}</h1>
+                <h1>{listing.name.toUpperCase()}</h1>
+                <h1>
+                    <NavLink to={`/users/${listing.user_id}/`} className='nav-item'>{listing.username}</NavLink>
+                </h1>
                 {user.id === listing.user_id && revealButton}
                 {reveal && functionButtons}
-                <h1>{listing.name}</h1>
                 <p>{listing.description}</p>
                 <p>{listing.price}</p>
                 {user.id !== listing.user_id && buyButton}

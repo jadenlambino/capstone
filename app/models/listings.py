@@ -76,5 +76,5 @@ class Listing(db.Model):
     user = db.relationship('User', back_populates='listings', foreign_keys=[user_id])
     buyer = db.relationship('User', back_populates='buyer', foreign_keys=[buyer_id])
     tag = db.relationship('Product_Tag', back_populates='listings')
-    review = db.relationship('Review', back_populates='listing')
+    review = db.relationship('Review', back_populates='listing', cascade="all, delete")
     # listing_photos = db.relationship('ListingPhotos', back_populates='listing')
