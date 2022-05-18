@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import EditReview from './reviews/EditReviewForm';
 import Popup from 'reactjs-popup'
 import ReviewForm from './reviews/ReviewForm';
+import ReviewDisplay from './reviews/ReviewDisplay';
+import PurchaseHistory from './purchasehistory/PurchaseHistoryDisplay';
 
 
 function User() {
@@ -72,36 +74,12 @@ function User() {
       </div>
       <div>
         {user.reviews?.map((review, idx) => (
-          <div key={idx}>
-            <p>{review.body}</p>
-            <Rating
-              initialValue={review.rating}
-              readonly
-            />
-          </div>
+          <ReviewDisplay review={review}/>
         ))}
       </div>
       <div>
         {viewer.id === user.id && user.purchases?.map((purchase, idx) => (
-          <div key={idx}>
-            <img src={purchase.photos} className='display-img'></img>
-            <p>{purchase.name}</p>
-            { !purchase.is_reviewed &&
-            <>
-              <button onClick={showFeedback}>Leave Feedback</button>
-              <Popup open={feedback}>
-                <ReviewForm purchase={purchase}/>
-              </Popup>
-            </>
-            }
-            {/* {purchase.is_reviewed &&
-            <>
-              <button onClick={showFeedback}>Edit Feedback</button>
-              <Popup open={feedback}>
-                <EditReview purchase={purchase}/>
-              </Popup>
-            </>} */}
-          </div>
+          <PurchaseHistory purchase={purchase} />
         ))}
       </div>
     </>

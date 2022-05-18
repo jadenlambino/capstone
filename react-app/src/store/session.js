@@ -117,14 +117,6 @@ export default function reducer(state = initialState, action) {
       return { user: action.payload }
     case REMOVE_USER:
       return { user: null }
-    case GET_REVIEWS:
-      newState = { ...state }
-      newState['reviews'] = action.reviews.reviews
-      return newState
-    case NEW_REVIEWS:
-      newState = { ...state }
-      newState['reviews'] = [...newState.reviews, action.review]
-      return newState
     default:
       return state;
   }

@@ -32,7 +32,7 @@ export const grabReviews = () => async (dispatch) => {
 }
 
 export const uploadReview = (review) => async (dispatch) => {
-    const {listing_id, reviewed_id, rating, body} = review
+    const { listing_id, reviewed_id, rating, body } = review
     const response = await fetch('/api/reviews/', {
         method: 'POST',
         headers: {
@@ -46,10 +46,10 @@ export const uploadReview = (review) => async (dispatch) => {
         })
     })
 
-    if (response.ok){
+    if (response.ok) {
         const data = await response.json()
         dispatch(postReview(data))
-        return {'message': 'it works!'}
+        return { 'message': 'it works!' }
     } else {
         const errors = await response.json()
         console.log(errors)
@@ -58,7 +58,7 @@ export const uploadReview = (review) => async (dispatch) => {
 }
 
 export const patchReview = (id, review) => async (dispatch) => {
-    const {listing_id, rating, body} = review
+    const { listing_id, rating, body } = review
     const response = await fetch(`/api/reviews/${id}/`, {
         method: 'PATCH',
         headers: {
@@ -85,7 +85,27 @@ export const removeReview = (id) => async (dispatch) => {
         method: 'DELETE'
     });
 
-    if (response.ok){
+    if (response.ok) {
         dispatch(deleteReviews(id))
     }
 }
+
+const initialState = {}
+
+const reducer = (state = initialState, action) => {
+    let newState
+    switch (action.type) {
+        case GET_REVIEWS:
+            newState = {}
+            action.reviews.reviews.forEach(review => {newState[review.id] = review})
+            return newState
+        case NEW_REVIEWS:
+            newState = { ...state }
+            newState[action.review.id] = action.review
+            return newState
+        default:
+            return state
+    }
+}
+
+export default reducer

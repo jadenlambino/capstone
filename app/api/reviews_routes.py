@@ -9,7 +9,7 @@ review_routes = Blueprint('reviews', __name__)
 @review_routes.route('/')
 def get_reviews():
     id = current_user.id
-    reviews = Review.query.filter_by(id = Review.reviewer_id).all()
+    reviews = Review.query.filter_by(reviewer_id = id).all()
     return jsonify({"reviews": [review.to_dict() for review in reviews]})
 
 @review_routes.route('/', methods=['POST'])
