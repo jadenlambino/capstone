@@ -11,14 +11,14 @@ const NavBar = () => {
 
   let logSign = (
     <>
-      <div>
+      <div className='nd'>
         <NavLink to='/login' exact={true} activeClassName='active' className='nav-item'>
-          Login
+          LOGIN
         </NavLink>
       </div>
-      <div>
+      <div className='nd'>
         <NavLink to='/sign-up' exact={true} activeClassName='active' className='nav-item'>
-          Sign Up
+          SIGN UP
         </NavLink>
       </div>
     </>
@@ -26,7 +26,7 @@ const NavBar = () => {
 
   let logout = (
     <Popup
-      trigger={<div>Profile</div>}
+      trigger={<div>PROFILE</div>}
       position='bottom center'
       on='hover'
       closeOnDocumentClick
@@ -40,27 +40,34 @@ const NavBar = () => {
 
   return (
     <nav>
-      <div>
-        <NavLink to='/listings' exact={true} activeClassName='active' className='nav-item'>
-          Buy
-        </NavLink>
+      <h1 className="title">J A I L E D</h1>
+      <div className='nc'>
+        <div className='nd'>
+          <NavLink to='/listings' exact={true} activeClassName='active' className='nav-item'>
+            BUY
+          </NavLink>
+        </div>
+        <div className='nd'>
+          <NavLink to='/users' exact={true} activeClassName='active' className='nav-item'>
+            USERS
+          </NavLink>
+        </div>
+        {user ? (
+          <div className='nd'>
+            <NavLink to='/sell' exact={true} className='nav-item'>
+              SELL
+            </NavLink>
+          </div>
+        ) : (
+          <div className='nd'>
+            <NavLink to='/login' exact={true} className='nav-item'>
+              SELL
+            </NavLink>
+          </div>
+        )}
+        {!user && logSign}
+        {user && logout}
       </div>
-      {!user && logSign}
-      <div>
-        <NavLink to='/users' exact={true} activeClassName='active' className='nav-item'>
-          Users
-        </NavLink>
-      </div>
-      {user ? (
-        <NavLink to='/sell' exact={true} className='nav-item'>
-          Sell
-        </NavLink>
-      ) : (
-        <NavLink to='/login' exact={true} className='nav-item'>
-          Sell
-        </NavLink>
-      )}
-      {user && logout}
     </nav>
   );
 }

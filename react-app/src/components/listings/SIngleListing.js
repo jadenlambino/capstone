@@ -42,8 +42,8 @@ const SingleListing = () => {
 
     const handleDelete = async (e) => {
         e.preventDefault()
-        history.push('/listings')
         await dispatch(removeListings(listing.id))
+        history.push('/listings')
     }
 
     let functionButtons = (
@@ -124,12 +124,13 @@ const SingleListing = () => {
         <div className='s-l-c'>
             <img src={listing.photos} alt='this is a picture' className='s-p'></img>
             <div className='s-i'>
+                <h1>{listing.username}</h1>
                 {user.id === listing.user_id && revealButton}
                 {reveal && functionButtons}
-                {user.id !== listing.user_id && buyButton}
                 <h1>{listing.name}</h1>
                 <p>{listing.description}</p>
                 <p>{listing.price}</p>
+                {user.id !== listing.user_id && buyButton}
             </div>
         </div>
     )

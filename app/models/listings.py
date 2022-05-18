@@ -2,7 +2,7 @@ from email.policy import default
 from sqlalchemy import ForeignKey
 from .db import db
 from .product_tags import Product_Tag
-from app.models import product_tags
+from app.models import product_tags, user
 from .reviews import Review
 
 class Listing(db.Model):
@@ -21,6 +21,7 @@ class Listing(db.Model):
 
     def to_dict(self):
         product_type = Product_Tag.query.get(self.product_tag)
+        username = user.User.query.get(self.user_id)
         return {
             'id' : self.id,
             'user_id' : self.user_id,
@@ -32,7 +33,8 @@ class Listing(db.Model):
             'photos': self.photos,
             'is_purchased' : self.is_purchased,
             'buyer_id': self.buyer_id,
-            'is_reviewed' : self.is_reviewed
+            'is_reviewed' : self.is_reviewed,
+            'username' : username.username,
         }
 
     # def edit_listing(self, product_tag, name, price, description, photos):

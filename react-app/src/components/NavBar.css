@@ -10,7 +10,25 @@ body {
 nav {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: first baseline;
+    align-items: center;
+    /* padding: 10px; */
+    border-bottom: 1px solid lightgrey;
+    width: 100%;
+}
+
+.title {
+    width: 60%;
+    padding-left: 10%;
+}
+
+.nc {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    float: right;
+    width: 20%;
 }
 
 .nav-item {
