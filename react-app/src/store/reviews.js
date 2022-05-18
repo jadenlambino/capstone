@@ -72,7 +72,8 @@ export const patchReview = (id, review) => async (dispatch) => {
     })
 
     if (response.ok) {
-        return response.json();
+        const data = await response.json();
+        dispatch(editReviews)
     } else {
         const errors = await response.json()
         console.log(errors)
@@ -97,11 +98,19 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_REVIEWS:
             newState = {}
-            action.reviews.reviews.forEach(review => {newState[review.id] = review})
+            action.reviews.reviews.forEach(review => {newState[review.listing_id] = review})
             return newState
         case NEW_REVIEWS:
             newState = { ...state }
             newState[action.review.id] = action.review
+            return newState
+        case EDIT_REVIEWS:
+            newState = {...state}
+            newState[action.review.id] = action.review
+            return newState
+        case DELETE_REVIEWS:
+            newState = {...state}
+            delete newState[action.id]
             return newState
         default:
             return state

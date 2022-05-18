@@ -39,19 +39,19 @@ def create_review():
     if form.errors:
         return form.errors, 403
 
-# @review_routes.route('/<int:id>/', methods=['PATCH'])
-# def edit_review(id):
-#     review = Review.query.filter_by(id = Review.listing_id).one()
-#     print(str(review) + '++++++++++++++++')
-#     form = ReviewForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
+@review_routes.route('/<int:id>/', methods=['PATCH'])
+def edit_review(id):
+    review = Review.query.filter_by(id = id).one()
+    print(str(review) + '++++++++++++++++')
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
 
-#     if form.validate_on_submit():
-#         data = form.data
-#         review.edit_rating(data['rating'])
-#         review.edit_body(data['body'])
-#         db.session.commit()
-#         return review.to_dict()
+    if form.validate_on_submit():
+        data = form.data
+        review.edit_rating(data['rating'])
+        review.edit_body(data['body'])
+        db.session.commit()
+        return review.to_dict()
 
-#     if form.errors:
-#         return form.errors, 403
+    if form.errors:
+        return form.errors, 403

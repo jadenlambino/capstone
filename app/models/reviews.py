@@ -16,7 +16,8 @@ class Review(db.Model):
             'reviewed_id': self.reviewed_id,
             'reviewer_id': self.reviewer_id,
             'rating': self.rating,
-            'body': self.body
+            'body': self.body,
+            'listing_id': self.listing_id
         }
 
     def edit_rating(self, rating):

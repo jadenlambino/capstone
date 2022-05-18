@@ -1,18 +1,23 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadReview } from "../../store/reviews";
 import { Rating } from "react-simple-star-rating";
 import { useHistory } from "react-router-dom";
+import Popup from "reactjs-popup";
 
 const ReviewForm = ({ purchase }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector(state => state.session.user)
-
+    const [feedback, setFeedback] = useState(false)
+    const showFeedback = (e) => {
+        e.preventDefault()
+        setFeedback(!feedback)
+    }
     const [rating, setRating] = useState(0)
     const [body, setBody] = useState('')
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         console.log(rating)
@@ -29,7 +34,7 @@ const ReviewForm = ({ purchase }) => {
             console.log(response.errors)
         }
 
-        history.push(`/users/${user.id}`)
+        setFeedback(false)
     }
 
     const handleRating = (rate) => {
@@ -38,20 +43,23 @@ const ReviewForm = ({ purchase }) => {
 
     return (
         <>
-            <img src={purchase.photos} className='display-img'></img>
-            <form onSubmit={handleSubmit}>
-                <input
-                type="text"
-                onChange={(e) => setBody(e.target.value)}
-                >
-                </input>
-                <Rating
-                onClick={handleRating}
-                ratingValue={rating}
-                readonly={rating > 0}
-                />
-                <button type='submit'>submit</button>
-            </form>
+            <button onClick={showFeedback}>Leave Feedback</button>
+            <Popup open={feedback}>
+                <img src={purchase.photos} className='display-img'></img>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        onChange={(e) => setBody(e.target.value)}
+                    >
+                    </input>
+                    <Rating
+                        onClick={handleRating}
+                        ratingValue={rating}
+                        readonly={rating > 0}
+                    />
+                    <button type='submit'>submit</button>
+                </form>
+            </Popup>
         </>
     )
 

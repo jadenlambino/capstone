@@ -3,23 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Rating } from "react-simple-star-rating";
 import { patchReview, removeReview } from "../../store/reviews";
 import { useHistory, useParams } from "react-router-dom";
+import Popup from "reactjs-popup";
+
 
 
 const EditReview = ({ purchase }) => {
     const dispatch = useDispatch()
     const history = useHistory()
-    const [review, setReview] = useState({})
-
-    const grabSingle = (id) => async (dispatch) => {
-        const response = await fetch(`/api/reviews/${id}/`)
-        const review = await response.json()
-        setReview(review)
-    }
-
-    useEffect(() => {
-        dispatch(grabSingle(purchase.id))
-    }, [dispatch])
-
+    const review = useSelector(state => state.reviews[purchase.id])
 
     const [rating, setRating] = useState(review.rating)
     const [body, setBody] = useState(review.body)
@@ -49,22 +40,22 @@ const EditReview = ({ purchase }) => {
 
     return (
         <>
-            <form onSubmit={handleEdit}>
-                <input
-                    type="text"
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}
-                >
-                </input>
-                <Rating
-                    onClick={handleRating}
-                    // ratingValue={rating}
-                    // readonly={rating > 0}
-                    initialValue={rating}
-                />
-                <button type='submit'>submit</button>
-            </form>
-            <button onClick={handleDelete}>Delete</button>
+                <form onSubmit={handleEdit}>
+                    <input
+                        type="text"
+                        value={body}
+                        onChange={(e) => setBody(e.target.value)}
+                    >
+                    </input>
+                    <Rating
+                        onClick={handleRating}
+                        // ratingValue={rating}
+                        // readonly={rating > 0}
+                        initialValue={rating}
+                    />
+                    <button type='submit'>submit</button>
+                </form>
+                <button onClick={handleDelete}>Delete</button>
         </>
     )
 }
