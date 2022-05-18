@@ -66,6 +66,22 @@ function User() {
   <button className='user-buttons' onClick={showListings}>My Listings</button>)
   : (<button className='user-buttons' onClick={showListings}>Listings</button>)
 
+  let userReviews = (
+    <div className='review-display'>
+        <div className='user-score'>
+          <h2 className='seller'>Seller Score</h2>
+          <Rating
+          initialValue={count || 0}
+          readonly
+          />
+          <h4>{`${user.reviews?.length} Feedback`}</h4>
+        </div>
+      {user.reviews?.map((review, idx) => (
+        <ReviewDisplay review={review}/>
+      ))}
+    </div>
+  )
+
   return (
     <>
       <div className='user-info'>
@@ -109,9 +125,7 @@ function User() {
           </div>
         ))}
 
-        {reviews && user.reviews?.map((review, idx) => (
-          <ReviewDisplay review={review}/>
-        ))}
+        {reviews && userReviews}
 
         {transactions && viewer.id === user.id && user.purchases?.map((purchase, idx) => (
           <PurchaseHistory purchase={purchase} />
