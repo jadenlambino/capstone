@@ -94,13 +94,13 @@ function User() {
               </Popup>
             </>
             }
-            {purchase.is_reviewed &&
+            {/* {purchase.is_reviewed &&
             <>
               <button onClick={showFeedback}>Edit Feedback</button>
               <Popup open={feedback}>
                 <EditReview purchase={purchase}/>
               </Popup>
-            </>}
+            </>} */}
           </div>
         ))}
       </div>

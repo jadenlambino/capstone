@@ -38,7 +38,7 @@ const ReviewForm = ({ purchase }) => {
 
     return (
         <>
-            <img src={purchase.photos}></img>
+            <img src={purchase.photos} className='display-img'></img>
             <form onSubmit={handleSubmit}>
                 <input
                 type="text"

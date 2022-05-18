@@ -21,7 +21,7 @@ const ListingsDisplay = () => {
         <>
             <div className='listing-display'>
                 {listings.map((listing, idx) => (
-                    <>
+                    <div key={idx}>
                         {listing.is_purchased === false &&
                             <div key={idx} className='listing-container'>
                                 <NavLink to={`/listings/${listing.id}`}>
@@ -34,7 +34,7 @@ const ListingsDisplay = () => {
                                 </span>
                             </div>
                         }
-                    </>
+                    </div>
                 ))}
             </div>
             <h1>Hello</h1>

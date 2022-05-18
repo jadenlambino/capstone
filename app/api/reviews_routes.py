@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from flask_login import current_user
 from app.models import Review, db, Listing
 from app.forms import ReviewForm
@@ -6,10 +6,11 @@ from app.forms import ReviewForm
 
 review_routes = Blueprint('reviews', __name__)
 
-@review_routes.route('/<int:id>/')
-def get_reviews(id):
-    review = Review.query.filter_by(id = Review.listing_id).one()
-    return review.to_dict()
+@review_routes.route('/')
+def get_reviews():
+    id = current_user.id
+    reviews = Review.query.filter_by(id = Review.reviewer_id).all()
+    return jsonify({"reviews": [review.to_dict() for review in reviews]})
 
 @review_routes.route('/', methods=['POST'])
 def create_review():
@@ -33,7 +34,7 @@ def create_review():
         listing.set_review()
 
         db.session.commit()
-        return new_review.to_dict()
+        return jsonify(new_review.to_dict())
 
     if form.errors:
         return form.errors, 403

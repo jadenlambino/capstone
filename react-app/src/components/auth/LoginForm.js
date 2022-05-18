@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { grabReviews } from '../../store/reviews';
 import { login } from '../../store/session';
 
 const LoginForm = () => {
@@ -15,6 +16,8 @@ const LoginForm = () => {
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
+    } else {
+      await dispatch(grabReviews())
     }
   };
 

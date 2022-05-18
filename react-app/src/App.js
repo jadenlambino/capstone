@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import ListingsDisplay from './components/listings/ListingsDisplay';
 import { authenticate } from './store/session';
+import { grabReviews } from './store/reviews';
 import SingleListing from './components/listings/SIngleListing';
 import { grabListings } from './store/listings';
 
@@ -20,6 +21,7 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
+      await dispatch(grabReviews())
       setLoaded(true);
     })();
   }, [dispatch]);

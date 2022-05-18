@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { patchReview, removeReview } from "../../store/session";
 import { Rating } from "react-simple-star-rating";
+import { patchReview, removeReview } from "../../store/reviews";
 import { useHistory, useParams } from "react-router-dom";
 
 

@@ -26,7 +26,6 @@ const SingleListing = () => {
         dispatch(grabSingle(id));
     }, [id]);
 
-    console.log(listing)
     if (!listing) return null
 
     const handleEdit = async (e) => {

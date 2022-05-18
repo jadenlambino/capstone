@@ -1,4 +1,5 @@
 // constants
+import { GET_REVIEWS, NEW_REVIEWS } from "./reviews";
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 const EDIT_REVIEWS = 'reviews/EDIT_REVIEWS'
@@ -109,46 +110,21 @@ export const signUp = (username, email, password) => async (dispatch) => {
   }
 }
 
-export const patchReview = (id, review) => async (dispatch) => {
-  const {rating, body} = review
-  const response = await fetch(`/api/reviews/${id}/`, {
-      method: 'PATCH',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-          rating,
-          body
-      })
-  })
-
-  if (response.ok) {
-      dispatch(editReviews)
-  } else {
-      const errors = await response.json()
-      console.log(errors)
-      return errors
-  }
-}
-
-export const removeReview = (id) => async (dispatch) => {
-  const response = await fetch(`api/reviews/${id}/`, {
-      method: 'DELETE'
-  });
-
-  if (response.ok){
-      dispatch(deleteReviews(id))
-  }
-}
-
 export default function reducer(state = initialState, action) {
+  let newState
   switch (action.type) {
     case SET_USER:
       return { user: action.payload }
     case REMOVE_USER:
       return { user: null }
-    case EDIT_REVIEWS:
-
+    case GET_REVIEWS:
+      newState = { ...state }
+      newState['reviews'] = action.reviews.reviews
+      return newState
+    case NEW_REVIEWS:
+      newState = { ...state }
+      newState['reviews'] = [...newState.reviews, action.review]
+      return newState
     default:
       return state;
   }
