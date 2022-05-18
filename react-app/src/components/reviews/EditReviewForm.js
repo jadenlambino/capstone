@@ -50,22 +50,28 @@ const EditReview = ({ purchase, open }) => {
         <>
             <button onClick={showFeedback} className='rb'>Edit Feedback</button>
             <Popup open={feedback}>
-            <form onSubmit={handleEdit}>
-                <input
-                    type="text"
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}
-                >
-                </input>
-                <Rating
-                    onClick={handleRating}
-                    // ratingValue={rating}
-                    // readonly={rating > 0}
-                    initialValue={rating}
-                />
-                <button type='submit'>submit</button>
-            </form>
-            <button onClick={handleDelete}>Delete</button>
+                <form onSubmit={handleEdit} className='review-form'>
+                    <span className="rti">
+                        <label>Review</label>
+                        <input
+                            type="text"
+                            onChange={(e) => setBody(e.target.value)}
+                            className='ti'
+                            value={body}
+                        >
+                        </input>
+                    </span>
+                    <Rating
+                        onClick={handleRating}
+                        // ratingValue={rating}
+                        // readonly={rating > 0}
+                        initialValue={rating}
+                    />
+                    <div>
+                        <button type='submit' className="rb">Submit</button>
+                        <button onClick={handleDelete} className="rb">Delete</button>
+                    </div>
+                </form>
             </Popup>
         </>
     )

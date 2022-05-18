@@ -46,18 +46,22 @@ const ReviewForm = ({ purchase, open }) => {
             <button onClick={showFeedback} className='rb'>Leave Feedback</button>
             <Popup open={feedback}>
                 <img src={purchase.photos} className='display-img'></img>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        onChange={(e) => setBody(e.target.value)}
-                    >
-                    </input>
+                <form onSubmit={handleSubmit} className='review-form'>
+                    <span className="rti">
+                        <label>Review</label>
+                        <input
+                            type="text"
+                            onChange={(e) => setBody(e.target.value)}
+                            className='ti'
+                        >
+                        </input>
+                    </span>
                     <Rating
                         onClick={handleRating}
                         ratingValue={rating}
                         readonly={rating > 0}
                     />
-                    <button type='submit'>submit</button>
+                    <button type='submit' className="rb">submit</button>
                 </form>
             </Popup>
         </>
