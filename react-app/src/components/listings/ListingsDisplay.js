@@ -23,9 +23,15 @@ const ListingsDisplay = () => {
                     <div key={idx}>
                         {listing.is_purchased === false &&
                             <div key={idx} className='listing-container'>
-                                <NavLink to={`/listings/${listing.id}`}>
-                                    <img src={listing.photos} className='display-img'></img>
-                                </NavLink>
+                                {user ? (
+                                    <NavLink to={`/listings/${listing.id}`}>
+                                        <img src={listing.photos} className='display-img'></img>
+                                    </NavLink>
+                                ) : (
+                                    <NavLink to={`/login`}>
+                                        <img src={listing.photos} className='display-img'></img>
+                                    </NavLink>
+                                )}
                                 <span className='listing-info'>
                                     <span>{listing.name}</span>
                                     <span>{listing.description}</span>
