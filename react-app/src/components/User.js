@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Rating } from 'react-simple-star-rating'
-import { useParams } from 'react-router-dom';
-import EditReview from './reviews/EditReviewForm';
-import Popup from 'reactjs-popup'
-import ReviewForm from './reviews/ReviewForm';
+import { Link, NavLink, useParams } from 'react-router-dom';
 import ReviewDisplay from './reviews/ReviewDisplay';
 import PurchaseHistory from './purchasehistory/PurchaseHistoryDisplay';
+import './User.css'
 
 
 function User() {
   const viewer = useSelector(state => state.session.user)
   const [user, setUser] = useState({});
   const { userId } = useParams();
-  const [ratingValue, setRatingValue] = useState(0)
-  const [feedback, setFeedback] = useState(false)
+  const [listings, setListings] = useState(true)
+  const [reviews, setReviews] = useState(false)
+  const [transactions, setTransactions] = useState(false)
 
   const fetchUser = async () => {
     const response = await fetch(`/api/users/${userId}`);
@@ -42,43 +41,79 @@ function User() {
     count /= user.reviews.length
   }
 
-  const showFeedback = (e) => {
-    e.preventDefault()
-    setFeedback(!feedback)
+  const showListings = (e) => {
+    e.preventDefault();
+    setReviews(false)
+    setTransactions(false)
+    setListings(true)
   }
+
+  const showReviews = (e) => {
+    e.preventDefault();
+    setListings(false);
+    setTransactions(false);
+    setReviews(true);
+  }
+
+  const showTransactions = (e) => {
+    e.preventDefault();
+    setListings(false);
+    setReviews(false);
+    setTransactions(true);
+  }
+
+  let listingButton = viewer.id === user.id ? (
+  <button className='user-buttons' onClick={showListings}>My Listings</button>)
+  : (<button className='user-buttons' onClick={showListings}>Listings</button>)
 
   return (
     <>
-      <ul>
-        <li>
-          <strong>User Id</strong> {userId}
-        </li>
-        <li>
-          <strong>Username</strong> {user.username}
-        </li>
-        <li>
-          <strong>Email</strong> {user.email}
-        </li>
-      </ul>
-      <Rating
-      initialValue={count || 0}
-      readonly
-      />
-      <div>
-        {user.listings?.map((listing, idx) => (
-          <div key={idx}>
-            <img src={listing.photos} alt='this is a picture' className='display-img'></img>
-            <p>{listing.name}</p>
+      <div className='user-info'>
+        <img src={user.profile_image}></img>
+        <h1>{user.username}</h1>
+        <Rating
+        initialValue={count || 0}
+        readonly
+        />
+      </div>
+      <div className='user-buttons-container'>
+        {listingButton}
+        <button className='user-buttons' onClick={showReviews}>Reviews</button>
+        {viewer.id === user.id && (
+          <button onClick={showTransactions} className='user-buttons'>My Purchases</button>
+        )}
+      </div>
+      <div className='display-container'>
+        {listings && user.listings?.map((listing, idx) => (
+          <div key={idx} className='ulc'>
+            <NavLink to={`/listings/${listing.id}`}>
+              <img src={listing.photos} alt='this is a picture' className='display-img'></img>
+            </NavLink>
+            <div className='uli'>
+              <div>
+                <h4>Name</h4>
+                <span>{listing.name}</span>
+              </div>
+              <div>
+                <h4>Description</h4>
+                <span>{listing.description}</span>
+              </div>
+              <div>
+                <h4>Price</h4>
+                <span>{`$${listing.price}`}</span>
+              </div>
+            </div>
+            <div>
+              <Link to={`/listings/${listing.id}`} className='ueb'>Edit Listing</Link>
+            </div>
           </div>
         ))}
-      </div>
-      <div>
-        {user.reviews?.map((review, idx) => (
+
+        {reviews && user.reviews?.map((review, idx) => (
           <ReviewDisplay review={review}/>
         ))}
-      </div>
-      <div>
-        {viewer.id === user.id && user.purchases?.map((purchase, idx) => (
+
+        {transactions && viewer.id === user.id && user.purchases?.map((purchase, idx) => (
           <PurchaseHistory purchase={purchase} />
         ))}
       </div>

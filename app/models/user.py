@@ -39,7 +39,8 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'listings': [listing.to_dict() for listing in listings],
             'reviews': [review.to_dict() for review in reviews],
-            'purchases': [purchase.to_dict() for purchase in purchases]
+            'purchases': [purchase.to_dict() for purchase in purchases],
+            'profile_picture': self.profile_picture
         }
 
     listings = db.relationship('Listing', back_populates='user', cascade="all, delete", foreign_keys='Listing.user_id')

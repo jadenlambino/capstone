@@ -4,6 +4,7 @@ import { uploadReview } from "../../store/reviews";
 import { Rating } from "react-simple-star-rating";
 import { useHistory } from "react-router-dom";
 import Popup from "reactjs-popup";
+import './ReviewForms.css'
 
 const ReviewForm = ({ purchase, open }) => {
     const dispatch = useDispatch()
@@ -42,7 +43,7 @@ const ReviewForm = ({ purchase, open }) => {
 
     return (
         <>
-            <button onClick={showFeedback}>Leave Feedback</button>
+            <button onClick={showFeedback} className='rb'>Leave Feedback</button>
             <Popup open={feedback}>
                 <img src={purchase.photos} className='display-img'></img>
                 <form onSubmit={handleSubmit}>

@@ -1,0 +1,17 @@
+.ulc {
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    justify-content: first baseline;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 10px;
+}
+
+.uli {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}

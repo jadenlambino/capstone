@@ -4,8 +4,7 @@ import { Rating } from "react-simple-star-rating";
 import { patchReview, removeReview } from "../../store/reviews";
 import { useHistory, useParams } from "react-router-dom";
 import Popup from "reactjs-popup";
-
-
+import './ReviewForms.css'
 
 const EditReview = ({ purchase, open }) => {
     const dispatch = useDispatch()
@@ -49,7 +48,7 @@ const EditReview = ({ purchase, open }) => {
 
     return (
         <>
-            <button onClick={showFeedback}>Edit Feedback</button>
+            <button onClick={showFeedback} className='rb'>Edit Feedback</button>
             <Popup open={feedback}>
             <form onSubmit={handleEdit}>
                 <input
