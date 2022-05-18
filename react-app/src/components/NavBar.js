@@ -33,9 +33,9 @@ const NavBar = () => {
       mouseLeaveDelay={100}
       mouseEnterDelay={0}
       arrow={false}
-      >
-        <LogoutButton />
-      </Popup>
+    >
+      <LogoutButton />
+    </Popup>
   )
 
   return (
@@ -51,6 +51,15 @@ const NavBar = () => {
           Users
         </NavLink>
       </div>
+      {user ? (
+        <NavLink to='/sell' exact={true} className='nav-item'>
+          Sell
+        </NavLink>
+      ) : (
+        <NavLink to='/login' exact={true} className='nav-item'>
+          Sell
+        </NavLink>
+      )}
       {user && logout}
     </nav>
   );

@@ -11,7 +11,7 @@ import ListingsDisplay from './components/listings/ListingsDisplay';
 import { authenticate } from './store/session';
 import { grabReviews } from './store/reviews';
 import SingleListing from './components/listings/SIngleListing';
-import { grabListings } from './store/listings';
+import LisitngForm from './components/listings/ListingsForm';
 
 
 function App() {
@@ -25,8 +25,6 @@ function App() {
       setLoaded(true);
     })();
   }, [dispatch]);
-
-
 
   if (!loaded) {
     return null;
@@ -56,6 +54,9 @@ function App() {
         </Route>
         <Route path='/listings/:id' exact={true}>
           <SingleListing />
+        </Route>
+        <Route path='/sell' exact={true}>
+          <LisitngForm />
         </Route>
       </Switch>
     </BrowserRouter>

@@ -1,9 +1,6 @@
 // constants
-import { GET_REVIEWS, NEW_REVIEWS } from "./reviews";
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
-const EDIT_REVIEWS = 'reviews/EDIT_REVIEWS'
-const DELETE_REVIEWS = 'reviews/DELETE_REVIEWS'
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -12,16 +9,6 @@ const setUser = (user) => ({
 
 const removeUser = () => ({
   type: REMOVE_USER,
-})
-
-const editReviews = (review) => ({
-  type: EDIT_REVIEWS,
-  review
-})
-
-const deleteReviews = (id) => ({
-  type: DELETE_REVIEWS,
-  id
 })
 
 const initialState = { user: null };
@@ -111,7 +98,6 @@ export const signUp = (username, email, password) => async (dispatch) => {
 }
 
 export default function reducer(state = initialState, action) {
-  let newState
   switch (action.type) {
     case SET_USER:
       return { user: action.payload }

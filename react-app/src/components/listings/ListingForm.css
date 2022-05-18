@@ -1,0 +1,54 @@
+.fc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ldf {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.ltb {
+    display: flex;
+    flex-direction: column
+}
+
+.ltbd {
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+}
+
+.lts {
+    display: flex;
+    flex-direction: column
+}
+
+.bh {
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: black;
+    font-family: grailed;
+    color: white;
+    padding: 15px;
+}
+
+.il {
+    text-align: center;
+}
+
+.ti {
+    border: 1px solid #070707;
+    border-radius: 2px;
+    height: 30px;
+}
+
+.si {
+    height: 34px;
+    font-family: grailed;
+    font-size: 16px;
+    text-align: center;
+}

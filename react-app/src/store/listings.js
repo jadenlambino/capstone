@@ -69,7 +69,6 @@ export const uploadListings = (listingData) => async (dispatch) => {
     } else {
         const errors = await response.json();
         return errors
-        console.log(errors)
     }
 }
 
