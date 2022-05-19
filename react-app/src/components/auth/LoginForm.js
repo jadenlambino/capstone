@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { grabReviews } from '../../store/reviews';
 import { login } from '../../store/session';
 import './LoginForm.css'
 
 const LoginForm = () => {
+  const history = useHistory()
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,6 +20,7 @@ const LoginForm = () => {
       setErrors(data);
     } else {
       await dispatch(grabReviews())
+      history.push('/listings')
     }
   };
 
@@ -32,6 +34,11 @@ const LoginForm = () => {
 
   if (user) {
     return <Redirect to='/listings' />;
+  }
+
+  const setDemo = async (e) => {
+    e.preventDefault();
+    await dispatch(login('demo@aa.io', 'password'))
   }
 
   return (
@@ -62,6 +69,7 @@ const LoginForm = () => {
         />
       </div>
       <button type='submit' className='lb'>Login</button>
+      <button onClick={setDemo} className='sb'>Demo</button>
     </form>
   );
 };

@@ -11,6 +11,8 @@ import { grabReviews } from './store/reviews';
 import SingleListing from './components/listings/SIngleListing';
 import LisitngForm from './components/listings/ListingsForm';
 import { grabListings } from './store/listings';
+import SplashPage from './components/needs/SplashPage';
+import AboutLinks from './components/needs/AboutLinks';
 
 
 function App() {
@@ -41,7 +43,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
+          <SplashPage />
         </ProtectedRoute>
         <Route path='/listings' exact={true}>
           <ListingsDisplay />
@@ -53,6 +55,7 @@ function App() {
           <LisitngForm />
         </Route>
       </Switch>
+      <AboutLinks />
     </BrowserRouter>
   );
 }
