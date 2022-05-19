@@ -1,11 +1,10 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { grabSingle, patchListings, removeListings, purchaseListings } from '../../store/listings'
 import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css';
 import './SingleListing.css'
-import ReviewForm from '../reviews/ReviewForm';
 
 const SingleListing = () => {
     const dispatch = useDispatch();
@@ -25,7 +24,7 @@ const SingleListing = () => {
             return;
         }
         dispatch(grabSingle(id));
-    }, [id]);
+    }, [id, dispatch]);
 
     if (!listing) return null
 
@@ -113,7 +112,7 @@ const SingleListing = () => {
     }
 
     let revealButton = (
-        <button onClick={rev}>open</button>
+        <button onClick={rev} className='rb'>Open</button>
     )
 
     const handlePurchase = async (e) => {
@@ -127,14 +126,14 @@ const SingleListing = () => {
     }
 
     let buyButton = (
-        <button onClick={handlePurchase}>Buy</button>
+        <button onClick={handlePurchase} className='rb'>Buy</button>
     )
 
 
     return (
         <div className='s-l-c'>
             <div className='ic'>
-                <img src={listing.photos} alt='this is a picture' className='s-p'></img>
+                <img src={listing.photos} alt="This is the product" className='s-p'></img>
             </div>
             <div className='s-i'>
                 <h1>{listing.name.toUpperCase()}</h1>

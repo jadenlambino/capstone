@@ -14,7 +14,7 @@ const ReviewDisplay = ({ review }) => {
                     />
                 <p>{review.body}</p>
             </div>
-            <img src={listing.photos} className='display-img'/>
+            <img src={listing.photos} className='display-img' alt="This is the product"/>
         </div>
     )
 }

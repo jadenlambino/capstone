@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import ReviewForm from "../reviews/ReviewForm";
 import EditReview from "../reviews/EditReviewForm";
 import './PurchaseHistory.css'
 
 const PurchaseHistory = ({ purchase }) => {
-    const dispatch = useDispatch()
     // const listing = useSelector(state => state.listings[purchase.id])
     const review = useSelector(state => state.reviews[purchase.id])
 
@@ -20,7 +19,7 @@ const PurchaseHistory = ({ purchase }) => {
     // if (!listing) return null
     return (
         <div className="ulc">
-                <img src={purchase.photos} className='display-img'></img>
+                <img src={purchase.photos} className='display-img' alt="This is the product"></img>
                 <div className='uli'>
                     <div>
                         <h4>Name</h4>

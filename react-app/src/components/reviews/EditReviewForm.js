@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Rating } from "react-simple-star-rating";
 import { patchReview, removeReview } from "../../store/reviews";
-import { useHistory, useParams } from "react-router-dom";
 import Popup from "reactjs-popup";
 import './ReviewForms.css'
 
 const EditReview = ({ purchase, open }) => {
     const dispatch = useDispatch()
-    const history = useHistory()
-    const user = useSelector(state => state.session.user)
     const review = useSelector(state => state.reviews[purchase.id])
     const [errors, setErrors] = useState([])
     const [rating, setRating] = useState(review.rating)

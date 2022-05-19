@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { uploadReview } from "../../store/reviews";
 import { Rating } from "react-simple-star-rating";
-import { useHistory } from "react-router-dom";
 import Popup from "reactjs-popup";
 import './ReviewForms.css'
 
 const ReviewForm = ({ purchase, open }) => {
     const dispatch = useDispatch()
-    const history = useHistory()
-    const user = useSelector(state => state.session.user)
     const [feedback, setFeedback] = useState(open)
     const [rating, setRating] = useState(0)
     const [body, setBody] = useState('')
@@ -49,7 +46,7 @@ const ReviewForm = ({ purchase, open }) => {
         <>
             <button onClick={showFeedback} className='rb'>Leave Feedback</button>
             <Popup open={feedback}>
-                <img src={purchase.photos} className='display-img'></img>
+                <img src={purchase.photos} className='display-img' alt="This is the product"></img>
                 <ul>
                     {errors?.map((error, idx) => (
                         <li key={idx}>{error}</li>

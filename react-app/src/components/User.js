@@ -26,7 +26,7 @@ function User() {
       return;
     }
     fetchUser();
-  }, [userId]);
+  }, [userId, fetchUser]);
 
   if (!user) {
     return null;
@@ -77,7 +77,7 @@ function User() {
           <h4>{`${user.reviews?.length} Feedback`}</h4>
         </div>
       {user.reviews?.map((review, idx) => (
-        <ReviewDisplay review={review}/>
+        <ReviewDisplay review={review} key={idx}/>
       ))}
     </div>
   )
@@ -85,7 +85,7 @@ function User() {
   return (
     <>
       <div className='user-info'>
-        <img src={user.profile_image}></img>
+        <img src={user.profile_image} alt="This is the product"></img>
         <h1>{user.username}</h1>
         <Rating
         initialValue={count || 0}
@@ -103,7 +103,7 @@ function User() {
         {listings && user.listings?.map((listing, idx) => (
           <div key={idx} className='ulc'>
             <NavLink to={`/listings/${listing.id}`}>
-              <img src={listing.photos} alt='this is a picture' className='display-img'></img>
+              <img src={listing.photos} alt="This is the product" className='display-img'></img>
             </NavLink>
             <div className='uli'>
               <div>

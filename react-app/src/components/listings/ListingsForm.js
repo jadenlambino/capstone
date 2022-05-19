@@ -14,7 +14,7 @@ const LisitngForm = () => {
     const [description, setDescription] = useState('')
     const [image, setImage] = useState(null);
     const [productTag, setProductTag] = useState()
-    const [defaultValue, setDeaultValue] = useState(false)
+    const [defaultValue, setDefultValue] = useState(false)
     const [errors, setErrors] = useState([])
 
     const handleSubmit = async (e) => {
