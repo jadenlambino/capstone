@@ -1,0 +1,11 @@
+.logout-button {
+    font-family: grailed;
+    font-size: 18px;
+    color: black;
+    text-decoration: none;
+    border: none;
+    background-color: white;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+}

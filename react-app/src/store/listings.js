@@ -1,5 +1,6 @@
 const GET_LISTINGS = 'listings/GET_LISTINGS'
 const GET_SINGLE = 'listings/GET_SINGLE'
+const BUY_LISTING = 'listings/BUY_LISTING'
 const NEW_LISTINGS = 'listings/NEW_LISTINGS'
 const EDIT_LISTINGS = 'listings/EDIT_LISTINGS'
 const DELETE_LISTINGS = 'listings/DELETE_LIST'
@@ -12,6 +13,11 @@ const getListings = (listings) => ({
 export const getSingle = (listings) => ({
     type: GET_SINGLE,
     listings
+})
+
+const buyListing = (listing) => ({
+    type: BUY_LISTING,
+    listing
 })
 
 const postListings = (listing) => ({
@@ -61,9 +67,33 @@ export const uploadListings = (listingData) => async (dispatch) => {
         dispatch(postListings(listing))
         return listing
     } else {
-        const errors = await response.json();
+        const data = await response.json();
+        if (data.errors) {
+            console.log(data.errors)
+            return data.errors
+        }
+    }
+}
+
+export const purchaseListings = (id, data) => async (dispatch) => {
+    const {buyer_id} = data;
+    const response = await fetch(`/api/listings/${id}/buy`, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            buyer_id
+        })
+    })
+
+    if (response.ok) {
+        const listing = await response.json();
+        dispatch(buyListing(listing))
+        return listing
+    } else {
+        const errors = await response.json()
         return errors
-        console.log(errors)
     }
 }
 
@@ -89,8 +119,11 @@ export const patchListings = (id, listingData) => async (dispatch) => {
         return listing
     }
     else {
-        const errors = await response.json();
-        console.log(errors)
+        const data = await response.json();
+        if (data.errors) {
+            console.log(data.errors)
+            return data.errors
+        }
     }
 }
 
@@ -118,6 +151,10 @@ export default function reducer(state = initialState, action) {
         case GET_SINGLE:
             newState = {...state}
             action.listings.listings.forEach(listing => {newState[listing.id] = listing})
+            return newState
+        case BUY_LISTING:
+            newState = {...state}
+            newState[action.listing.id] = action.listing
             return newState
         case NEW_LISTINGS:
             newState = {...state};

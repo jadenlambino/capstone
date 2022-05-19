@@ -3,7 +3,7 @@ import { uploadListings } from "../../store/listings";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom'
-
+import './ListingForm.css'
 
 const LisitngForm = () => {
     const dispatch = useDispatch();
@@ -14,9 +14,8 @@ const LisitngForm = () => {
     const [description, setDescription] = useState('')
     const [image, setImage] = useState(null);
     const [productTag, setProductTag] = useState()
-    const [photoLoading, setPhotoLoading] = useState(false)
-    const [defaultValue, setDeaultValue] = useState(false)
-
+    const [defaultValue, setDefultValue] = useState(false)
+    const [errors, setErrors] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,8 +28,10 @@ const LisitngForm = () => {
         formData.append('name', name);
 
         const response = await dispatch(uploadListings(formData))
-        if (response.errors) {
-            console.log(response.errors)
+        if (response.id) {
+            history.push(`/listings/${response.id}`)
+        } else {
+            setErrors(response)
         }
     }
 
@@ -40,49 +41,79 @@ const LisitngForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>Product Tag</label>
-            <select
-            onChange={(e) => setProductTag(e.target.value)}
-            defaultValue={defaultValue}
-            >
-                <option value={defaultValue} disabled hidden>Select an option</option>
-                <option value={1}>Jacket</option>
-                <option value={2}>Shirt</option>
-                <option value={3}>T-Shirt</option>
-                <option value={4}>Sweatshirt</option>
-                <option value={5}>Hoodie</option>
-                <option value={6}>Jeans</option>
-                <option value={7}>Pants</option>
-                <option value={8}>Shorts</option>
-                <option value={9}>Shoes</option>
-                <option value={10}>Hats</option>
-                <option value={11}>Accessories</option>
-            </select>
-            <label>Name</label>
-            <input
-            type="text"
-            onChange={(e) => setName(e.target.value)}
-            >
-            </input>
-            <label>Description</label>
-            <input
-            type="text"
-            onChange={(e) => setDescription(e.target.value)}
-            >
-            </input>
-            <label>Price</label>
-            <input
-            type="text"
-            onChange={e => setPrice(e.target.value)}>
-            </input>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={updateImage}
-            />
-            <button type='submit'>Submit</button>
-        </form>
+        <div className="fc">
+            <h1>Add a new listing</h1>
+            <ul>
+                {errors?.map((error, idx) => (
+                        <li key={idx}>{error}</li>
+                ))}
+            </ul>
+            <form onSubmit={handleSubmit} className='ldf'>
+                <div className="ltb">
+                    <div className="ltbd">
+                        <label className="il">Name</label>
+                        <input
+                        type="text"
+                        onChange={(e) => setName(e.target.value)}
+                        className='ti'
+                        >
+                        </input>
+                    </div>
+                    <div className="ltbd">
+                        <label className="il">Description</label>
+                        <input
+                        type="text"
+                        onChange={(e) => setDescription(e.target.value)}
+                        className='ti'
+                        >
+                        </input>
+                    </div>
+                </div>
+                <div className="lts">
+                    <div className="ltbd">
+                        <label className="il">Product Tag</label>
+                        <select
+                        onChange={(e) => setProductTag(e.target.value)}
+                        defaultValue={defaultValue}
+                        className='si'
+                        >
+                            <option value={defaultValue} disabled hidden>Select an option</option>
+                            <option value={1}>Jacket</option>
+                            <option value={2}>Shirt</option>
+                            <option value={3}>T-Shirt</option>
+                            <option value={4}>Sweatshirt</option>
+                            <option value={5}>Hoodie</option>
+                            <option value={6}>Jeans</option>
+                            <option value={7}>Pants</option>
+                            <option value={8}>Shorts</option>
+                            <option value={9}>Shoes</option>
+                            <option value={10}>Hats</option>
+                            <option value={11}>Accessories</option>
+                        </select>
+                    </div>
+                    <div className="ltbd">
+                        <label className="il">Price</label>
+                        <input
+                        type="text"
+                        onChange={e => setPrice(e.target.value)}
+                        className='ti'
+                        >
+                        </input>
+                    </div>
+                    <label for='file' className='fi'>Choose File</label>
+                    <input
+                    type="file"
+                    accept="image/*"
+                    onChange={updateImage}
+                    id='file'
+                    hidden
+                    />
+                </div>
+            </form>
+            <div>
+                <button type='submit' onClick={handleSubmit} className="bh">Submit</button>
+            </div>
+        </div>
     )
 }
 

@@ -1,7 +1,9 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
-import { grabSingle, patchListings, removeListings } from '../../store/listings'
+import { NavLink, useHistory, useParams } from 'react-router-dom';
+import { grabSingle, patchListings, removeListings, purchaseListings } from '../../store/listings'
+import Popup from 'reactjs-popup'
+import 'reactjs-popup/dist/index.css';
 import './SingleListing.css'
 
 const SingleListing = () => {
@@ -15,15 +17,15 @@ const SingleListing = () => {
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState(0)
     const [reveal, setReveal] = useState(false)
+    const [errors, setErrors] = useState([])
 
     useEffect(() => {
         if (!id) {
             return;
         }
         dispatch(grabSingle(id));
-    }, [id]);
+    }, [id, dispatch]);
 
-    console.log(listing)
     if (!listing) return null
 
     const handleEdit = async (e) => {
@@ -34,23 +36,48 @@ const SingleListing = () => {
             price,
             description
         }
-        await dispatch(patchListings(listing.id, data))
-        //hello
+        const response = await dispatch(patchListings(listing.id, data))
+        if (response.id) {
+            setErrors([])
+            setReveal(false)
+            return
+        } else {
+            setErrors(response)
+        }
     }
 
     const handleDelete = async (e) => {
         e.preventDefault()
-        history.push('/listings')
         await dispatch(removeListings(listing.id))
+        history.push('/listings')
+    }
+
+    const rev = (e) => {
+        e.preventDefault()
+        setName(listing.name)
+        setProductTag(listing.product_tag)
+        setDescription(listing.description)
+        setPrice(listing.price)
+        setReveal(!reveal)
+    }
+
+    const reset = () => {
+        setReveal(false)
+        setErrors([])
     }
 
     let functionButtons = (
-        <>
-            <form onSubmit={handleEdit}>
+        <Popup open={reveal} onClose={reset} modal>
+            <ul>
+                {errors?.map((error, idx) => (
+                        <li key={idx}>{error}</li>
+                ))}
+            </ul>
+            <form onSubmit={handleEdit} className='sf'>
                 <label>Product Tag</label>
                 <select
-                onChange={(e) => setProductTag(e.target.value)}
-                defaultValue={listing.product_tag}>
+                    onChange={(e) => setProductTag(e.target.value)}
+                    defaultValue={listing.product_tag}>
                     <option value={listing.product_tag} selected hidden>{listing.product_type}</option>
                     <option value={1}>Jacket</option>
                     <option value={2}>Shirt</option>
@@ -66,53 +93,66 @@ const SingleListing = () => {
                 </select>
                 <label>Name</label>
                 <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                 >
                 </input>
                 <label>Description</label>
                 <input
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className='btb'
                 >
                 </input>
                 <label>Price</label>
                 <input
-                type="text"
-                value={price}
-                onChange={e => setPrice(e.target.value)}>
+                    type="text"
+                    value={price}
+                    onChange={e => setPrice(e.target.value)}>
                 </input>
-                <button type='submit'>Submit</button>
+                <button type='submit' className='sfb'>Submit</button>
+                <button onClick={handleDelete} className='sfb'>Delete</button>
             </form>
-            <button onClick={handleDelete}>delete</button>
-        </>
+        </Popup>
     )
 
-    const rev = (e) => {
+    let revealButton = (
+        <button onClick={rev} className='rb'>Open</button>
+    )
+
+    const handlePurchase = async (e) => {
         e.preventDefault()
-        setName(listing.name)
-        setProductTag(listing.product_tag)
-        setDescription(listing.description)
-        setPrice(listing.price)
-        setReveal(!reveal)
+
+        const data = {
+            buyer_id: user.id
+        }
+        await dispatch(purchaseListings(id, data))
+        history.push(`/users/${user.id}`)
     }
 
-    let revealButton = (
-        <button onClick={rev}>open</button>
+    let buyButton = (
+        <button onClick={handlePurchase} className='rb'>Buy</button>
     )
 
 
     return (
         <div className='s-l-c'>
-            <img src={listing.photos} alt='this is a picture' className='s-p'></img>
+            <div className='ic'>
+                <img src={listing.photos} alt="This is the product" className='s-p'></img>
+            </div>
             <div className='s-i'>
+                <h1>{listing.name.toUpperCase()}</h1>
+                <h1>
+                    <NavLink to={`/users/${listing.user_id}/`} className='nav-item'>{listing.username}</NavLink>
+                </h1>
                 {user.id === listing.user_id && revealButton}
-                {reveal && functionButtons}
-                <h1>{listing.name}</h1>
+                {reveal}
+                {functionButtons}
                 <p>{listing.description}</p>
                 <p>{listing.price}</p>
+                {user.id !== listing.user_id && buyButton}
             </div>
         </div>
     )

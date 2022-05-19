@@ -1,0 +1,92 @@
+.user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    width: 100%;
+    padding: 0px, 10px, 20px, 10px;
+}
+
+.user-buttons-container {
+    width: 100%;
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    height: 20%;
+    display: flex;
+    justify-content: first baseline;
+    align-items: center;
+}
+
+.user-buttons {
+    padding: 20px;
+    font-family: grailed;
+    font-size: large;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.display-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ulc {
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    justify-content: first baseline;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.uli {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+    border-bottom: 1px solid lightgray;
+    border-width: 30%;
+}
+
+.ueb {
+    color: white;
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: black;
+    text-decoration: none;
+    width: 100%;
+    padding: 10px;
+}
+
+.ueb:hover {
+    background-color: #343434
+}
+
+.review-display {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.user-score {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30%;
+    border-bottom: 1px solid lightgrey;
+}
+
+.seller {
+    text-align: center;
+}
+
+.user-score > * {
+    padding: 10px;
+}

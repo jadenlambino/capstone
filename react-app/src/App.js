@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import ListingsDisplay from './components/listings/ListingsDisplay';
 import { authenticate } from './store/session';
+import { grabReviews } from './store/reviews';
 import SingleListing from './components/listings/SIngleListing';
+import LisitngForm from './components/listings/ListingsForm';
 import { grabListings } from './store/listings';
 
 
@@ -20,11 +20,11 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
+      await dispatch(grabReviews());
+      await dispatch(grabListings())
       setLoaded(true);
     })();
   }, [dispatch]);
-
-
 
   if (!loaded) {
     return null;
@@ -34,12 +34,6 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
@@ -54,6 +48,9 @@ function App() {
         </Route>
         <Route path='/listings/:id' exact={true}>
           <SingleListing />
+        </Route>
+        <Route path='/sell' exact={true}>
+          <LisitngForm />
         </Route>
       </Switch>
     </BrowserRouter>
