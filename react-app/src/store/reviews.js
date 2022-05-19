@@ -49,11 +49,13 @@ export const uploadReview = (review) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json()
         dispatch(postReview(data))
-        return { 'message': 'it works!' }
+        return { message: 'success' }
     } else {
-        const errors = await response.json()
-        console.log(errors)
-        return errors
+        const data = await response.json();
+        if (data.errors) {
+            console.log(data.errors)
+            return data.errors
+        }
     }
 }
 
@@ -74,10 +76,13 @@ export const patchReview = (id, review) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(editReviews(data))
+        return { message: 'success' }
     } else {
-        const errors = await response.json()
-        console.log(errors)
-        return errors
+        const data = await response.json();
+        if (data.errors) {
+            console.log(data.errors)
+            return data.errors
+        }
     }
 }
 

@@ -11,12 +11,14 @@ const ReviewForm = ({ purchase, open }) => {
     const history = useHistory()
     const user = useSelector(state => state.session.user)
     const [feedback, setFeedback] = useState(open)
+    const [rating, setRating] = useState(0)
+    const [body, setBody] = useState('')
+    const [errors, setErrors] = useState([])
+
     const showFeedback = (e) => {
         e.preventDefault()
         setFeedback(!feedback)
     }
-    const [rating, setRating] = useState(0)
-    const [body, setBody] = useState('')
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -31,10 +33,12 @@ const ReviewForm = ({ purchase, open }) => {
         }
 
         const response = await dispatch(uploadReview(review))
-        if (response.errors) {
-            console.log(response.errors)
+        if (response.message === 'success') {
+            setFeedback(false)
+        } else {
+            setErrors(response)
         }
-        setFeedback(false)
+
     }
 
     const handleRating = (rate) => {
@@ -46,6 +50,11 @@ const ReviewForm = ({ purchase, open }) => {
             <button onClick={showFeedback} className='rb'>Leave Feedback</button>
             <Popup open={feedback}>
                 <img src={purchase.photos} className='display-img'></img>
+                <ul>
+                    {errors?.map((error, idx) => (
+                        <li key={idx}>{error}</li>
+                    ))}
+                </ul>
                 <form onSubmit={handleSubmit} className='review-form'>
                     <span className="rti">
                         <label>Review</label>

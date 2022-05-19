@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_login import current_user
 from app.models import Review, db, Listing
 from app.forms import ReviewForm
-
+from app.api.auth_routes import validation_errors_to_error_messages
 
 review_routes = Blueprint('reviews', __name__)
 
@@ -37,7 +37,7 @@ def create_review():
         return jsonify(new_review.to_dict())
 
     if form.errors:
-        return form.errors, 403
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 403
 
 @review_routes.route('/<int:id>/', methods=['PATCH'])
 def edit_review(id):
@@ -54,7 +54,7 @@ def edit_review(id):
         return review.to_dict()
 
     if form.errors:
-        return form.errors, 403
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 403
 
 @review_routes.route('/<int:id>/', methods=['DELETE'])
 def delete_review(id):

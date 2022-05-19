@@ -11,7 +11,7 @@ const EditReview = ({ purchase, open }) => {
     const history = useHistory()
     const user = useSelector(state => state.session.user)
     const review = useSelector(state => state.reviews[purchase.id])
-
+    const [errors, setErrors] = useState([])
     const [rating, setRating] = useState(review.rating)
     const [body, setBody] = useState(review.body)
 
@@ -31,7 +31,11 @@ const EditReview = ({ purchase, open }) => {
         }
 
         const response = await dispatch(patchReview(review.id, edit))
-        setFeedback(false)
+        if (response.message === 'success') {
+            setFeedback(false)
+        } else {
+            setErrors(response)
+        }
 
     }
 
@@ -50,6 +54,11 @@ const EditReview = ({ purchase, open }) => {
         <>
             <button onClick={showFeedback} className='rb'>Edit Feedback</button>
             <Popup open={feedback}>
+                <ul>
+                    {errors?.map((error, idx) => (
+                        <li key={idx}>{error}</li>
+                    ))}
+                </ul>
                 <form onSubmit={handleEdit} className='review-form'>
                     <span className="rti">
                         <label>Review</label>
