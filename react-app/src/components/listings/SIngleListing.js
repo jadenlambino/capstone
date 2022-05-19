@@ -18,6 +18,7 @@ const SingleListing = () => {
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState(0)
     const [reveal, setReveal] = useState(false)
+    const [errors, setErrors] = useState([])
 
     useEffect(() => {
         if (!id) {
@@ -36,8 +37,13 @@ const SingleListing = () => {
             price,
             description
         }
-        await dispatch(patchListings(listing.id, data))
-        //hello
+        const response = await dispatch(patchListings(listing.id, data))
+        if (response.id) {
+            setErrors([])
+            return
+        } else {
+            setErrors(response)
+        }
     }
 
     const handleDelete = async (e) => {
@@ -48,11 +54,16 @@ const SingleListing = () => {
 
     let functionButtons = (
         <>
+            {errors?.map(error => (
+                <ul>
+                    <li>{error}</li>
+                </ul>
+            ))}
             <form onSubmit={handleEdit}>
                 <label>Product Tag</label>
                 <select
-                onChange={(e) => setProductTag(e.target.value)}
-                defaultValue={listing.product_tag}>
+                    onChange={(e) => setProductTag(e.target.value)}
+                    defaultValue={listing.product_tag}>
                     <option value={listing.product_tag} selected hidden>{listing.product_type}</option>
                     <option value={1}>Jacket</option>
                     <option value={2}>Shirt</option>
@@ -68,23 +79,23 @@ const SingleListing = () => {
                 </select>
                 <label>Name</label>
                 <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                 >
                 </input>
                 <label>Description</label>
                 <input
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                 >
                 </input>
                 <label>Price</label>
                 <input
-                type="text"
-                value={price}
-                onChange={e => setPrice(e.target.value)}>
+                    type="text"
+                    value={price}
+                    onChange={e => setPrice(e.target.value)}>
                 </input>
                 <button type='submit'>Submit</button>
             </form>

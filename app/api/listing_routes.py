@@ -67,6 +67,7 @@ def post_listing():
         return new_listing.to_dict()
 
     if form.errors:
+        print(form.errors)
         return {'errors': validation_errors_to_error_messages(form.errors)}, 403
 
 @listing_routes.route('/<int:id>/', methods=["PATCH"])

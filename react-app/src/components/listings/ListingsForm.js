@@ -28,10 +28,10 @@ const LisitngForm = () => {
         formData.append('name', name);
 
         const response = await dispatch(uploadListings(formData))
-        if (response) {
-            setErrors(response)
-        } else {
+        if (response.id) {
             history.push(`/listings/${response.id}`)
+        } else {
+            setErrors(response)
         }
     }
 
@@ -43,7 +43,7 @@ const LisitngForm = () => {
     return (
         <div className="fc">
             <h1>Add a new listing</h1>
-            {errors.map(error => (
+            {errors?.map(error => (
                 <ul>
                     <li>{error}</li>
                 </ul>

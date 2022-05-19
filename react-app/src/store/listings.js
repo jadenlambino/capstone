@@ -63,13 +63,13 @@ export const uploadListings = (listingData) => async (dispatch) => {
     })
 
     if (response.ok) {
-        console.log('hello')
         const listing = await response.json();
         dispatch(postListings(listing))
-        return null
+        return listing
     } else {
         const data = await response.json();
         if (data.errors) {
+            console.log(data.errors)
             return data.errors
         }
     }
@@ -119,8 +119,11 @@ export const patchListings = (id, listingData) => async (dispatch) => {
         return listing
     }
     else {
-        const errors = await response.json();
-        console.log(errors)
+        const data = await response.json();
+        if (data.errors) {
+            console.log(data.errors)
+            return data.errors
+        }
     }
 }
 
