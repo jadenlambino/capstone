@@ -25,9 +25,6 @@ def get_single_listing(id):
 def post_listing():
     form = ListingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('--------------------------------')
-    print(str(request.files) + '================================')
-    print(str(request.form) + '!!!!!!!!!!!!!!!!!')
 
     if "image" not in request.files:
         return {"errors": "image required"}, 400
