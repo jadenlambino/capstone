@@ -35,3 +35,30 @@
     padding: 10px;
     margin-left: 10px;
 }
+
+.sf {
+    display: flex;
+    flex-direction: column;
+}
+
+.sfb {
+    font-family: grailed;
+    color: white;
+    background-color: black;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.sf > select, input{
+    margin-bottom: 15px;
+    width: 100%;
+    font-family: grailed;
+}
+
+.btb {
+    height: fit-content;
+}
+
+ul {
+    max-width: 50%;
+}

@@ -43,11 +43,11 @@ const LisitngForm = () => {
     return (
         <div className="fc">
             <h1>Add a new listing</h1>
-            {errors?.map(error => (
-                <ul>
-                    <li>{error}</li>
-                </ul>
-            ))}
+            <ul>
+                {errors?.map((error, idx) => (
+                        <li key={idx}>{error}</li>
+                ))}
+            </ul>
             <form onSubmit={handleSubmit} className='ldf'>
                 <div className="ltb">
                     <div className="ltbd">

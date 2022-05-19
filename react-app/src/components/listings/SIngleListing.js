@@ -39,6 +39,7 @@ const SingleListing = () => {
         const response = await dispatch(patchListings(listing.id, data))
         if (response.id) {
             setErrors([])
+            setReveal(false)
             return
         } else {
             setErrors(response)
@@ -51,14 +52,28 @@ const SingleListing = () => {
         history.push('/listings')
     }
 
+    const rev = (e) => {
+        e.preventDefault()
+        setName(listing.name)
+        setProductTag(listing.product_tag)
+        setDescription(listing.description)
+        setPrice(listing.price)
+        setReveal(!reveal)
+    }
+
+    const reset = () => {
+        setReveal(false)
+        setErrors([])
+    }
+
     let functionButtons = (
-        <>
-            {errors?.map(error => (
-                <ul>
-                    <li>{error}</li>
-                </ul>
-            ))}
-            <form onSubmit={handleEdit}>
+        <Popup open={reveal} onClose={reset} modal>
+            <ul>
+                {errors?.map((error, idx) => (
+                        <li key={idx}>{error}</li>
+                ))}
+            </ul>
+            <form onSubmit={handleEdit} className='sf'>
                 <label>Product Tag</label>
                 <select
                     onChange={(e) => setProductTag(e.target.value)}
@@ -88,6 +103,7 @@ const SingleListing = () => {
                     type="text"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                    className='btb'
                 >
                 </input>
                 <label>Price</label>
@@ -96,20 +112,11 @@ const SingleListing = () => {
                     value={price}
                     onChange={e => setPrice(e.target.value)}>
                 </input>
-                <button type='submit'>Submit</button>
+                <button type='submit' className='sfb'>Submit</button>
+                <button onClick={handleDelete} className='sfb'>Delete</button>
             </form>
-            <button onClick={handleDelete}>delete</button>
-        </>
+        </Popup>
     )
-
-    const rev = (e) => {
-        e.preventDefault()
-        setName(listing.name)
-        setProductTag(listing.product_tag)
-        setDescription(listing.description)
-        setPrice(listing.price)
-        setReveal(!reveal)
-    }
 
     let revealButton = (
         <button onClick={rev} className='rb'>Open</button>
@@ -141,7 +148,8 @@ const SingleListing = () => {
                     <NavLink to={`/users/${listing.user_id}/`} className='nav-item'>{listing.username}</NavLink>
                 </h1>
                 {user.id === listing.user_id && revealButton}
-                {reveal && functionButtons}
+                {reveal}
+                {functionButtons}
                 <p>{listing.description}</p>
                 <p>{listing.price}</p>
                 {user.id !== listing.user_id && buyButton}
