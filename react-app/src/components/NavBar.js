@@ -54,10 +54,10 @@ const NavBar = () => {
     </Popup>
   )
 
-  if (user) {
-    setLogin(false)
-    setSignup(false)
-  }
+  // if (user) {
+  //   setLogin(false)
+  //   setSignup(false)
+  // }
 
   return (
     <nav>
