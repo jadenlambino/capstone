@@ -7,6 +7,7 @@ import PurchaseHistory from './purchasehistory/PurchaseHistoryDisplay';
 import './User.css'
 
 
+
 function User() {
   const viewer = useSelector(state => state.session.user)
   const [user, setUser] = useState({});
@@ -26,7 +27,7 @@ function User() {
       return;
     }
     fetchUser();
-  }, [userId, fetchUser]);
+  }, [userId]);
 
   if (!user) {
     return null;
@@ -120,7 +121,7 @@ function User() {
               </div>
             </div>
             <div>
-              <Link to={`/listings/${listing.id}`} className='ueb'>Edit Listing</Link>
+              {viewer.id === user.id && (<Link to={`/listings/${listing.id}`} className='ueb'>Edit Listing</Link>)}
             </div>
           </div>
         ))}
