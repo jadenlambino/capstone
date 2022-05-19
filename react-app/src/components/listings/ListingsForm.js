@@ -14,8 +14,8 @@ const LisitngForm = () => {
     const [description, setDescription] = useState('')
     const [image, setImage] = useState(null);
     const [productTag, setProductTag] = useState()
-    // const [photoLoading, setPhotoLoading] = useState(false)
     const [defaultValue, setDeaultValue] = useState(false)
+    const [errors, setErrors] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,10 +28,11 @@ const LisitngForm = () => {
         formData.append('name', name);
 
         const response = await dispatch(uploadListings(formData))
-        if (response.errors) {
-            console.log(response.errors)
+        if (response) {
+            setErrors(response)
+        } else {
+            history.push(`/listings/${response.id}`)
         }
-        history.push(`/listings/${response.id}`)
     }
 
     const updateImage = (e) => {
@@ -42,6 +43,11 @@ const LisitngForm = () => {
     return (
         <div className="fc">
             <h1>Add a new listing</h1>
+            {errors.map(error => (
+                <ul>
+                    <li>{error}</li>
+                </ul>
+            ))}
             <form onSubmit={handleSubmit} className='ldf'>
                 <div className="ltb">
                     <div className="ltbd">
@@ -94,10 +100,13 @@ const LisitngForm = () => {
                         >
                         </input>
                     </div>
+                    <label for='file' className='fi'>Choose File</label>
                     <input
                     type="file"
                     accept="image/*"
                     onChange={updateImage}
+                    id='file'
+                    hidden
                     />
                 </div>
             </form>

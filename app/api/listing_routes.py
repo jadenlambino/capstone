@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user
 from sqlalchemy import true
+from app.api.auth_routes import validation_errors_to_error_messages
 from app.models import Listing, db
 from app.forms.listing_form import ListingForm
 from app.s3_helpers import (
@@ -37,8 +38,6 @@ def post_listing():
         return {"errors": "file type not permitted"}, 400
 
     image.filename = get_unique_filename(image.filename)
-    print(image.filename)
-    print(image)
 
     upload = upload_file_to_s3(image)
 
@@ -68,7 +67,7 @@ def post_listing():
         return new_listing.to_dict()
 
     if form.errors:
-        return form.errors, 403
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 403
 
 @listing_routes.route('/<int:id>/', methods=["PATCH"])
 def edit_listing(id):
@@ -93,7 +92,7 @@ def edit_listing(id):
         return listing.to_dict()
 
     if form.errors:
-        return form.errors, 403
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 403
     # db.session.update(edit_listing)
     # return edit_listing.to_dict()
 

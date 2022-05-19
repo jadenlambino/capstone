@@ -6,14 +6,21 @@ import Popup from 'reactjs-popup'
 import './NavBar.css'
 import { useSelector } from 'react-redux';
 import LoginForm from './auth/LoginForm';
+import SignupForm from './auth/SignUpForm';
 
 const NavBar = () => {
   const user = useSelector(state => state.session.user)
   const [login, setLogin] = useState(false)
+  const [signup, setSignup] = useState(false)
 
   const showLogin = (e) => {
     e.preventDefault();
     setLogin(!login)
+  }
+
+  const showSignup = (e) => {
+    e.preventDefault();
+    setSignup(!signup)
   }
 
   let logSign = (
@@ -25,9 +32,10 @@ const NavBar = () => {
         </Popup>
       </div>
       <div className='nd'>
-        <NavLink to='/sign-up' exact={true} activeClassName='active' className='nav-item'>
-          SIGN UP
-        </NavLink>
+        <button className='sb' onClick={showSignup}>SIGN UP</button>
+        <Popup open={signup} onClose={showSignup}>
+            <SignupForm />
+        </Popup>
       </div>
     </>
   )
