@@ -54,6 +54,11 @@ const NavBar = () => {
     </Popup>
   )
 
+  // if (user) {
+  //   setLogin(false)
+  //   setSignup(false)
+  // }
+
   return (
     <nav>
       <h1 className="title">J A I L E D</h1>
@@ -76,9 +81,9 @@ const NavBar = () => {
           </div>
         ) : (
           <div className='nd'>
-            <NavLink to='/login' exact={true} className='nav-item'>
+            <h4 onClick={showLogin}>
               SELL
-            </NavLink>
+            </h4>
           </div>
         )}
         {!user && logSign}
