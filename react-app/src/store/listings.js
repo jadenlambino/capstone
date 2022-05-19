@@ -66,6 +66,9 @@ export const uploadListings = (listingData) => async (dispatch) => {
         const listing = await response.json();
         dispatch(postListings(listing))
         return listing
+    } else if (response.status === 400) {
+        const data = await response.json();
+        return [data.errors]
     } else {
         const data = await response.json();
         if (data.errors) {

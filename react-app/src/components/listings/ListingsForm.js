@@ -31,7 +31,9 @@ const LisitngForm = () => {
         if (response.id) {
             history.push(`/listings/${response.id}`)
         } else {
+            console.log(response)
             setErrors(response)
+            console.log(errors)
         }
     }
 
