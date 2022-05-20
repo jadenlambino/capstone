@@ -13,6 +13,7 @@ const LisitngForm = () => {
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState('')
     const [image, setImage] = useState(null);
+    const [url, setUrl] = useState('')
     const [productTag, setProductTag] = useState()
     const [defaultValue, setDefultValue] = useState(false)
     const [errors, setErrors] = useState([])
@@ -21,11 +22,11 @@ const LisitngForm = () => {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append("image", image);
         formData.append("product_tag", productTag);
         formData.append("description", description);
         formData.append("price", price);
         formData.append('name', name);
+        formData.append('url', url)
 
         const response = await dispatch(uploadListings(formData))
         if (response.id) {
@@ -40,6 +41,20 @@ const LisitngForm = () => {
     const updateImage = (e) => {
         const file = e.target.files[0];
         setImage(file);
+        const imageData = new FormData();
+        imageData.append("image", image);
+
+        const uploadedUrl = await fetch('/api/images/', {
+            method: 'POST',
+            body: imageData,
+        });
+
+        if (uploadedUrl.ok) {
+            const res = await uploadedUrl.json()
+            setUrl(res.url)
+        } else {
+
+        }
     }
 
     return (
@@ -102,15 +117,17 @@ const LisitngForm = () => {
                         >
                         </input>
                     </div>
-                    <label for='file' className='fi'>Choose File</label>
-                    <input
-                    type="file"
-                    accept="image/*"
-                    onChange={updateImage}
-                    id='file'
-                    hidden
-                    />
                 </div>
+            </form>
+            <form>
+                <label for='file' className='fi'>Choose File</label>
+                <input
+                type="file"
+                accept="image/*"
+                onChange={updateImage}
+                id='file'
+                hidden
+                />
             </form>
             <div>
                 <button type='submit' onClick={handleSubmit} className="bh">Submit</button>
