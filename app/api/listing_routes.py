@@ -53,7 +53,7 @@ def post_listing():
             name = data['name'],
             price = float(data['price']),
             description = data['description'],
-            photos = data['url']
+            photos = data['photos']
         )
         # print('++++++++++++++' +  str(data))
         db.session.add(new_listing)

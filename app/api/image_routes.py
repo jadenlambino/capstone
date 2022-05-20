@@ -5,7 +5,7 @@ from app.s3_helpers import (
 
 image_routes = Blueprint('images', __name__)
 
-@image_routes.route('/')
+@image_routes.route('/', methods=["POST"])
 def validate_image():
     if "image" not in request.files:
         return {"errors": "image required"}, 400
