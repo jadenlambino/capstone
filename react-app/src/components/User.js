@@ -34,7 +34,7 @@ function User() {
   }
 
   let count = 0
-  if(user.reviews) {
+  if (user.reviews) {
     user.reviews.forEach(review => {
       count += review.rating
       return count
@@ -64,21 +64,21 @@ function User() {
   }
 
   let listingButton = viewer.id === user.id ? (
-  <button className='user-buttons' onClick={showListings}>My Listings</button>)
-  : (<button className='user-buttons' onClick={showListings}>Listings</button>)
+    <button className='user-buttons' onClick={showListings}>My Listings</button>)
+    : (<button className='user-buttons' onClick={showListings}>Listings</button>)
 
   let userReviews = (
     <div className='review-display'>
-        <div className='user-score'>
-          <h2 className='seller'>Seller Score</h2>
-          <Rating
+      <div className='user-score'>
+        <h2 className='seller'>Seller Score</h2>
+        <Rating
           initialValue={count || 0}
           readonly
-          />
-          <h4>{`${user.reviews?.length} Feedback`}</h4>
-        </div>
+        />
+        <h4>{`${user.reviews?.length} Feedback`}</h4>
+      </div>
       {user.reviews?.map((review, idx) => (
-        <ReviewDisplay review={review} key={idx}/>
+        <ReviewDisplay review={review} key={idx} />
       ))}
     </div>
   )
@@ -86,11 +86,11 @@ function User() {
   return (
     <>
       <div className='user-info'>
-        <img src={user.profile_image} alt="This is the product"></img>
+        {/* <img src={user.profile_image} alt="This is the product"></img> */}
         <h1>{user.username}</h1>
         <Rating
-        initialValue={count || 0}
-        readonly
+          initialValue={count || 0}
+          readonly
         />
       </div>
       <div className='user-buttons-container'>
@@ -128,9 +128,18 @@ function User() {
 
         {reviews && userReviews}
 
-        {transactions && viewer.id === user.id && user.purchases?.map((purchase, idx) => (
-          <PurchaseHistory purchase={purchase} />
-        ))}
+        {transactions && viewer.id === user.id && (
+          <>
+            {user.purchases.length > 0 ?
+            <h1>These are your purchases</h1> :
+            <Link to={'/listings'}>
+              <h1>No purchase history found, click here to shop.</h1>
+            </Link>}
+            {user.purchases?.map((purchase, idx) => (
+            <PurchaseHistory purchase={purchase} />
+            ))}
+          </>
+        )}
       </div>
     </>
   );

@@ -7,7 +7,7 @@ def seed_listings():
         name = 'Jacket',
         price = 100.00,
         description = 'This is a jacket',
-        photos = 'https://jaden-capstone.s3.us-west-1.amazonaws.com/fd1abf11f09a4b188464bb31468d23ac.jpg'
+        photos = 'https://jaden-capstone.s3.us-west-1.amazonaws.com/a03626a2fc3b4524b47aabb081e590b6.jpg'
     )
     demo2 = Listing (
         user_id = 1,

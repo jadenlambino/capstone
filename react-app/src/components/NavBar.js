@@ -54,6 +54,11 @@ const NavBar = () => {
     </Popup>
   )
 
+  // if (user) {
+  //   setLogin(false)
+  //   setSignup(false)
+  // }
+
   return (
     <nav>
       <h1 className="title">J A I L E D</h1>
@@ -63,23 +68,27 @@ const NavBar = () => {
             BUY
           </NavLink>
         </div>
-        <div className='nd'>
-          <NavLink to='/users' exact={true} activeClassName='active' className='nav-item'>
-            USERS
-          </NavLink>
-        </div>
         {user ? (
-          <div className='nd'>
-            <NavLink to='/sell' exact={true} className='nav-item'>
-              SELL
-            </NavLink>
-          </div>
+          <>
+            <div className='nd'>
+              <NavLink to='/users' exact={true} activeClassName='active' className='nav-item'>
+                USERS
+              </NavLink>
+            </div>
+            <div className='nd'>
+              <NavLink to='/sell' exact={true} className='nav-item'>
+                SELL
+              </NavLink>
+            </div>
+          </>
         ) : (
-          <div className='nd'>
-            <NavLink to='/login' exact={true} className='nav-item'>
-              SELL
-            </NavLink>
-          </div>
+          <>
+            <div className='nd'>
+              <h4 onClick={showLogin}>
+                SELL
+              </h4>
+            </div>
+          </>
         )}
         {!user && logSign}
         {user && logout}
