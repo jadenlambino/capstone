@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import ReviewForm from "../reviews/ReviewForm";
 import EditReview from "../reviews/EditReviewForm";
 import './PurchaseHistory.css'
@@ -25,12 +25,12 @@ const PurchaseHistory = ({ purchase }) => {
             </NavLink>
                 <div className='uli'>
                     <div>
-                        <h4>Name</h4>
-                        <span>{purchase.name}</span>
+                        <h4>Seller</h4>
+                        <span>{purchase.username}</span>
                     </div>
                     <div>
-                        <h4>Description</h4>
-                        <span>{purchase.description}</span>
+                        <h4>Name</h4>
+                        <span>{purchase.name}</span>
                     </div>
                     <div>
                         <h4>Price</h4>
