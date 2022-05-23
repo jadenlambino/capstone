@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { NavLink, Link } from "react-router-dom";
 import ReviewForm from "../reviews/ReviewForm";
 import EditReview from "../reviews/EditReviewForm";
 import './PurchaseHistory.css'
@@ -19,15 +20,17 @@ const PurchaseHistory = ({ purchase }) => {
     // if (!listing) return null
     return (
         <div className="ulc">
+            <NavLink to={`/listings/${purchase.id}`}>
                 <img src={purchase.photos} className='display-img' alt="This is the product"></img>
+            </NavLink>
                 <div className='uli'>
+                    <div>
+                        <h4>Seller</h4>
+                        <span>{purchase.username}</span>
+                    </div>
                     <div>
                         <h4>Name</h4>
                         <span>{purchase.name}</span>
-                    </div>
-                    <div>
-                        <h4>Description</h4>
-                        <span>{purchase.description}</span>
                     </div>
                     <div>
                         <h4>Price</h4>
