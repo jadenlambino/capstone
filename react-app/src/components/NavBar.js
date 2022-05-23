@@ -51,7 +51,7 @@ const NavBar = () => {
       arrow={false}
     >
       <div className='lpo'>
-        <NavLink to={`/users/${user.id}/`} className='nav-item prof-link'>Profile</NavLink>
+        {user && <NavLink to={`/users/${user.id}/`} className='nav-item prof-link'>Profile</NavLink>}
         <LogoutButton />
       </div>
     </Popup>
