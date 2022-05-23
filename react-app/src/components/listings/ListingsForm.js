@@ -128,7 +128,7 @@ const LisitngForm = () => {
                     </div>
                 </div>
             </form>
-            <div>
+            <div className="img-form">
                 <form onSubmit={updateImage}>
                     <label for='file' className='fi'>Choose File</label>
                     <input
@@ -138,13 +138,13 @@ const LisitngForm = () => {
                     id='file'
                     hidden
                     />
-                <button type="submit" className="fi" onClick={updateImage}>Submit</button>
+                <button type="submit" className="fi" onClick={updateImage}>Add image</button>
                 </form>
-                <img src={url}>
+                <img src={url} className='listing-image'>
                 </img>
             </div>
             <div>
-                <button type='submit' onClick={handleSubmit} className="bh">Submit</button>
+                <button type='submit' onClick={handleSubmit} className="bh">Submit Form</button>
             </div>
         </div>
     )

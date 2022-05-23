@@ -95,7 +95,7 @@ function User() {
       </div>
       <div className='user-buttons-container'>
         {listingButton}
-        <button className='user-buttons' onClick={showReviews}>Reviews</button>
+        <button className='user-buttons' onClick={showReviews}>Feedback</button>
         {viewer.id === user.id && (
           <button onClick={showTransactions} className='user-buttons'>My Purchases</button>
         )}
