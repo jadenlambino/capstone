@@ -1,3 +1,7 @@
 .splash {
     text-align: center;
 }
+
+.splash-div {
+    height: 80vh;
+}
