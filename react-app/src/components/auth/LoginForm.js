@@ -39,6 +39,7 @@ const LoginForm = () => {
   const setDemo = async (e) => {
     e.preventDefault();
     await dispatch(login('demo@aa.io', 'password'))
+    history.push('/listings')
   }
 
   return (
