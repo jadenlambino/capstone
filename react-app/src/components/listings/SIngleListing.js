@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useHistory, useParams } from 'react-router-dom';
+import { NavLink, useHistory, useParams, Link } from 'react-router-dom';
 import { grabSingle, patchListings, removeListings, purchaseListings } from '../../store/listings'
 import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css';
@@ -18,6 +18,8 @@ const SingleListing = () => {
     const [price, setPrice] = useState(0)
     const [reveal, setReveal] = useState(false)
     const [errors, setErrors] = useState([])
+    const [openPurchase, setopenPurchase] = useState(false)
+    const [openReminder, setOpenReminder] = useState(false)
 
     useEffect(() => {
         if (!id) {
@@ -119,7 +121,7 @@ const SingleListing = () => {
     )
 
     let revealButton = (
-        <button onClick={rev} className='rb'>Open</button>
+        <button onClick={rev} className='rb'>Edit</button>
     )
 
     const handlePurchase = async (e) => {
@@ -129,13 +131,28 @@ const SingleListing = () => {
             buyer_id: user.id
         }
         await dispatch(purchaseListings(id, data))
-        history.push(`/users/${user.id}`)
+        setopenPurchase(false)
+        setOpenReminder(true)
     }
 
-    let buyButton = (
-        <button onClick={handlePurchase} className='rb'>Buy</button>
+    let reviewReminder = (
+        <Popup open={openReminder} modal>
+            <h1>Remember to leave a review!</h1>
+            <Link to={`/users/${user.id}`} className='rb'>Take me to my profile</Link>
+        </Popup>
     )
 
+    let purchasePage = (
+        <Popup open={openPurchase} modal>
+            <h1>Proceed with purchase?</h1>
+            <button onClick={handlePurchase} className='rb'>Yes</button>
+            <button className='rb' onClick={() => setopenPurchase(!openPurchase)}> No</button>
+        </Popup>
+    )
+
+    let buyButton = (
+        <button onClick={() => setopenPurchase(!openPurchase)} className='rb'>Buy</button>
+    )
 
     return (
         <div className='s-l-c'>
@@ -143,16 +160,18 @@ const SingleListing = () => {
                 <img src={listing.photos} alt="This is the product" className='s-p'></img>
             </div>
             <div className='s-i'>
-                <h1>{listing.name.toUpperCase()}</h1>
                 <h1>
-                    <NavLink to={`/users/${listing.user_id}/`} className='nav-item'>{listing.username}</NavLink>
+                    <NavLink to={`/users/${listing.user_id}/`} className='user-link'>{listing.username}</NavLink>
                 </h1>
+                <h1>{listing.name.toUpperCase()}</h1>
                 {user.id === listing.user_id && revealButton}
                 {reveal}
                 {functionButtons}
-                <p>{listing.description}</p>
-                <p>{listing.price}</p>
+                <p>Description<p>{listing.description}</p></p>
+                <p>Price<p>{`$${listing.price}`}</p></p>
                 {user.id !== listing.user_id && buyButton}
+                {purchasePage}
+                {reviewReminder}
             </div>
         </div>
     )

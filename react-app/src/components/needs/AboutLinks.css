@@ -4,11 +4,12 @@ footer {
     justify-content: space-evenly;
     align-items: center;
     border-top: 1px solid lightgray;
-    position: fixed;
+    position: sticky;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(211,211,211,0.5);
+    background-color: rgba(211,211,211);
+    margin-top: 5px;
 }
 
 .fc {

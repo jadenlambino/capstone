@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import Popup from 'reactjs-popup'
 import './NavBar.css'
@@ -50,7 +50,10 @@ const NavBar = () => {
       mouseEnterDelay={0}
       arrow={false}
     >
-      <LogoutButton />
+      <div className='lpo'>
+        <NavLink to={`/users/${user.id}/`} className='nav-item prof-link'>Profile</NavLink>
+        <LogoutButton />
+      </div>
     </Popup>
   )
 
@@ -70,11 +73,11 @@ const NavBar = () => {
         </div>
         {user ? (
           <>
-            <div className='nd'>
+            {/* <div className='nd'>
               <NavLink to='/users' exact={true} activeClassName='active' className='nav-item'>
                 USERS
               </NavLink>
-            </div>
+            </div> */}
             <div className='nd'>
               <NavLink to='/sell' exact={true} className='nav-item'>
                 SELL

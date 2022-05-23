@@ -49,7 +49,7 @@ const EditReview = ({ purchase, open }) => {
 
     return (
         <>
-            <button onClick={showFeedback} className='rb'>Edit Feedback</button>
+            <button onClick={showFeedback} className='rb'>Edit Review</button>
             <Popup open={feedback}>
                 <ul>
                     {errors?.map((error, idx) => (

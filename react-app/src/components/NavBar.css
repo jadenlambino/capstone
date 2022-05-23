@@ -64,3 +64,12 @@ nav {
     background-color: lightgray;
     color: black;
 }
+
+.lpo {
+    display: flex;
+    flex-direction: column;
+}
+
+.prof-link {
+    border: none;
+}

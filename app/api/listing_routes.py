@@ -25,30 +25,24 @@ def get_single_listing(id):
 def post_listing():
     form = ListingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('--------------------------------')
-    print(str(request.files) + '================================')
-    print(str(request.form) + '!!!!!!!!!!!!!!!!!')
 
-    if "image" not in request.files:
-        return {"errors": "image required"}, 400
+    # if "image" not in request.files:
+    #     return {"errors": "image required"}, 400
 
-    image = request.files["image"]
+    # image = request.files["image"]
 
-    if not allowed_file(image.filename):
-        return {"errors": "file type not permitted"}, 400
+    # if not allowed_file(image.filename):
+    #     return {"errors": "file type not permitted"}, 400
 
-    image.filename = get_unique_filename(image.filename)
+    # image.filename = get_unique_filename(image.filename)
 
-    upload = upload_file_to_s3(image)
+    # upload = upload_file_to_s3(image)
 
-    if "url" not in upload:
-        # if the dictionary doesn't have a url key
-        # it means that there was an error when we tried to upload
-        # so we send back that error message
-        print(upload)
-        return upload, 400
-    print("hello from 29")
-    url = upload["url"]
+    # if "url" not in upload:
+    #     print(upload)
+    #     return upload, 400
+    # print("hello from 29")
+    # url = upload["url"]
 
     if form.validate_on_submit():
         data = form.data
@@ -59,7 +53,7 @@ def post_listing():
             name = data['name'],
             price = float(data['price']),
             description = data['description'],
-            photos = url
+            photos = data['photos']
         )
         # print('++++++++++++++' +  str(data))
         db.session.add(new_listing)

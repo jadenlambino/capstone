@@ -44,7 +44,7 @@ const ReviewForm = ({ purchase, open }) => {
 
     return (
         <>
-            <button onClick={showFeedback} className='rb'>Leave Feedback</button>
+            <button onClick={showFeedback} className='rb'>Leave Review</button>
             <Popup open={feedback}>
                 <img src={purchase.photos} className='display-img' alt="This is the product"></img>
                 <ul>

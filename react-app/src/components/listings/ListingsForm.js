@@ -13,6 +13,7 @@ const LisitngForm = () => {
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState('')
     const [image, setImage] = useState(null);
+    const [url, setUrl] = useState('https://www.cyclonehealth.iastate.edu/wp-content/uploads/shw-tiles/default.jpg')
     const [productTag, setProductTag] = useState()
     const [defaultValue, setDefultValue] = useState(false)
     const [errors, setErrors] = useState([])
@@ -20,12 +21,16 @@ const LisitngForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (url === 'https://www.cyclonehealth.iastate.edu/wp-content/uploads/shw-tiles/default.jpg'){
+            return setErrors(['Please make sure to upload an image of your product'])
+        }
+
         const formData = new FormData();
-        formData.append("image", image);
         formData.append("product_tag", productTag);
         formData.append("description", description);
         formData.append("price", price);
         formData.append('name', name);
+        formData.append('photos', url)
 
         const response = await dispatch(uploadListings(formData))
         if (response.id) {
@@ -37,9 +42,32 @@ const LisitngForm = () => {
         }
     }
 
-    const updateImage = (e) => {
-        const file = e.target.files[0];
-        setImage(file);
+    const uploadImage = (e) => {
+        const file = e.target.files[0]
+        setImage(file)
+    }
+
+    const updateImage = async (e) => {
+        e.preventDefault();
+        const imageData = new FormData();
+        imageData.append("image", image);
+
+        const uploadedUrl = await fetch('/api/images/', {
+            method: 'POST',
+            body: imageData,
+        });
+
+        if (uploadedUrl.ok) {
+            console.log('hello')
+            const res = await uploadedUrl.json()
+            setUrl(res.url)
+            console.log(url)
+            setErrors([])
+        } else {
+            const errors = await uploadedUrl.json()
+            console.log(errors.errors)
+            setErrors([errors.errors])
+        }
     }
 
     return (
@@ -96,24 +124,31 @@ const LisitngForm = () => {
                     <div className="ltbd">
                         <label className="il">Price</label>
                         <input
-                        type="text"
+                        type="number"
                         onChange={e => setPrice(e.target.value)}
                         className='ti'
                         >
                         </input>
                     </div>
+                </div>
+            </form>
+            <div className="img-form">
+                <form onSubmit={updateImage}>
                     <label for='file' className='fi'>Choose File</label>
                     <input
                     type="file"
                     accept="image/*"
-                    onChange={updateImage}
+                    onChange={uploadImage}
                     id='file'
                     hidden
                     />
-                </div>
-            </form>
+                <button type="submit" className="fi" onClick={updateImage}>Add image</button>
+                </form>
+                <img src={url} className='listing-image'>
+                </img>
+            </div>
             <div>
-                <button type='submit' onClick={handleSubmit} className="bh">Submit</button>
+                <button type='submit' onClick={handleSubmit} className="bh">Submit Form</button>
             </div>
         </div>
     )
