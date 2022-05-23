@@ -21,6 +21,10 @@ const LisitngForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (url === 'https://www.cyclonehealth.iastate.edu/wp-content/uploads/shw-tiles/default.jpg'){
+            return setErrors(['Please make sure to upload an image of your product'])
+        }
+
         const formData = new FormData();
         formData.append("product_tag", productTag);
         formData.append("description", description);
@@ -120,7 +124,7 @@ const LisitngForm = () => {
                     <div className="ltbd">
                         <label className="il">Price</label>
                         <input
-                        type="text"
+                        type="number"
                         onChange={e => setPrice(e.target.value)}
                         className='ti'
                         >
