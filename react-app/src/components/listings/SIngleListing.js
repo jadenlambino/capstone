@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useHistory, useParams } from 'react-router-dom';
+import { NavLink, useHistory, useParams, Link } from 'react-router-dom';
 import { grabSingle, patchListings, removeListings, purchaseListings } from '../../store/listings'
 import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css';
@@ -135,15 +135,10 @@ const SingleListing = () => {
         setOpenReminder(true)
     }
 
-    const redirectToProfile = (e) => {
-        e.preventDefault()
-        history.push(`/users/${user.id}`)
-    }
-
     let reviewReminder = (
         <Popup open={openReminder} modal>
             <h1>Remember to leave a review!</h1>
-            <button onclick={redirectToProfile} className='rb'>Take me to my profile</button>
+            <Link to={`/users/${user.id}`} className='rb'>Take me to my profile</Link>
         </Popup>
     )
 
