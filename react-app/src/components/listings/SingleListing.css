@@ -62,3 +62,16 @@
 ul {
     max-width: 50%;
 }
+
+.user-link {
+    color: darkblue;
+    text-decoration: none;
+}
+
+.user-link:hover {
+    color: black
+}
+
+p {
+    text-align: center;
+}

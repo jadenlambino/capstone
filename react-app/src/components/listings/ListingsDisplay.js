@@ -44,7 +44,7 @@ const ListingsDisplay = () => {
                                 )}
                                 <span className='listing-info'>
                                     <span>{listing.name}</span>
-                                    <span>{listing.description}</span>
+                                    {/* <span>{listing.description}</span> */}
                                     <span>{`$${listing.price}`}</span>
                                 </span>
                             </div>

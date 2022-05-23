@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    height: 95vh;
+    height: 100%;
 }
 
 .listing-container {
@@ -22,6 +22,7 @@
 .listing-info {
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
 .hide {

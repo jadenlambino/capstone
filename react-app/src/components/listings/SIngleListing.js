@@ -161,14 +161,14 @@ const SingleListing = () => {
             </div>
             <div className='s-i'>
                 <h1>
-                    <NavLink to={`/users/${listing.user_id}/`} className='nav-item'>{listing.username}</NavLink>
+                    <NavLink to={`/users/${listing.user_id}/`} className='user-link'>{listing.username}</NavLink>
                 </h1>
                 <h1>{listing.name.toUpperCase()}</h1>
                 {user.id === listing.user_id && revealButton}
                 {reveal}
                 {functionButtons}
-                <p>{listing.description}</p>
-                <p>{listing.price}</p>
+                <p>Description<p>{listing.description}</p></p>
+                <p>Price<p>{`$${listing.price}`}</p></p>
                 {user.id !== listing.user_id && buyButton}
                 {purchasePage}
                 {reviewReminder}
