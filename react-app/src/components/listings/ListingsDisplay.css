@@ -8,14 +8,13 @@
 
 .listing-container {
     margin: 5px;
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
 }
 
 .display-img {
-    height: 200px;
-    width: 200px;
+    height: 220px;
+    width: 235px;
     object-fit: cover;
 }
 
@@ -27,4 +26,22 @@
 
 .hide {
     display: none;
+}
+
+.l-price {
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 3px;
+    color: darkgrey;
+    text-align: right;
+}
+
+.listings-header {
+    padding-bottom: 3px;
+}
+
+.l-head {
+    border-bottom: 1px solid #e1e1e1;
+    text-align: left;
+    padding-bottom: 10px;
+    padding-left: 10%;
 }

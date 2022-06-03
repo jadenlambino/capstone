@@ -84,7 +84,7 @@ function User() {
   )
 
   return (
-    <>
+    <div className='content-wrap'>
       <div className='user-info'>
         {/* <img src={user.profile_image} alt="This is the product"></img> */}
         <h1>{user.username}</h1>
@@ -141,7 +141,7 @@ function User() {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 }
 export default User;
