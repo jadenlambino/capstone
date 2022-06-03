@@ -24,7 +24,10 @@ const ListingsDisplay = () => {
     }
 
     return (
-        <>
+        <div className="content-wrap">
+            <div className="listings-header">
+                <h1 className='l-head'>L I S T I N G S</h1>
+            </div>
             <div className='listing-display'>
                 {listings.map((listing, idx) => (
                     <div key={idx}>
@@ -43,16 +46,16 @@ const ListingsDisplay = () => {
                                     </>
                                 )}
                                 <span className='listing-info'>
-                                    <span>{listing.name}</span>
+                                    <span className='l-price'>{`$${listing.price}`}</span>
+                                    <span className='l-title'>{listing.name}</span>
                                     {/* <span>{listing.description}</span> */}
-                                    <span>{`$${listing.price}`}</span>
                                 </span>
                             </div>
                         }
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     )
 }
 

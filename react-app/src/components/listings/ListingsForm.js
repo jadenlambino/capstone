@@ -71,84 +71,86 @@ const LisitngForm = () => {
     }
 
     return (
-        <div className="fc">
-            <h1>Add a new listing</h1>
-            <ul>
-                {errors?.map((error, idx) => (
-                        <li key={idx}>{error}</li>
-                ))}
-            </ul>
-            <form onSubmit={handleSubmit} className='ldf'>
-                <div className="ltb">
-                    <div className="ltbd">
-                        <label className="il">Name</label>
-                        <input
-                        type="text"
-                        onChange={(e) => setName(e.target.value)}
-                        className='ti'
-                        >
-                        </input>
+        <div className="content-wrap">
+            <div className="fc">
+                <h1>Add a new listing</h1>
+                <ul>
+                    {errors?.map((error, idx) => (
+                            <li key={idx}>{error}</li>
+                    ))}
+                </ul>
+                <form onSubmit={handleSubmit} className='ldf'>
+                    <div className="ltb">
+                        <div className="ltbd">
+                            <label className="il">Name</label>
+                            <input
+                            type="text"
+                            onChange={(e) => setName(e.target.value)}
+                            className='ti'
+                            >
+                            </input>
+                        </div>
+                        <div className="ltbd">
+                            <label className="il">Description</label>
+                            <input
+                            type="text"
+                            onChange={(e) => setDescription(e.target.value)}
+                            className='ti'
+                            >
+                            </input>
+                        </div>
                     </div>
-                    <div className="ltbd">
-                        <label className="il">Description</label>
-                        <input
-                        type="text"
-                        onChange={(e) => setDescription(e.target.value)}
-                        className='ti'
-                        >
-                        </input>
+                    <div className="lts">
+                        <div className="ltbd">
+                            <label className="il">Product Tag</label>
+                            <select
+                            onChange={(e) => setProductTag(e.target.value)}
+                            defaultValue={defaultValue}
+                            className='si'
+                            >
+                                <option value={defaultValue} disabled hidden>Select an option</option>
+                                <option value={1}>Jacket</option>
+                                <option value={2}>Shirt</option>
+                                <option value={3}>T-Shirt</option>
+                                <option value={4}>Sweatshirt</option>
+                                <option value={5}>Hoodie</option>
+                                <option value={6}>Jeans</option>
+                                <option value={7}>Pants</option>
+                                <option value={8}>Shorts</option>
+                                <option value={9}>Shoes</option>
+                                <option value={10}>Hats</option>
+                                <option value={11}>Accessories</option>
+                            </select>
+                        </div>
+                        <div className="ltbd">
+                            <label className="il">Price</label>
+                            <input
+                            type="number"
+                            onChange={e => setPrice(e.target.value)}
+                            className='ti'
+                            >
+                            </input>
+                        </div>
                     </div>
-                </div>
-                <div className="lts">
-                    <div className="ltbd">
-                        <label className="il">Product Tag</label>
-                        <select
-                        onChange={(e) => setProductTag(e.target.value)}
-                        defaultValue={defaultValue}
-                        className='si'
-                        >
-                            <option value={defaultValue} disabled hidden>Select an option</option>
-                            <option value={1}>Jacket</option>
-                            <option value={2}>Shirt</option>
-                            <option value={3}>T-Shirt</option>
-                            <option value={4}>Sweatshirt</option>
-                            <option value={5}>Hoodie</option>
-                            <option value={6}>Jeans</option>
-                            <option value={7}>Pants</option>
-                            <option value={8}>Shorts</option>
-                            <option value={9}>Shoes</option>
-                            <option value={10}>Hats</option>
-                            <option value={11}>Accessories</option>
-                        </select>
-                    </div>
-                    <div className="ltbd">
-                        <label className="il">Price</label>
-                        <input
-                        type="number"
-                        onChange={e => setPrice(e.target.value)}
-                        className='ti'
-                        >
-                        </input>
-                    </div>
-                </div>
-            </form>
-            <div className="img-form">
-                <form onSubmit={updateImage}>
-                    <label for='file' className='fi'>Choose File</label>
-                    <input
-                    type="file"
-                    accept="image/*"
-                    onChange={uploadImage}
-                    id='file'
-                    hidden
-                    />
-                <button type="submit" className="fi" onClick={updateImage}>Add image</button>
                 </form>
-                <img src={url} className='listing-image'>
-                </img>
-            </div>
-            <div>
-                <button type='submit' onClick={handleSubmit} className="bh">Submit Form</button>
+                <div className="img-form">
+                    <form onSubmit={updateImage}>
+                        <label for='file' className='fi'>Choose File</label>
+                        <input
+                        type="file"
+                        accept="image/*"
+                        onChange={uploadImage}
+                        id='file'
+                        hidden
+                        />
+                    <button type="submit" className="fi" onClick={updateImage}>Add image</button>
+                    </form>
+                    <img src={url} className='listing-image'>
+                    </img>
+                </div>
+                <div>
+                    <button type='submit' onClick={handleSubmit} className="bh">Submit Form</button>
+                </div>
             </div>
         </div>
     )

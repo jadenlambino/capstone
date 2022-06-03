@@ -3,18 +3,18 @@ footer {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    border-top: 1px solid lightgray;
-    position: sticky;
+    border-top: 1px solid darkgrey;
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(211,211,211);
     margin-top: 5px;
+    height: 2.5rem;
 }
 
 .fc {
     text-decoration: none;
     color: black;
     font-size: larger;
-    padding: 10px;
+    margin-top:  1rem;
 }

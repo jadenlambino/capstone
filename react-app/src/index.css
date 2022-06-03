@@ -3,3 +3,17 @@
     border: 1px solid black;
     background-color: black;
     /* font-family: grailed; */
+
+/* body {
+    background: rgb(98,91,91);
+    background: linear-gradient(172deg, rgba(98,91,91,1) 0%, rgba(166,155,155,1) 50%, rgba(255,255,255,1) 100%);
+} */
+
+#root {
+    position: relative;
+    min-height: 98vh;
+}
+
+.content-wrap {
+    padding-bottom: 4rem
+}
