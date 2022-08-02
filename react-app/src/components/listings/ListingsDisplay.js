@@ -19,8 +19,8 @@ const ListingsDisplay = () => {
 
 
     const showLogin = (e) => {
-      e.preventDefault();
-      setLogin(!login)
+        e.preventDefault();
+        setLogin(!login)
     }
 
     return (

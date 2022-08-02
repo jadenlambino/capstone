@@ -6,9 +6,14 @@
     height: 80vh;
 }
 
+.carousel-container {
+    margin: 8px;
+}
+
 .carousel div {
     height: 300px;
     width: 350px;
+    margin: 0 8px;
 }
 
 .c-jacket {

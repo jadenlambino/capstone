@@ -1,6 +1,7 @@
 import React from 'react'
 import Carousel from 'react-multi-carousel'
 import "react-multi-carousel/lib/styles.css";
+import { NavLink } from 'react-router-dom';
 import './SplashPage.css'
 
 const SplashPage = () => {
@@ -33,17 +34,39 @@ const SplashPage = () => {
                     responsive={responsive}
                     className='carousel'
                 >
-                    <div className='c-jacket'></div>
-                    <div className='c-shirt'></div>
-                    <div className='c-tshirt'></div>
-                    <div className='c-sweatshirt'></div>
-                    <div className='c-hoodie'></div>
-                    <div className='c-jeans'></div>
-                    <div className='c-pants'></div>
-                    <div className='c-shorts'></div>
-                    <div className='c-shoes'></div>
-                    <div className='c-hats'></div>
-                    <div className='c-accessories'></div>
+                    <NavLink to={'listings/jackets/'}>
+                      <div className='c-jacket'></div>
+                    </NavLink>
+                    <NavLink to={'listings/shirts/'}>
+                      <div className='c-shirt'></div>
+                    </NavLink>
+                    <NavLink to={'listings/tshirts/'}>
+                      <div className='c-tshirt'></div>
+                    </NavLink>
+                    <NavLink to={'listings/sweatshirts/'}>
+                      <div className='c-sweatshirt'></div>
+                    </NavLink>
+                    <NavLink to={'listings/hoodies/'}>
+                      <div className='c-hoodie'></div>
+                    </NavLink>
+                    <NavLink to={'listings/jeans/'}>
+                      <div className='c-jeans'></div>
+                    </NavLink>
+                    <NavLink to={'listings/pants/'}>
+                      <div className='c-pants'></div>
+                    </NavLink>
+                    <NavLink to={'listings/shorts/'}>
+                      <div className='c-shorts'></div>
+                    </NavLink>
+                    <NavLink to={'listings/shoes/'}>
+                      <div className='c-shoes'></div>
+                    </NavLink>
+                    <NavLink to={'listings/hats/'}>
+                      <div className='c-hats'></div>
+                    </NavLink>
+                    <NavLink to={'listings/accessories/'}>
+                      <div className='c-accessories'></div>
+                    </NavLink>
                 </Carousel>
             </div>
             <div className='description'>

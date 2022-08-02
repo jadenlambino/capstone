@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import CategorySelector from './helper-functions'
 
-const TShirtDisplay = () => {
+const TShirtDisplay = (catagory_id) => {
 
-    let category = CategorySelector(3)
+    let category = CategorySelector(catagory_id)
 
     return (
         <div className='listing-container'>

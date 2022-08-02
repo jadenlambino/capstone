@@ -3,7 +3,7 @@ footer {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    border-top: 1px solid darkgrey;
+    /* border-top: 1px solid darkgrey; */
     position: absolute;
     bottom: 0;
     left: 0;
@@ -15,6 +15,7 @@ footer {
 .fc {
     text-decoration: none;
     color: black;
-    font-size: larger;
+    font-size: 16px;
     margin-top:  1rem;
+    line-height: 20px;
 }
