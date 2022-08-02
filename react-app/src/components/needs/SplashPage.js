@@ -70,7 +70,6 @@ const SplashPage = () => {
                 </Carousel>
             </div>
             <div className='description'>
-
             </div>
         </div>
     )

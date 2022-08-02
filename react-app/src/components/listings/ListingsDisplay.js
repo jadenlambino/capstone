@@ -26,7 +26,7 @@ const ListingsDisplay = () => {
     return (
         <div className="content-wrap">
             <div className="listings-header">
-                <h1 className='l-head'>L I S T I N G S</h1>
+                <h2 className='l-head'>Listings</h2>
             </div>
             <div className='listing-display'>
                 {listings.map((listing, idx) => (
