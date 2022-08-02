@@ -14,6 +14,7 @@ import { grabListings } from './store/listings';
 import SplashPage from './components/needs/SplashPage';
 import AboutLinks from './components/needs/AboutLinks';
 import TShirtDisplay from './components/listings/single-item-listing/tshirt-page';
+import SecondNav from './components/secondaryNavigation';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
+      <SecondNav />
       <Switch>
         {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
