@@ -16,6 +16,10 @@
     margin: 0 8px;
 }
 
+.carousel a {
+    text-decoration: none;
+}
+
 .c-jacket {
     background-image: url('../../extras/jacket.jpg');
     background-size: cover;
@@ -80,4 +84,10 @@
     background-image: url('../../extras/accessories.jpg');
     background-size: cover;
     background-repeat: none;
+}
+
+.c-label {
+    color: black;
+    text-align: center;
+    text-decoration: none;
 }

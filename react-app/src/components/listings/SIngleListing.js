@@ -155,23 +155,25 @@ const SingleListing = () => {
     )
 
     return (
-        <div className='s-l-c'>
-            <div className='ic'>
-                <img src={listing.photos} alt="This is the product" className='s-p'></img>
-            </div>
-            <div className='s-i'>
-                <h1>
-                    <NavLink to={`/users/${listing.user_id}/`} className='user-link'>{listing.username}</NavLink>
-                </h1>
-                <h1>{listing.name.toUpperCase()}</h1>
-                {user.id === listing.user_id && revealButton}
-                {reveal}
-                {functionButtons}
-                <p>Description<p>{listing.description}</p></p>
-                <p>Price<p>{`$${listing.price}`}</p></p>
-                {user.id !== listing.user_id && buyButton}
-                {purchasePage}
-                {reviewReminder}
+        <div className='content-wrap'>
+            <div className='s-l-c'>
+                <div className='ic'>
+                    <img src={listing.photos} alt="This is the product" className='s-p'></img>
+                </div>
+                <div className='s-i'>
+                    <h1>
+                        <NavLink to={`/users/${listing.user_id}/`} className='user-link'>{listing.username}</NavLink>
+                    </h1>
+                    <h1>{listing.name.toUpperCase()}</h1>
+                    {user.id === listing.user_id && revealButton}
+                    {reveal}
+                    {functionButtons}
+                    <p>Description<p>{listing.description}</p></p>
+                    <p>Price<p>{`$${listing.price}`}</p></p>
+                    {user.id !== listing.user_id && buyButton}
+                    {purchasePage}
+                    {reviewReminder}
+                </div>
             </div>
         </div>
     )
