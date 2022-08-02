@@ -13,6 +13,8 @@ import LisitngForm from './components/listings/ListingsForm';
 import { grabListings } from './store/listings';
 import SplashPage from './components/needs/SplashPage';
 import AboutLinks from './components/needs/AboutLinks';
+import TShirtDisplay from './components/listings/single-item-listing/tshirt-page';
+import SecondNav from './components/secondaryNavigation';
 
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
+      <SecondNav />
       <Switch>
         {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
@@ -47,6 +50,9 @@ function App() {
         </Route>
         <Route path='/listings' exact={true}>
           <ListingsDisplay />
+        </Route>
+        <Route path='/categories/:catagoryName' exact={true}>
+          <TShirtDisplay />
         </Route>
         <Route path='/listings/:id' exact={true}>
           <SingleListing />

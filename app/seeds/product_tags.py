@@ -3,37 +3,37 @@ from app.models import db, Product_Tag
 
 def seed_product_tags():
     demo = Product_Tag (
-        type = 'Jacket'
+        type = 'jackets'
     )
     demo2 = Product_Tag (
-        type = 'Shirt'
+        type = 'shirts'
     )
     demo3 = Product_Tag (
-        type = 'T-Shirt'
+        type = 'tshirts'
     )
     demo4 = Product_Tag (
-        type = 'Sweatshirt'
+        type = 'sweatshirts'
     )
     demo5 = Product_Tag (
-        type = 'Hoodie'
+        type = 'hoodies'
     )
     demo6 = Product_Tag (
-        type = 'Jeans'
+        type = 'jeans'
     )
     demo7 = Product_Tag (
-        type = 'Pants'
+        type = 'pants'
     )
     demo8 = Product_Tag (
-        type = 'Shorts'
+        type = 'shorts'
     )
     demo9 = Product_Tag (
-        type = 'Shoes'
+        type = 'shoes'
     )
     demo10 = Product_Tag (
-        type = 'Hats'
+        type = 'hats'
     )
     demo11 = Product_Tag (
-        type = 'Accessories'
+        type = 'accessories'
     )
 
     db.session.add(demo)

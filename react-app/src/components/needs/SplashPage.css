@@ -5,3 +5,89 @@
 .splash-div {
     height: 80vh;
 }
+
+.carousel-container {
+    margin: 8px;
+}
+
+.carousel div {
+    height: 300px;
+    width: 350px;
+    margin: 0 8px;
+}
+
+.carousel a {
+    text-decoration: none;
+}
+
+.c-jacket {
+    background-image: url('../../extras/jacket.jpg');
+    background-size: cover;
+    background-repeat: none;
+}
+
+.c-shirt {
+    background-image: url('../../extras/shirt.jpg');
+    background-size: cover;
+    background-repeat: none;
+}
+
+.c-tshirt {
+    background-image: url('../../extras/tshirt.jpg');
+    background-size: cover;
+    background-repeat: none;
+}
+
+.c-sweatshirt {
+    background-image: url('../../extras/sweatshirt.jpg');
+    background-size: cover;
+    background-repeat: none;
+}
+
+.c-hoodie {
+    background-image: url('../../extras/hoodie.jpg');
+    background-size: cover;
+    background-repeat: none;
+}
+
+.c-jeans {
+    background-image: url('../../extras/jeans.jpg');
+    background-size: cover;
+    background-repeat: none;
+}
+
+.c-pants {
+    background-image: url('../../extras/pants.jpg');
+    background-size: cover;
+    background-repeat: none;
+}
+
+.c-shorts {
+    background-image: url('../../extras/shorts.jpg');
+    background-size: cover;
+    background-repeat: none;
+}
+
+.c-shoes {
+    background-image: url('../../extras/shoes.jpg');
+    background-size: cover;
+    background-repeat: none;
+}
+
+.c-hats {
+    background-image: url('../../extras/hat.jpg');
+    background-size: cover;
+    background-repeat: none;
+}
+
+.c-accessories {
+    background-image: url('../../extras/accessories.jpg');
+    background-size: cover;
+    background-repeat: none;
+}
+
+.c-label {
+    color: black;
+    text-align: center;
+    text-decoration: none;
+}
