@@ -64,7 +64,9 @@ const NavBar = () => {
 
   return (
     <nav>
-      <h1 className="title">J A I L E D</h1>
+      <NavLink to={'/'} className='title'>
+        <h1 className="title">J A I L E D</h1>
+      </NavLink>
       <div className='nc'>
         <div className='nd'>
           <NavLink to='/listings' exact={true} activeClassName='active' className='nav-item'>
