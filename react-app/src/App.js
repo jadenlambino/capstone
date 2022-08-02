@@ -13,6 +13,7 @@ import LisitngForm from './components/listings/ListingsForm';
 import { grabListings } from './store/listings';
 import SplashPage from './components/needs/SplashPage';
 import AboutLinks from './components/needs/AboutLinks';
+import TShirtDisplay from './components/listings/single-item-listing/tshirt-page';
 
 
 function App() {
@@ -47,6 +48,9 @@ function App() {
         </Route>
         <Route path='/listings' exact={true}>
           <ListingsDisplay />
+        </Route>
+        <Route path='/listings/tshirt' exact={true}>
+          <TShirtDisplay />
         </Route>
         <Route path='/listings/:id' exact={true}>
           <SingleListing />
