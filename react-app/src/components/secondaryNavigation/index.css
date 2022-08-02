@@ -10,7 +10,7 @@ nav {
 }
 
 [role='tooltip'].second-content {
-    width: fit-content;
+    width: 10%;
     height: fit-content;
     display: flex;
     justify-content: center;

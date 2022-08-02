@@ -8,13 +8,14 @@
 
 .ldf {
     display: flex;
-    justify-content: space-between;
-    width: 70%;
+    justify-content: space-around;
+    width: 100%;
 }
 
 .ltb {
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    width: 45%;
 }
 
 .ltbd {
@@ -25,7 +26,8 @@
 
 .lts {
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    width: 45%;
 }
 
 .bh {
@@ -39,13 +41,14 @@
 }
 
 .il {
-    text-align: center;
+    text-align: left;
 }
 
 .ti {
     border: 1px solid #070707;
     border-radius: 2px;
     height: 30px;
+    width: 100%;
 }
 
 .si {
