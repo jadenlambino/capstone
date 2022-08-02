@@ -49,7 +49,7 @@ function App() {
         <Route path='/listings' exact={true}>
           <ListingsDisplay />
         </Route>
-        <Route path='/listings/:catagoryName' exact={true}>
+        <Route path='/categories/:catagoryName' exact={true}>
           <TShirtDisplay />
         </Route>
         <Route path='/listings/:id' exact={true}>

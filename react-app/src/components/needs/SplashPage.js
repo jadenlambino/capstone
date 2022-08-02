@@ -34,37 +34,37 @@ const SplashPage = () => {
                     responsive={responsive}
                     className='carousel'
                 >
-                    <NavLink to={'listings/jackets/'}>
+                    <NavLink to={'categories/jackets/'}>
                       <div className='c-jacket'></div>
                     </NavLink>
-                    <NavLink to={'listings/shirts/'}>
+                    <NavLink to={'categories/shirts/'}>
                       <div className='c-shirt'></div>
                     </NavLink>
-                    <NavLink to={'listings/tshirts/'}>
+                    <NavLink to={'categories/tshirts/'}>
                       <div className='c-tshirt'></div>
                     </NavLink>
-                    <NavLink to={'listings/sweatshirts/'}>
+                    <NavLink to={'categories/sweatshirts/'}>
                       <div className='c-sweatshirt'></div>
                     </NavLink>
-                    <NavLink to={'listings/hoodies/'}>
+                    <NavLink to={'categories/hoodies/'}>
                       <div className='c-hoodie'></div>
                     </NavLink>
-                    <NavLink to={'listings/jeans/'}>
+                    <NavLink to={'categories/jeans/'}>
                       <div className='c-jeans'></div>
                     </NavLink>
-                    <NavLink to={'listings/pants/'}>
+                    <NavLink to={'categories/pants/'}>
                       <div className='c-pants'></div>
                     </NavLink>
-                    <NavLink to={'listings/shorts/'}>
+                    <NavLink to={'categories/shorts/'}>
                       <div className='c-shorts'></div>
                     </NavLink>
-                    <NavLink to={'listings/shoes/'}>
+                    <NavLink to={'categories/shoes/'}>
                       <div className='c-shoes'></div>
                     </NavLink>
-                    <NavLink to={'listings/hats/'}>
+                    <NavLink to={'categories/hats/'}>
                       <div className='c-hats'></div>
                     </NavLink>
-                    <NavLink to={'listings/accessories/'}>
+                    <NavLink to={'categories/accessories/'}>
                       <div className='c-accessories'></div>
                     </NavLink>
                 </Carousel>
