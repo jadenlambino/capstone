@@ -8,3 +8,21 @@ nav {
     justify-content: space-around;
     width: 100%;
 }
+
+[role='tooltip'].second-content {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+[role='tooltip'].second-content a {
+    color: black;
+    text-decoration: none;
+}
+
+[role='tooltip'].second-content a:hover {
+    color: grey;
+}
