@@ -27,13 +27,13 @@ const NavBar = () => {
     <>
       <div className='nd'>
         <button className='nb' onClick={showLogin}>LOGIN</button>
-        <Popup open={login} onClose={showLogin}>
+        <Popup open={login} onClose={showLogin} className='auth-popup'>
           <LoginForm />
         </Popup>
       </div>
       <div className='nd'>
         <button className='sb' onClick={showSignup}>SIGN UP</button>
-        <Popup open={signup} onClose={showSignup}>
+        <Popup open={signup} onClose={showSignup} className='auth-popup'>
             <SignupForm />
         </Popup>
       </div>

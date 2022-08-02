@@ -39,3 +39,7 @@
     background-color: lightgray;
     color: black;
 }
+
+.error {
+    color: red;
+}

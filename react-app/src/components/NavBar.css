@@ -73,3 +73,8 @@ nav {
 .prof-link {
     border: none;
 }
+
+.auth-popup-content {
+    border-radius: 10px;
+    width: 30%;
+}
