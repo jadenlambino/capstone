@@ -40,9 +40,9 @@ const ListingsDisplay = () => {
                                 ) : (
                                     <>
                                         <img src={listing.photos} className='display-img' alt="This is the product" onClick={showLogin}></img>
-                                        <Popup open={login} onClose={showLogin}>
-                                            <LoginForm />
-                                        </Popup>
+                                        {/* <Popup open={login} onClose={showLogin}> */}
+                                        <LoginForm open={true} trigger={null}/>
+                                        {/* </Popup> */}
                                     </>
                                 )}
                                 <span className='listing-info'>

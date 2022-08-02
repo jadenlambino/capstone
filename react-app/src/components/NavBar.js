@@ -26,10 +26,10 @@ const NavBar = () => {
   let logSign = (
     <>
       <div className='nd'>
-        <button className='nb' onClick={showLogin}>LOGIN</button>
-        <Popup open={login} onClose={showLogin} className='auth-popup'>
+        {/* <button className='nb' onClick={showLogin}>LOGIN</button> */}
+        {/* <Popup open={login} onClose={showLogin} className='auth-popup'> */}
           <LoginForm />
-        </Popup>
+        {/* </Popup> */}
       </div>
       <div className='nd'>
         <button className='sb' onClick={showSignup}>SIGN UP</button>
