@@ -37,7 +37,6 @@ const SplashPage = () => {
                 <Carousel
                     responsive={responsive}
                     className='carousel'
-                    showDots={true}
                 >
                     <NavLink to={'categories/jackets/'}>
                       <div className='c-jacket'></div>

@@ -55,6 +55,10 @@ const ListingsDisplay = () => {
                     </div>
                 ))}
             </div>
+            <div>
+                This is where the image should be
+                <img src='https://jaden-capstone.s3.us-west-1.amazonaws.com/jacket.jpg'></img>
+            </div>
         </div>
     )
 }

@@ -20,6 +20,8 @@ nav {
 .title {
     width: 60%;
     padding-left: 10%;
+    text-decoration: none;
+    color: black;
 }
 
 .nc {
