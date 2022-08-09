@@ -1,4 +1,23 @@
+from itertools import product
 from app.models import db, Listing
+from faker import Faker
+from app.seeds.image_seed import jacket, shirt, tshirt, sweatshirts, hoodies, jeans, pants, shorts, shoes, hats, accessories
+from random import randint
+
+fake = Faker()
+
+def grab_images(list, tag):
+    for i in range(0, 9):
+        new_listing = Listing (
+            user_id = randint(1, 23),
+            product_tag = tag,
+            name = fake.sentence(nb_words = 3),
+            price = randint(20, 100000),
+            description = fake.sentence(nb_words = 10),
+            photos = list[i]
+        )
+        db.session.add(new_listing)
+
 
 def seed_listings():
     demo = Listing (
@@ -113,6 +132,19 @@ def seed_listings():
         description = 'Limited edition Hello Kitty bag',
         photos = 'https://jaden-capstone.s3.us-west-1.amazonaws.com/46ee1cdba04349fc8501e13b95d9c81c.jpg'
     )
+
+    grab_images(jacket, 1)
+    grab_images(shirt, 2)
+    grab_images(tshirt, 3)
+    grab_images(sweatshirts, 4)
+    grab_images(hoodies, 5)
+    grab_images(jeans, 6)
+    grab_images(pants, 7)
+    grab_images(shorts, 8)
+    grab_images(shoes, 9)
+    grab_images(hats, 10)
+    grab_images(accessories, 11)
+
 
     db.session.add(demo)
     db.session.add(demo2)

@@ -40,9 +40,9 @@ const ListingsDisplay = () => {
                                 ) : (
                                     <>
                                         <img src={listing.photos} className='display-img' alt="This is the product" onClick={showLogin}></img>
-                                        {/* <Popup open={login} onClose={showLogin}> */}
-                                        {/* <LoginForm open={true} trigger={null}/> */}
-                                        {/* </Popup> */}
+                                        <Popup open={login} onClose={showLogin} className='auth-popup'>
+                                            <LoginForm open={true} trigger={null}/>
+                                        </Popup>
                                     </>
                                 )}
                                 <span className='listing-info'>
@@ -54,10 +54,6 @@ const ListingsDisplay = () => {
                         }
                     </div>
                 ))}
-            </div>
-            <div>
-                This is where the image should be
-                <img src='https://jaden-capstone.s3.us-west-1.amazonaws.com/jacket.jpg'></img>
             </div>
         </div>
     )

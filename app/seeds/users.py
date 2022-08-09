@@ -1,4 +1,7 @@
 from app.models import db, User
+from faker import Faker
+
+fake = Faker()
 
 
 # Adds a demo user, you can add other users here if you want
@@ -9,6 +12,16 @@ def seed_users():
         email='marnie@aa.io', first_name='Marnie', last_name='Mays', username='marnie', password='password')
     bobbie = User(
         email='bobbie@aa.io', first_name='Bobbie', last_name='Brown', username='bobbie',  password='password')
+
+    for i in range (0, 20):
+        new_user = User(
+            email=fake.free_email(),
+            first_name=fake.first_name(),
+            last_name=fake.last_name(),
+            username=fake.user_name(),
+            password='password'
+        )
+        db.session.add(new_user)
 
     db.session.add(demo)
     db.session.add(marnie)
