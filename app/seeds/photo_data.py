@@ -1,13 +1,21 @@
 import requests
-from types import SimpleNamespace
 
 def create_json(query):
-    api_url=f'https://api.unsplash.com/search/photos/?client_id=tJxMHKXfGEIYAJR0VkVg81ZkBI7YWXt4h71pT-I6bEQ&query={query}'
+    new_list = []
+    api_url=f'https://api.unsplash.com/search/photos/?client_id=3Wj5IOgNev0nG0m-v8C6iRZQbVRaNRz9-Z4zDP0EJjA&query={query}'
     response = requests.get(api_url)
     dictionary = response.json()
     photos = dictionary['results']
-    for i in range (1 , 20):
+    print(len(photos))
+    for i in range (0 , 9):
         indiv=photos[i]
-        print(indiv['urls']['small_s3'])
+        new_list.append(indiv['urls']['small_s3'])
+    print(new_list)
 
-create_json('jacket')
+create_json('hoodies')
+create_json('jeans')
+create_json('pants')
+create_json('shorts')
+create_json('shoes')
+create_json('hats')
+create_json('accessories')
