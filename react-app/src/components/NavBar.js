@@ -15,7 +15,7 @@ const NavBar = () => {
 
   const showLogin = (e) => {
     e.preventDefault();
-    setLogin(!login)
+    setLogin(true)
   }
 
   const showSignup = (e) => {
@@ -26,9 +26,9 @@ const NavBar = () => {
   let logSign = (
     <>
       <div className='nd'>
-        {/* <button className='nb' onClick={showLogin}>LOGIN</button>
-        <Popup open={login} onClose={showLogin} className='auth-popup'> */}
-          <LoginForm />
+        <button className='nb' onClick={showLogin}>LOGIN</button>
+        {/* <Popup open={login} onClose={showLogin} className='auth-popup'> */}
+        <LoginForm please={login} work={setLogin}/>
         {/* </Popup> */}
       </div>
       <div className='nd'>
