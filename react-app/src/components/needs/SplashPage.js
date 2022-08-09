@@ -6,19 +6,19 @@ import './SplashPage.css'
 
 const SplashPage = () => {
     const responsive = {
-        superLargeDesktop: {
-          // the naming can be any, depends on you.
-          breakpoint: { max: 4000, min: 3000 },
-          items: 4,
-          slidesToSlide: 4
-        },
+        // superLargeDesktop: {
+        //   // the naming can be any, depends on you.
+        //   breakpoint: { max: 4000, min: 3000 },
+        //   items: 4,
+        //   slidesToSlide: 4
+        // },
         desktop: {
-          breakpoint: { max: 3000, min: 1024 },
+          breakpoint: { max: 3000, min: 1200 },
           items: 3,
           slidesToSlide: 3
         },
         tablet: {
-          breakpoint: { max: 1024, min: 464 },
+          breakpoint: { max: 1200, min: 600 },
           items: 2,
           slidesToSlide: 2
         },

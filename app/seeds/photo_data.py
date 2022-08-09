@@ -2,7 +2,7 @@ import requests
 
 def create_json(query):
     new_list = []
-    api_url=f'https://api.unsplash.com/search/photos/?client_id=3Wj5IOgNev0nG0m-v8C6iRZQbVRaNRz9-Z4zDP0EJjA&query={query}'
+    api_url=f'https://api.unsplash.com/search/photos/?client_id=&query={query}'
     response = requests.get(api_url)
     dictionary = response.json()
     photos = dictionary['results']
