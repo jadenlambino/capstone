@@ -37,6 +37,10 @@ const SplashPage = () => {
                 <Carousel
                     responsive={responsive}
                     className='carousel'
+<<<<<<< Updated upstream
+=======
+                    // showDots={true}
+>>>>>>> Stashed changes
                 >
                     <NavLink to={'categories/jackets/'}>
                       <div className='c-jacket'></div>

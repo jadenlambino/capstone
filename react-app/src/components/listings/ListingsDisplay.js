@@ -56,8 +56,12 @@ const ListingsDisplay = () => {
                 ))}
             </div>
             <div>
+<<<<<<< Updated upstream
                 This is where the image should be
                 <img src='https://jaden-capstone.s3.us-west-1.amazonaws.com/jacket.jpg'></img>
+=======
+                <img src={'https://jaden-capstone.s3.us-west-1.amazonaws.com/jacket.jpg'} />
+>>>>>>> Stashed changes
             </div>
         </div>
     )
