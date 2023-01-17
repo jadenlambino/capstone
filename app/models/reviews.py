@@ -1,12 +1,14 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class Review(db.Model):
     __tablename__ = 'reviews'
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    listing_id = db.Column(db.Integer, db.ForeignKey('listings.id'), nullable=False)
-    reviewed_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    reviewer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    listing_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('listings.id')), nullable=False)
+    reviewed_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    reviewer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     rating = db.Column(db.Float, nullable=False)
     body = db.Column(db.String(1000), nullable=False)
 

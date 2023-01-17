@@ -1,5 +1,5 @@
 from sqlalchemy import ForeignKey
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .listings import Listing
 from .reviews import Review
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -9,6 +9,8 @@ from .reviews import Review
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
