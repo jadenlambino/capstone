@@ -6,11 +6,9 @@ def create_json(query):
     response = requests.get(api_url)
     dictionary = response.json()
     photos = dictionary['results']
-    print(len(photos))
     for i in range (0 , 9):
         indiv=photos[i]
         new_list.append(indiv['urls']['small_s3'])
-    print(new_list)
 
 create_json('hoodies')
 create_json('jeans')

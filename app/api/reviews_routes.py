@@ -17,7 +17,6 @@ def create_review():
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    print(str(form.data) + '---------------------------------')
     if form.validate_on_submit():
         data = form.data
         new_review = Review (
@@ -42,7 +41,6 @@ def create_review():
 @review_routes.route('/<int:id>/', methods=['PATCH'])
 def edit_review(id):
     review = Review.query.filter_by(id = id).one()
-    print(str(review) + '++++++++++++++++')
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 

@@ -23,8 +23,6 @@ def validate_image():
         # if the dictionary doesn't have a url key
         # it means that there was an error when we tried to upload
         # so we send back that error message
-        print(upload)
         return upload, 400
-    print("hello from 29")
     url = upload["url"]
     return {'url': url}, 200

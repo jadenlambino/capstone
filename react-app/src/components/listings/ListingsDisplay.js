@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { grabListings } from '../../store/listings';
-import Popup from 'reactjs-popup';
 import { NavLink } from 'react-router-dom';
 import LoginForm from '../auth/LoginForm';
 import 'reactjs-popup/dist/index.css';
@@ -39,10 +38,10 @@ const ListingsDisplay = () => {
                                     </NavLink>
                                 ) : (
                                     <>
-                                        <img src={listing.photos} className='display-img' alt="This is the product" onClick={showLogin}></img>
-                                        <Popup open={login} onClose={showLogin} className='auth-popup'>
-                                            <LoginForm open={true} trigger={null}/>
-                                        </Popup>
+                                        <button onClick={showLogin}>
+                                            <img src={listing.photos} className='display-img' alt="This is the product"></img>
+                                        </button>
+                                        <LoginForm please={login} work={setLogin}/>
                                     </>
                                 )}
                                 <span className='listing-info'>

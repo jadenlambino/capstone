@@ -1,23 +1,25 @@
 from email.policy import default
 from sqlalchemy import ForeignKey
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .product_tags import Product_Tag
 from app.models import product_tags, user
 from .reviews import Review
 
 class Listing(db.Model):
     __tablename__ = 'listings'
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    product_tag = db.Column(db.Integer, db.ForeignKey('product_tags.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    product_tag = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('product_tags.id')), nullable=False)
     name = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Float, nullable=False)
     description = db.Column(db.String(255), nullable=False)
     photos = db.Column(db.String, nullable=False)
     is_purchased = db.Column(db.Boolean, nullable=False, default=False)
     is_reviewed = db.Column(db.Boolean, nullable=False, default=False)
-    buyer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    buyer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
 
     def to_dict(self):
         product_type = Product_Tag.query.get(self.product_tag)

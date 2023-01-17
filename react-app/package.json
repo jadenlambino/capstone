@@ -1,4 +1,5 @@
 {
+  "bulid": "CI=false && react-scripts build",
   "name": "react-app",
   "version": "0.1.0",
   "private": true,

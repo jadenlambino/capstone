@@ -36,9 +36,7 @@ const LisitngForm = () => {
         if (response.id) {
             history.push(`/listings/${response.id}`)
         } else {
-            console.log(response)
             setErrors(response)
-            console.log(errors)
         }
     }
 
@@ -58,14 +56,11 @@ const LisitngForm = () => {
         });
 
         if (uploadedUrl.ok) {
-            console.log('hello')
             const res = await uploadedUrl.json()
             setUrl(res.url)
-            console.log(url)
             setErrors([])
         } else {
             const errors = await uploadedUrl.json()
-            console.log(errors.errors)
             setErrors([errors.errors])
         }
     }
@@ -145,7 +140,7 @@ const LisitngForm = () => {
                         />
                     <button type="submit" className="fi" onClick={updateImage}>Add image</button>
                     </form>
-                    <img src={url} className='listing-image'>
+                    <img src={url} className='listing-image' alt="picture">
                     </img>
                 </div>
                 <div>

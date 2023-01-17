@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, useHistory } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import { grabReviews } from '../../store/reviews';
 import { login } from '../../store/session';
 import './LoginForm.css'
 
-const LoginForm = () => {
-  const history = useHistory()
+const LoginForm = ({please, work}) => {
+  // const history = useHistory()
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [open, setOpen] = useState(false)
-  const user = useSelector(state => state.session.user);
+  // const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
@@ -21,7 +21,7 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     } else {
-      setOpen(false)
+      work(false)
       await dispatch(grabReviews())
       // history.push('/listings')
     }
@@ -41,20 +41,20 @@ const LoginForm = () => {
 
   const setDemo = async (e) => {
     e.preventDefault();
-    setOpen(false)
+    // setOpen(false)
+    work(false)
     await dispatch(login('demo@aa.io', 'password'))
     // history.push('/listings')
   }
 
-  const openModal = (e) => {
-    e.preventDefault()
-    setOpen(!open)
-  }
+  // const openModal = (e) => {
+  //   e.preventDefault()
+  //   setOpen(!open)
+  // }
 
   return (
     <>
-      <button className='nb' onClick={openModal}>LOGIN</button>
-      <Popup modal className='auth-popup' open={open}>
+      <Popup modal className='auth-popup' open={please} onClose={() => work(false)}>
         <form onSubmit={onLogin} className='lf'>
           <div>
             {errors.map((error, ind) => (
