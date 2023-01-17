@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import ReviewForm from "../reviews/ReviewForm";
 import EditReview from "../reviews/EditReviewForm";
 import './PurchaseHistory.css'

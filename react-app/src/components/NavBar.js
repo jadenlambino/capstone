@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import Popup from 'reactjs-popup'
 import './NavBar.css'

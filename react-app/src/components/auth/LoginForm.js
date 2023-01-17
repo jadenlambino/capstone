@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, useHistory } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import { grabReviews } from '../../store/reviews';
 import { login } from '../../store/session';
 import './LoginForm.css'
 
 const LoginForm = ({please, work}) => {
-  const history = useHistory()
+  // const history = useHistory()
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [open, setOpen] = useState(false)
-  const user = useSelector(state => state.session.user);
+  // const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {

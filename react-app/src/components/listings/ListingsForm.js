@@ -140,7 +140,7 @@ const LisitngForm = () => {
                         />
                     <button type="submit" className="fi" onClick={updateImage}>Add image</button>
                     </form>
-                    <img src={url} className='listing-image'>
+                    <img src={url} className='listing-image' alt="picture">
                     </img>
                 </div>
                 <div>
