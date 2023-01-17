@@ -46,7 +46,6 @@ def post_listing():
 
     if form.validate_on_submit():
         data = form.data
-        print("++++++++++++++" + str(data))
         new_listing = Listing (
             user_id = current_user.id,
             product_tag = data['product_tag'],
@@ -61,7 +60,6 @@ def post_listing():
         return new_listing.to_dict()
 
     if form.errors:
-        print(form.errors)
         return {'errors': validation_errors_to_error_messages(form.errors)}, 403
 
 @listing_routes.route('/<int:id>/', methods=["PATCH"])
@@ -71,8 +69,6 @@ def edit_listing(id):
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    print(data['name'])
-    print(data['price'])
     product_tag = data['product_tag']
     name = data['name']
     price = data['price']
@@ -94,10 +90,8 @@ def edit_listing(id):
 @listing_routes.route('/<int:id>/buy', methods=['PATCH'])
 def buy_listing(id):
     listing = Listing.query.filter_by(id=id).one()
-    print(str(request.data) + '--------------------------------')
     data = request.data.decode('utf-8')
     data_dict = ast.literal_eval(data)
-    print(data_dict)
 
     listing.set_purchase(data_dict['buyer_id'])
 
