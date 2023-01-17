@@ -53,7 +53,6 @@ export const uploadReview = (review) => async (dispatch) => {
     } else {
         const data = await response.json();
         if (data.errors) {
-            console.log(data.errors)
             return data.errors
         }
     }
@@ -80,7 +79,6 @@ export const patchReview = (id, review) => async (dispatch) => {
     } else {
         const data = await response.json();
         if (data.errors) {
-            console.log(data.errors)
             return data.errors
         }
     }

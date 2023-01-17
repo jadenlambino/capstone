@@ -20,8 +20,6 @@ const ReviewForm = ({ purchase, open }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(rating)
-
         const review = {
             listing_id: purchase.id,
             reviewed_id: purchase.user_id,

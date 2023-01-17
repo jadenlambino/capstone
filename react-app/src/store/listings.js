@@ -53,7 +53,6 @@ export const grabSingle = (id) => async (dispatch) => {
 
 export const uploadListings = (listingData) => async (dispatch) => {
     // const {productTag, name, price, description, formData} = listingData;
-    console.log(listingData)
     const response = await fetch('/api/listings/', {
         method: 'POST',
         // headers: {
@@ -72,7 +71,6 @@ export const uploadListings = (listingData) => async (dispatch) => {
     } else {
         const data = await response.json();
         if (data.errors) {
-            console.log(data.errors)
             return data.errors
         }
     }
@@ -124,7 +122,6 @@ export const patchListings = (id, listingData) => async (dispatch) => {
     else {
         const data = await response.json();
         if (data.errors) {
-            console.log(data.errors)
             return data.errors
         }
     }
