@@ -32,6 +32,9 @@ target_metadata = current_app.extensions['migrate'].db.metadata
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get('SCHEMA')
 
 def run_migrations_offline():
     """Run migrations in 'offline' mode.
