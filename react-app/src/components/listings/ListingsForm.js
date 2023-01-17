@@ -15,7 +15,7 @@ const LisitngForm = () => {
     const [image, setImage] = useState(null);
     const [url, setUrl] = useState('https://www.cyclonehealth.iastate.edu/wp-content/uploads/shw-tiles/default.jpg')
     const [productTag, setProductTag] = useState()
-    const [defaultValue, setDefultValue] = useState(false)
+    // const [defaultValue, setDefultValue] = useState(false)
     const [errors, setErrors] = useState([])
 
     const handleSubmit = async (e) => {
@@ -100,10 +100,10 @@ const LisitngForm = () => {
                             <label className="il">Product Tag</label>
                             <select
                             onChange={(e) => setProductTag(e.target.value)}
-                            defaultValue={defaultValue}
+                            defaultValue={false}
                             className='si'
                             >
-                                <option value={defaultValue} disabled hidden>Select an option</option>
+                                <option value={false} disabled hidden>Select an option</option>
                                 <option value={1}>Jacket</option>
                                 <option value={2}>Shirt</option>
                                 <option value={3}>T-Shirt</option>
@@ -140,7 +140,7 @@ const LisitngForm = () => {
                         />
                     <button type="submit" className="fi" onClick={updateImage}>Add image</button>
                     </form>
-                    <img src={url} className='listing-image' alt="picture">
+                    <img src={url} className='listing-image' alt="listing">
                     </img>
                 </div>
                 <div>

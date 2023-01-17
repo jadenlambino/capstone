@@ -38,7 +38,7 @@ const EditReview = ({ purchase, open }) => {
 
     const handleDelete = async (e) => {
         e.preventDefault()
-        const response = await dispatch(removeReview(review.id))
+        await dispatch(removeReview(review.id))
         setFeedback(false)
         // history.push(`/users/${user.id}`)
     }
